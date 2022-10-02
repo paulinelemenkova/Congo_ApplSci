@@ -82,10 +82,10 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{RStoolbox and Raster Packages of R for Remote Sensing Data Classification by k-means Clustering in Congo River Basin, DRC}
+\Title{R Libraries for Remote Sensing Data Classification by k-means Clustering and NDVI Computation in Congo River Basin, DRC}
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{RStoolbox and Raster Packages of R for Remote Sensing Data Classification by k-means Clustering in Congo River Basin, DRC}
+\TitleCitation{R Libraries for Remote Sensing Data Classification by k-means Clustering and NDVI Computation in Congo River Basin, DRC}
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Add \orcidA{} behind the author's name
@@ -304,6 +304,22 @@ plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 \makebox[0.90\linewidth][c]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
+			\includegraphics[width=0.95\textwidth]{Bumba_2013_NAT.jpg}
+		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.95\textwidth]{Bumba_2013_FCC.jpg}
+		\caption{False colour composite, bands RGB (5-4-3): 2013.}
+	\end{subfigure}%
+}
+\caption{Bumba town region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
 			\includegraphics[width=0.95\textwidth]{Basoko_2013_NAT.jpg}
 		\caption{Natural colour composite, bands RGB (4-3-2): 2013.}
 	\end{subfigure}%
@@ -330,22 +346,6 @@ plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 	\end{subfigure}%
 }
 \caption{Kisangani city region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
-\end{figure}
-
-\begin{figure}[H]
-\makebox[0.90\linewidth][c]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Bumba_2013_NAT.jpg}
-		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Bumba_2013_FCC.jpg}
-		\caption{False colour composite, bands RGB (5-4-3): 2013.}
-	\end{subfigure}%
-}
-\caption{Bumba town region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
 \end{figure}
 
 \subsection{k-means Clustering}
@@ -388,9 +388,47 @@ plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Baso
 legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
 \end{lstlisting}
 
+\begin{figure}[H]
+\centering
+	\includegraphics[width=15.0 cm]{Classif_run.jpg}
+	\caption{Executing the \emph{k}-means clustering classification algorithm in RStudio using the RStoolbox package. Parameters of cluster centroids and sum of squares by cluster are displayed in the console of R. Spatial parameters of the output map are listed. Here the example of Landsat image of the Basoko.
+	\label{fig01}}
+\end{figure} 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Results}
+
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Bumba_2013_grey.jpg}
+		\caption{Monochrome image for Bumba region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Bumba_2013_class.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Bumba_2022_grey.jpg}
+		\caption{Monochrome image for Bumba region: 2022.}
+	\end{subfigure}
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Bumba_2022_class.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+
+}
+\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -460,36 +498,6 @@ legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), f
 \caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
 \end{figure}
 
-\begin{figure}[H]
-\makebox[0.90\linewidth][r]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.85\textwidth]{Basoko_2013_grey.jpg}
-		\caption{Monochrome image for Bumba region: 2013.}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-		\includegraphics[width=0.95\textwidth]{Basoko_2013_class.jpg}
-		\caption{Classified scene using \emph{k}-means clustering: 2013.}
-	\end{subfigure}%
-}\\
-\vfill \vspace{1mm}
-\makebox[0.90\linewidth][r]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.85\textwidth]{Basoko_2022_grey.jpg}
-		\caption{Monochrome image for Bumba region: 2022.}
-	\end{subfigure}
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-		\includegraphics[width=0.95\textwidth]{Basoko_2022_class.jpg}
-		\caption{Classified scene using \emph{k}-means clustering: 2022.}
-	\end{subfigure}%
-
-}
-\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
-\end{figure}
-
 The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
 
 \begin{enumerate}
@@ -504,6 +512,51 @@ The classes of land cover types were defined based on the following classificati
 	\item Savannah with sparse trees;
 	\item Water bodies;
 \end{enumerate} 
+
+
+\subsection{NDVI}
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{NDVI_Bumba_2013}
+		\caption{Bumba region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{NDVI_Bumba_2022}
+		\caption{Bumba region: 2022}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{NDVI_Basoko_2013.jpg}
+		\caption{Basoko region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{NDVI_Basoko_2022}
+		\caption{Basoko region: 2022.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{NDVI_Kisangani_2013}
+		\caption{Kisangani region: 2013}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{NDVI_Kisangani_2022}
+		\caption{Kisangani region: 2022}
+	\end{subfigure}%
+
+}
+\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangali. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
