@@ -31,16 +31,57 @@
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
 
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{gensymb} % for degree symbol
+\usepackage{lscape}
+\usepackage{pxfonts}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{RGB}{255,255,255}
+\definecolor{SlateGray}{HTML}{708090}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    keywordstyle=\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{SlateGray},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t, 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=topline|bottomline,
+    }
+
+\lstset{style=mystyle}
+\captionsetup[lstlisting]{position=top, margin=0cm,labelfont={bf, small, stretch=1.17}, labelsep=colon, textfont={small, stretch=1.17}, aboveskip=6pt, singlelinecheck=off, justification=justified}
+	
+\usepackage{soul} % highlighting text
+
 %=================================================================
 %% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
 %% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{Title}
+\Title{RStoolbox and Raster Packages of R for Remote Sensing Data Classification by k-means Clustering in Congo River Basin, DRC}
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{Title}
+\TitleCitation{RStoolbox and Raster Packages of R for Remote Sensing Data Classification by k-means Clustering in Congo River Basin, DRC}
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Add \orcidA{} behind the author's name
@@ -92,27 +133,153 @@ $^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (
 \section{Introduction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Study Area}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=12.0 cm]{Fig_01}
+	\caption{Topographic map of Congo River Basin with the DCR. Cartography: Generic Mapping Tools (GMT). Data source: GEBCO/SRTM. Mapping: authors.
+	\label{fig01}}
+\end{figure} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
+
+\subsection{Data inspection}
+
+\begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, label={lst:01}]
+library(rgdal)
+library(raster)
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data: Landsat OLI/TIRS image for Basoko, Congo (2013):
+Landsat_Basoko2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Printing the list
+list.files()
+# Reading in files as SpatialGridDataFrame objects :
+BasokoBand1 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoBand2 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoBand3 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoBand4 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoBand5 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoBand6 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoBand7 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Visualizing and checking the class of random bands
+plot(BasokoBand1)
+res(BasokoBand1)
+class(BasokoBand5)
+## [1] "SpatialGridDataFrame"
+## attr(,"package")
+## [1] "sp"
+slotNames(BasokoBand5)
+# [1] "data"        "grid"        "bbox"        "proj4string"
+summary(BasokoBand5@data)
+# Min.   : 6637
+# 1st Qu.:14955
+# Median :15669
+# Mean   :15752
+# 3rd Qu.:16579
+# Max.   :27433
+# NA's   :17221239
+# Check the topology of the class
+str(BasokoBand5@grid)
+#Formal class 'GridTopology' [package "sp"] with 3 slots
+# ..@ cellcentre.offset: Named num [1:2] 696300 43500
+#  .. ..- attr(*, "names")= chr [1:2] "x" "y"
+#  ..@ cellsize         : num [1:2] 30 30
+#  ..@ cells.dim        : int [1:2] 7591 7741
+# Check up spatial dimention
+BasokoBand5@grid@cellcentre.offset
+# x      y
+# 696300  43500
+BasokoBand5@grid@cellsize
+# [1] 30 30
+BasokoBand5@bbox
+#      min    max
+# x 696285 924015
+# y 43485 275715
+BasokoBand5@proj4string
+# generating RasterLayers of Landsat bands
+BasokoB1 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoB2 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoB3 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoB4 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoB5 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoB6 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoB7 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Creating a facetted stack from the Landsat OLI-TIRS bands:
+image <- stack(BasokoB1, BasokoB2, BasokoB3, BasokoB4, BasokoB5, BasokoB6, BasokoB7)
+# Visualizing the image with separated bands:
+plot(image)
+# Check metadata:
+nlayers(image)
+res(image)
+# Creating the object of RasterLayer class for one random band (here: Band 2)
+Basoko2013_B2 <- raster(Landsat_Basoko2013[2])
+Basoko2013_B2
+# Plotting one randon band
+plot(Basoko2013_B2,
+     main = "Landsat OLI/TIRS 2013 band 2\nBasoko, central Congo",
+     col = gray(0:100 / 100))
+\end{lstlisting}
+
+\subsection{Plotting band composites}
+
+\subsection{k-means Clustering}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
+The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
 
-Bulleted lists look like this:
-\begin{itemize}
-	\item	First bullet;
-	\item	Second bullet;
-	\item	Third bullet.
-\end{itemize}
+\begin{enumerate}
+	\item	Swamp forest
+	\item	Humid tropical forest;
+	\item	Secondary forest;
+	\item	Urban areas and impervious surfaces;
+	\item Inundated grassland;
+	\item Deciduous forest;
+	\item Shrubland and grassland;
+	\item Cropland and mosaic forest;
+	\item Savannah with sparse trees;
+	\item Water bodies;
+\end{enumerate} 
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Basoko_2013_NAT}
+		\caption{Natural colour composite, bands RGB (4-3-2): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Basoko_2013.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Basoko_2022_NAT.jpg}
+		\caption{Natural colour composite, bands RGB (4-3-2): 2022.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Basoko_2013.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+}
+\caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
 
 Numbered lists can be added as follows:
-\begin{enumerate}
+\begin{itemize}
 	\item	First item; 
 	\item	Second item;
 	\item	Third item.
-\end{enumerate}
-
-\subsection{Figures, Tables and Schemes}
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
