@@ -41,6 +41,10 @@
 \usepackage{gensymb} % for degree symbol
 \usepackage{lscape}
 \usepackage{pxfonts}
+\usepackage{graphicx}
+\usepackage{tikz}
+	\newlength\imagewidth
+	\newlength\imagescale
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -225,9 +229,74 @@ plot(Basoko2013_B2,
 
 \subsection{Plotting band composites}
 
+The band composites for the three studied regions were plotted as natural and false colour composites, which were generated using the code in Listing \ref{lst:02}. The code snippet is given for the town of Basoko, and applied similarly for the rest of the scenes. 
+
+\begin{lstlisting}[language=r, caption=R code used for colour composites by libraries raster and
+terra; here a case of Bumba town applied likewise for all the other images, label={lst:02}]
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Importing data
+Landsat_Bumba2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Printing the list
+list.files()
+# creating SpatRaster object
+landsat <- rast(Landsat_Bumba2013)
+# check properties
+landsat
+# combining bands for natural colour composite, here using bands 4, 3 and 2.
+landsatRGB <- landsat[[c(4,3,2)]]
+# check up metadata
+landsatRGB
+# visualising  natural colour composite on screen
+plotRGB(landsatRGB, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_178058_20131223_20200912_02_T1: Bumba, Congo", cex.main=0.9, axes=FALSE)
+# combining bands for false colour composite, here using bands 5, 4 and 3.
+landsatFCC <- landsat[[c(5,4,3)]]
+# visualising false colour composite on screen
+plotRGB(landsatFCC, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1_B: Basoko, central Congo", cex.main=0.9, axes=FALSE)
+\end{lstlisting}
+
+The multi-facetted plot showing individual bands of the image Landsat OLI/TIRS has been plotted using the libraries 'raster' and 'terra', by the code in Listing \ref{lst:02}. Here the case is given for the for image covering the Basoko town (2022).
+
+\begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, label={lst:02}]
+library(raster)
+library(terra)
+# terra version 1.2.11
+# Setup working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+b1 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B1.TIF') # Ultra Blue/Aerosol
+b2 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B2.TIF') # Blue
+b3 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B3.TIF') # Green
+b4 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B4.TIF') # Red
+b5 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B5.TIF') # Near Infrared NIR
+b6 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B6.TIF') # Green
+b7 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B7.TIF') # Red
+b9 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B8.TIF') # Panchromatic
+b8 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B9.TIF') # Cirrus
+b10 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B10.TIF') # TIRS 1
+b11 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B11.TIF') # TIRS 2
+# Defining the color palette
+colors <- kovesi.cyclic_grey_15_85_c0(100)
+# Plotting 11 original individual 11 layers (raw bands) of the multi-spectral image Landsat-8.
+par(mfrow = c(4, 3), mar=c(0, 5, 0, 0), mai = c(0.1, 0.1, 0.1, 0.1)) # c(bottom, left, top, right)
+plot(b1, main = "Ultra Blue / Aerosol (B1)", col = colors, axes = FALSE, legend = TRUE)
+plot(b2, main = "Blue (B2)", col = colors, axes = FALSE, legend = TRUE)
+plot(b3, main = "Green (B3)", col = colors, axes = FALSE, legend = TRUE)
+plot(b4, main = "Red (B4)", col = colors, axes = FALSE, legend = TRUE)
+plot(b5, main = "Near Infrared (NIR) (B5)", col = colors, axes = FALSE, legend = TRUE)
+plot(b6, main = "SWIR (B6)", col = colors, axes = FALSE, legend = TRUE)
+plot(b7, main = "NIR (B7)", col = colors, axes = FALSE, legend = TRUE)
+plot(b8, main = "Panchromatic (B8)", col = colors, axes = FALSE, legend = TRUE)
+plot(b9, main = "Cirrus (B9)", col = colors, axes = FALSE, legend = TRUE)
+plot(b10, main = "TIRS 1 (B10)", col = colors, axes = FALSE, legend = TRUE)
+plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
+\end{lstlisting}
+
 \begin{figure}[H]
 \makebox[\textwidth][r]{\includegraphics[width=1.3\textwidth]{Basoko_grey_multibands.jpg}}%
-	\caption{Composite map of the monochrome 11 bands of the Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river): multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
+	\caption{Composite of monochrome 11 bands: Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river). Multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
 	\label{fig04}
 \end{figure} 
 
@@ -244,28 +313,84 @@ plot(Basoko2013_B2,
 		\caption{False colour composite, bands RGB (5-4-3): 2013.}
 	\end{subfigure}%
 }
-\caption{Natural and False colour composite visualization of Landsat 8 OLI image of Basoko region, Congo. Mapping: RStudio. Source: authors.}\label{fig07}
+\caption{Basoko town, Congo river, Aruwimi tributary and surroundings. Natural and false colour composite of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.95\textwidth]{Kisangani_2013_NAT.jpg}
+		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.95\textwidth]{Kisangani_2013_FCC.jpg}
+		\caption{False colour composite, bands RGB (5-4-3): 2013.}
+	\end{subfigure}%
+}
+\caption{Kisangani city region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.95\textwidth]{Bumba_2013_NAT.jpg}
+		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.95\textwidth]{Bumba_2013_FCC.jpg}
+		\caption{False colour composite, bands RGB (5-4-3): 2013.}
+	\end{subfigure}%
+}
+\caption{Bumba town region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
 \end{figure}
 
 \subsection{k-means Clustering}
 
+\begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, label={lst:03}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Importing data
+Landsat_Basoko2022 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Printing the list
+list.files()
+# Creating the object of RasterLayer class for one band
+Basoko2022_B2 <- raster(Landsat_Basoko2022[2])
+Basoko2022_B2
+# Generating the color palette table
+colors <- kovesi.linear_grey_10_95_c0(100)
+# Plotting one band
+plot(Basoko2022_B2,
+    main = "Landsat OLI/TIRS 2022 band 2 Basoko, Congo \nLC08_L1TP_177059_20220208_20220212_02_T1", font.main=2, cex.main = 0.90, axes = FALSE, box = FALSE, legend = FALSE, col = colors)
+# Stacking the data to create a RasterStack. A RasterStack is a collection of RasterLayer objects (layers of selected bands) with the same spatial extent and resolution. A RasterStack can be created from RasterLayer objects, or from raster files
+Landsat_Basoko2022_stack <- stack(Landsat_Basoko2022)
+# Turning a stack into a brick. RasterBrick is a multi-layer raster object created from the multi-layer file(s) (bands). RasterBrick is similar to a RasterStack (that can be created with stack), but processing time is shorter for RasterBrick. RasterBrick is less flexible as it can only point to a single file.
+# Landsat_Basoko2022_brick <- brick(Landsat_Basoko2022_stack)
+Landsat_Basoko2022_brick <- brick(Basoko2022_B2)
+# Viewing brick attributes
+Landsat_Basoko2022_brick
+# Plotting the RGB triplet from the RasterBrick
+olpar <- par(no.readonly = TRUE) # back-up par
+par(mfrow=c(1,1))
+plotRGB(Landsat_Basoko2022_brick)
+## Running the classification
+set.seed(25)
+unC <- unsuperClass(Landsat_Basoko2022_brick, nSamples = 100, nClasses = 10, nStarts = 5)
+unC
+# Creating the color palette table
+colors <- kovesi.diverging_rainbow_bgymr_45_85_c67(10)
+# Plotting a map
+plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Basoko, Congo  \nL1TP_177059_20220208_20220212_02_T1 (2022)", font.main=2, cex.main = 0.95, col = colors, axes = FALSE, box = FALSE, legend = FALSE)
+# Adding legend
+legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Results}
-
-The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
-
-\begin{enumerate}
-	\item	Swamp forest
-	\item	Humid tropical forest;
-	\item	Secondary forest;
-	\item	Urban areas and impervious surfaces;
-	\item Inundated grassland;
-	\item Deciduous forest;
-	\item Shrubland and grassland;
-	\item Cropland and mosaic forest;
-	\item Savannah with sparse trees;
-	\item Water bodies;
-\end{enumerate} 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -287,21 +412,98 @@ The classes of land cover types were defined based on the following classificati
 			\includegraphics[width=0.85\textwidth]{Basoko_2022_grey.jpg}
 		\caption{Monochrome image for Basoko region: 2022.}
 	\end{subfigure}%
+%		\pgfmathsetlength{\imagewidth}{\linewidth}%
+ %  		\pgfmathsetlength{\imagescale}{\imagewidth/10}%
+ %  		\begin{tikzpicture}
+   %			\draw [thick,red,->] (0,4) -- (3,4);
+%		\end{tikzpicture}
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Basoko_2013_class.jpg}
+		\includegraphics[width=0.95\textwidth]{Basoko_2022_class.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2022.}
 	\end{subfigure}%
+
 }
 \caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
 \end{figure}
+%\begin{tikzpicture}
+ %  	\draw [red,->] (0,0) -- (5cm,0.0);
+%\end{tikzpicture}
+%------------
 
-Numbered lists can be added as follows:
-\begin{itemize}
-	\item	First item; 
-	\item	Second item;
-	\item	Third item.
-\end{itemize}
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.88\textwidth]{Kisangani_2013_grey.jpg}
+		\caption{Monochrome image for Kisangani area, B5 (NIR): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Kisangani_2013_class}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.97\textwidth]{Kisangani_2015_class}
+		\caption{Classified scene using \emph{k}-means clustering: 2015.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.96\textwidth]{Kisangani_2022_class}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+}
+\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Basoko_2013_grey.jpg}
+		\caption{Monochrome image for Bumba region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Basoko_2013_class.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Basoko_2022_grey.jpg}
+		\caption{Monochrome image for Bumba region: 2022.}
+	\end{subfigure}
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Basoko_2022_class.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+
+}
+\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
+
+The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
+
+\begin{enumerate}
+	\item	Swamp forest
+	\item	Humid tropical forest;
+	\item	Secondary forest;
+	\item	Urban areas and impervious surfaces;
+	\item Inundated grassland;
+	\item Deciduous forest;
+	\item Shrubland and grassland;
+	\item Cropland and mosaic forest;
+	\item Savannah with sparse trees;
+	\item Water bodies;
+\end{enumerate} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
