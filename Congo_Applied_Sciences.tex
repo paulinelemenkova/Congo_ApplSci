@@ -395,6 +395,29 @@ legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), f
 	\label{fig01}}
 \end{figure} 
 
+\subsection{NDVI calculation}
+
+\begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town with the same principle applied for all other images, label={lst:03}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data
+filenames <- paste0('LC08_L1TP_177059_20131216_20200912_02_T1_B', 1:7, ".tif")
+filenames
+landsat <- rast(filenames)
+landsat
+vi <- function(img, k, i) {
+  bk <- img[[k]]
+  bi <- img[[i]]
+  vi <- (bk - bi) / (bk + bi)
+  return(vi)
+}
+# plotting the NDVI. For Landsat NIR = 5, red = 4.
+ndvi <- vi(landsat, 5, 4)
+colors <- brewer.pal(10, "RdYlGn")
+plot(ndvi, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1: Basoko, Congo DC (2013)", cex.main=0.95, axes = FALSE, legend = FALSE)
+legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Results}
