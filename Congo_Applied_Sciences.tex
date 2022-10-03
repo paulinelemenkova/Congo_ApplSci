@@ -111,10 +111,12 @@ $^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (
 \corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32471860459 (P.L.)}
 
 % Abstract (Do not insert blank lines, i.e. \\) 
-\abstract{}
+\abstract{
+In this paper, we show that processing of the remote sensing data can be performed using libraries of R language. The classification tasks can be formulated using the k-means clustering algorithms and achieved using RStoolbox package, computing the Normalized Difference Vegetation Index (NDVI) from the Landsat-8 OLI-TIRS satellite image is achieved using the terra library and data handling is processed using integration of raster and rgdal libraries. Our proposed framework of image processing using R programming approach is designed to exploit parameters of image bands as cues to detect land cover types and vegetation parameters via the digital numbers (DN)s of the pixels corresponding to the spectral reflectance of the objects represented on the Earth's surface. Our method is effective for processing time-series of the images taken in various periods to monitor landscape dynamics in the region of Congo River basin. Application of scripts towards geospatial data is effective and robust method contrasting to GIS approaches due to high automation and machine-based graphical data processing. Furthermore, the algorithms of R libraries are adjusted to spatial operations, such as projection and transformation, topology  of classified objects and geolocation. We validated the functionality of R programming for Earth observation data on the publicly available datasets of Landsat-8 OLI-TIRS covering the three spots of interest along the river of Congo: the towns of Bumba, Basoko and Kisangani for the years 2013, 2015 and 2022, respectively. We also demonstrated the performance of graphical data handling for cartographic visualization using R libraries RColorBrewer, viridis, viridisLite, pals, colorspace and graphics. In all cases the R programming approach proposes the results in geoinformation data processing and mapping better than state-of-the-art GIS software for remote sensing data processing.
+}
 
 % Keywords
-\keyword{keyword 1; keyword 2; keyword 3 (List three to ten pertinent keywords specific to the article; yet reasonably common within the subject discipline.)} 
+\keyword{image processing; remote sensing; Landsat; R language; programming; cartography; mapping; data visualization; NDVI ; Africa} 
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
 \PACS{91.10.Da; 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
@@ -135,6 +137,13 @@ $^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+Satellite image processing is a fundamental problem in remote sensing data analysis. In this paper, we present an R programming language \cite{RCoreTeam} applied towards the unsupervised classification and NDVI calculation of Landsat-8 OLI/TIRS data on Congo. Motivated by recent reports regarding the environmental changes in rainfall tropical forests of central Africa \cite{Wasseige,lescuyer2010chainsaw,Jayathilake,POTAPOV2012106,Shapiro,7326202}, we applied multi-temporal data covering identical selected regions along the stream of upper Congo river, with a time span of 2013 to 2022, to demonstrate the dynamics of the landscapes over the years using Landsat satellite images. Our methods apply the k-means automated clustering and the calculation of the NDVI bands using R libraries RStoolbox, terra, raster and auxiliary graphical packages.
+
+Satellite images processed by remote sensing processing tools, are often used in mapping landscape dynamics as a way to detect land cover changes through exploiting underlying similarities and differences in pixels of the image dataset in the Landsat \cite{SIKUZANI2020e01333,DUVEILLER20081969} or Sentinel scenes \cite{9554698,Lemenkova202021} or their integration \cite{ZHANG2021112470,CHEN2021102386}. Some of these methods of image processing use time series comparison of the spatial resolution imagery \cite{7326202,6352722}, topological data extraction by spectral analysis derived from spatial SAR data \cite{1027205}, and photogrammetric LiDAR data processing for detection of forest canopy \cite{rs13183777}. Additionally, some of the methods of image processing use supervised classification include the automated extraction of training samples and national reference maps \cite{rs12172705}, regression tree analysis for tree height canopy modelling in evergreen forest tree coverage \cite{HANSEN2016221}, and statistical approaches for detecting forest degradation \cite{7326141}, to mention some of them.
+
+The brightness of pixels in the satellite images correspond to the spectral reflectance of various surfaces and objects on the Earth, e.g., built-up urban area, bare soil and deserts, forest of various types, water bodies, etc. Since the absorption of the solar radiation varies in these objects, their spectral reflection is different, correspondently. Such fundamental properties of optics of the surface and materials form a basis for environmental applications of satellite imagery generated by the sensors embedded onboard of the space born satellites \cite{Lillesand}. These differences in the spectral signatures of the objects and surfaces are detectable on the spectral bands of satellite imagery and digital numbers (DNs) of the pixels in the bitmap images and can be used for land cover mapping \cite{Manakos}.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Study Area}
@@ -622,7 +631,7 @@ LD & Linear dichroism
 % References, variant A: external bibliography
 %=====================================
 \bibliography{Congo.bib}
-\nocite{*}
+%\nocite{*}
 
 \end{document}
 
