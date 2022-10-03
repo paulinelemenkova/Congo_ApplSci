@@ -159,6 +159,8 @@ While remote sensing data acquisition process and techniques of image processing
 	\label{fig01}}
 \end{figure} 
 
+Basoko town is situated in the confluence of Aruwimi tributary into the Congo river.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
 
@@ -308,57 +310,52 @@ plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 \end{lstlisting}
 
 \begin{figure}[H]
-\makebox[\textwidth][r]{\includegraphics[width=1.3\textwidth]{Basoko_grey_multibands.jpg}}%
+\makebox[\textwidth][r]{\includegraphics[width=1.3\textwidth]{Fig_02.jpg}}%
 	\caption{Composite of monochrome 11 bands: Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river). Multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
-	\label{fig04}
+	\label{fig02}
 \end{figure} 
 
 \begin{figure}[H]
-\makebox[0.90\linewidth][c]{%
+\makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.95\textwidth]{Bumba_2013_NAT.jpg}
-		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
+			\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
+		\caption{Bumba: natural colour composite, 2013}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.95\textwidth]{Bumba_2013_FCC.jpg}
-		\caption{False colour composite, bands RGB (5-4-3): 2013.}
+		\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
+		\caption{Bumba: false colour composite: 2013.}
 	\end{subfigure}%
-}
-\caption{Bumba town region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
-\end{figure}
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
+		\caption{Basoko: natural colour composite: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
+		\caption{Basoko: false colour composite: 2013}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
+		\caption{Kisangani: Natural colour composite: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
+		\caption{Kisangani: False colour composite: 2013}
+	\end{subfigure}%
 
-\begin{figure}[H]
-\makebox[0.90\linewidth][c]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Basoko_2013_NAT.jpg}
-		\caption{Natural colour composite, bands RGB (4-3-2): 2013.}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Basoko_B543_2013.jpg}
-		\caption{False colour composite, bands RGB (5-4-3): 2013.}
-	\end{subfigure}%
 }
-\caption{Basoko town, Congo river, Aruwimi tributary and surroundings. Natural and false colour composite of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
-\end{figure}
-
-\begin{figure}[H]
-\makebox[0.90\linewidth][c]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Kisangani_2013_NAT.jpg}
-		\caption{Natural colour composite, bands RGB (2-3-4): 2013.}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.95\textwidth]{Kisangani_2013_FCC.jpg}
-		\caption{False colour composite, bands RGB (5-4-3): 2013.}
-	\end{subfigure}%
-}
-\caption{Kisangani city region, Congo river: natural and false colour composites of the Landsat 8 OLI image. Mapping: RStudio. Source: authors.}\label{fig07}
+\caption{Natural (bands 2-3-4) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio}\label{fig03}
 \end{figure}
 
 \subsection{k-means Clustering}
@@ -403,9 +400,9 @@ legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), f
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=15.0 cm]{Classif_run.jpg}
+	\includegraphics[width=15.0 cm]{Fig_04.jpg}
 	\caption{Executing the \emph{k}-means clustering classification algorithm in RStudio using the RStoolbox package. Parameters of cluster centroids and sum of squares by cluster are displayed in the console of R. Spatial parameters of the output map are listed. Here the example of Landsat image of the Basoko.
-	\label{fig01}}
+	\label{fig04}}
 \end{figure} 
 
 \subsection{NDVI calculation}
@@ -440,12 +437,12 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.85\textwidth]{Bumba_2013_grey.jpg}
+			\includegraphics[width=0.85\textwidth]{Fig_05a.jpg}
 		\caption{Monochrome image for Bumba region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Bumba_2013_class.jpg}
+		\includegraphics[width=0.95\textwidth]{Fig_05b.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2013.}
 	\end{subfigure}%
 }\\
@@ -453,29 +450,29 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.85\textwidth]{Bumba_2022_grey.jpg}
+			\includegraphics[width=0.85\textwidth]{Fig_05c.jpg}
 		\caption{Monochrome image for Bumba region: 2022.}
 	\end{subfigure}
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Bumba_2022_class.jpg}
+		\includegraphics[width=0.95\textwidth]{Fig_05d.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2022.}
 	\end{subfigure}%
 
 }
-\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig05}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.85\textwidth]{Basoko_2013_grey.jpg}
+			\includegraphics[width=0.85\textwidth]{Fig_06a.jpg}
 		\caption{Monochrome image for Basoko region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Basoko_2013_class.jpg}
+		\includegraphics[width=0.95\textwidth]{Fig_06b.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2013.}
 	\end{subfigure}%
 }\\
@@ -483,7 +480,7 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.85\textwidth]{Basoko_2022_grey.jpg}
+			\includegraphics[width=0.85\textwidth]{Fig_06c.jpg}
 		\caption{Monochrome image for Basoko region: 2022.}
 	\end{subfigure}%
 %		\pgfmathsetlength{\imagewidth}{\linewidth}%
@@ -493,7 +490,7 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 %		\end{tikzpicture}
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Basoko_2022_class.jpg}
+		\includegraphics[width=0.95\textwidth]{Fig_06d.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2022.}
 	\end{subfigure}%
 
@@ -509,12 +506,12 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.88\textwidth]{Kisangani_2013_grey.jpg}
+			\includegraphics[width=0.88\textwidth]{Fig_07a.jpg}
 		\caption{Monochrome image for Kisangani area, B5 (NIR): 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.95\textwidth]{Kisangani_2013_class}
+		\includegraphics[width=0.95\textwidth]{Fig_07b.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2013.}
 	\end{subfigure}%
 }\\
@@ -522,16 +519,16 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.97\textwidth]{Kisangani_2015_class}
+			\includegraphics[width=0.97\textwidth]{Fig_07c.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2015.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.96\textwidth]{Kisangani_2022_class}
+		\includegraphics[width=0.96\textwidth]{Fig_07d.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2022.}
 	\end{subfigure}%
 }
-\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig07}
 \end{figure}
 
 The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
@@ -551,16 +548,17 @@ The classes of land cover types were defined based on the following classificati
 
 
 \subsection{NDVI}
+
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{NDVI_Bumba_2013}
+			\includegraphics[width=0.87\textwidth]{Fig_08a.jpg}
 		\caption{Bumba region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{NDVI_Bumba_2022}
+		\includegraphics[width=0.87\textwidth]{Fig_08b.jpg}
 		\caption{Bumba region: 2022}
 	\end{subfigure}%
 }\\
@@ -568,12 +566,12 @@ The classes of land cover types were defined based on the following classificati
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{NDVI_Basoko_2013.jpg}
+			\includegraphics[width=0.87\textwidth]{Fig_08c.jpg}
 		\caption{Basoko region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{NDVI_Basoko_2022}
+		\includegraphics[width=0.87\textwidth]{Fig_08d.jpg}
 		\caption{Basoko region: 2022.}
 	\end{subfigure}%
 }\\
@@ -581,17 +579,17 @@ The classes of land cover types were defined based on the following classificati
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{NDVI_Kisangani_2013}
+			\includegraphics[width=0.87\textwidth]{Fig_08e.jpg}
 		\caption{Kisangani region: 2013}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{NDVI_Kisangani_2022}
+		\includegraphics[width=0.87\textwidth]{Fig_08f.jpg}
 		\caption{Kisangani region: 2022}
 	\end{subfigure}%
 
 }
-\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangali. Mapping: RStudio. Source: authors.}\label{fig06}
+\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangali. Mapping: RStudio. Source: authors.}\label{fig08}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
