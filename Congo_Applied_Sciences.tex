@@ -370,7 +370,7 @@ plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 The colour products for all the three cities were prepared using the combination of bands 2-3-4 (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands is converted to the colours with the intensity channel corresponding to the resolution of the original bands (30 m). A hue, saturation and intensity transformation of each of the triplets are processed and resampled by R package 'terra' to form the output image, Figure \ref{fig03}.
 
 \subsection{k-means Clustering}
-The \emph{k}-means clustering of R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partition without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using automatic approach.
+The \emph{k}-means clustering of R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partition without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using automatic approach. The algorithm has been performed using \emph{k}-means clustering method, which presents a machine learning approach for clustering pixels according to their intensity and brightness into the defined groups (or clusters), Listing \ref{lst:04}. 
 
 \begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, label={lst:04}]
 # Set up working directory
@@ -387,9 +387,9 @@ colors <- kovesi.linear_grey_10_95_c0(100)
 # Plotting one band
 plot(Basoko2022_B2,
     main = "Landsat OLI/TIRS 2022 band 2 Basoko, Congo \nLC08_L1TP_177059_20220208_20220212_02_T1", font.main=2, cex.main = 0.90, axes = FALSE, box = FALSE, legend = FALSE, col = colors)
-# Stacking the data to create a RasterStack. A RasterStack is a collection of RasterLayer objects (layers of selected bands) with the same spatial extent and resolution. A RasterStack can be created from RasterLayer objects, or from raster files
+# Stacking the data to create a RasterStack. 
 Landsat_Basoko2022_stack <- stack(Landsat_Basoko2022)
-# Turning a stack into a brick. RasterBrick is a multi-layer raster object created from the multi-layer file(s) (bands). RasterBrick is similar to a RasterStack (that can be created with stack), but processing time is shorter for RasterBrick. RasterBrick is less flexible as it can only point to a single file.
+# Turning a stack into a brick. 
 # Landsat_Basoko2022_brick <- brick(Landsat_Basoko2022_stack)
 Landsat_Basoko2022_brick <- brick(Basoko2022_B2)
 # Viewing brick attributes
@@ -410,6 +410,8 @@ plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Baso
 legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
 \end{lstlisting}
 
+The image for classification was generated using stacking the data which enabled to create a RasterStack as a collection of RasterLayer objects generated from raster layers of selected bands with the same spatial extent and resolution (30 m for the most Landsat-8 OLI/TIRS bands). Afterwards, the RasterStack was merged into the RasterBrick, which is a multi-layer raster object created from the multi-layer files, i.e. RasterStack made up of Landsat band. The processing time for the RasterBrick in R environment is shorter compared to the RasterStack, since RasterBrick is less flexible and is merged as a single file. The similarity is that the both are created with stack of raster bands. The procedure and the output of the k-means clustering is presented in Figure \ref{fig04} which shows the console of the RStudio with statistical information on cluster centroids and sum of squares for each processed map, and the cluster map that depicts the class memberships of the pixels, here with a case of Basoko town (2013), Figure \ref{fig04} . 
+
 \begin{figure}[H]
 \centering
 	\includegraphics[width=15.0 cm]{Fig_04.jpg}
@@ -417,6 +419,11 @@ legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), f
 	\label{fig04}}
 \end{figure} 
 
+Thus, the automatic clustering analysis has been performed without prior knowing of class membership of those pixels. Based on the automatic analysis of pixel brightness, the pixels of a given symbol were partitioned into the same spectral class which belongs to one of the 10 clusters. The clusters were identified by associating the pixels from the images with the available information of spectral reflectance and presented as maps in Figures \ref{fig05} (Bumba), \ref{fig06} (Basoko) and \ref{fig07} (Kisangani). 
+
+The determined number of the spectral classes was 10, into which the data were divided automatically by the search for spectral class for each pixel in the image. We applied the 10 classes for the unsupervised approach to classification to produce the thematic maps of vegetation and land cover classes using the following classification adopted from the existing previous studies \cite{Bwangoy}: swamp forest; humid tropical forest; secondary forest; urban areas and impervious surfaces; inundated grassland; deciduous forest; shrubland and grassland; cropland and mosaic forest; savannah with sparse trees; water bodies. 
+
+\newpage
 \subsection{NDVI calculation}
 
 \begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town with the same principle applied for all other images, label={lst:05}]
@@ -543,7 +550,7 @@ legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5"
 \caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig07}
 \end{figure}
 
-The classes of land cover types were defined based on the following classification adopted from the existing previous studies \cite{Bwangoy}:
+The classes of land cover types were defined as follows:
 
 \begin{enumerate}
 	\item	Swamp forest
