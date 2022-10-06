@@ -147,9 +147,7 @@ Spectral bands that comprise the satellite imagery each consists of a matrix of 
 
 Modelling, reconstruction and prognosis of forest degradation poses a challenge for both environmental research efforts as well as socio-economic applications, since deforestation affects the current land use policy and agro-industrial development of central African countries \cite{TEGEGNE2016312,f13091508}. Economic activities, such as timber production, road expansion, logging and manufacturing, are directly related to deforestation \cite{BRANDT201615,TRITSCH2020106660,Lietal2015}. Another source of deforestation results from the high consumption of wood from the population to make a living through agriculture and woodcutting \cite{Iloweka}. At the same time, deforestation and unbalanced functioning of forest ecosystems has environmental consequences, e.g., land degradation, desertification, the loss of wildlife habitat and soil erosion \cite{AQUILAS2022100553}. Assessment of the degree of deforestation is possible by comparison of forest areas on older maps with those detected on the remote sensing data \cite{rs12040638,land10101042,Zhangetal2005}, analysis of landscape dynamics by time series of images \cite{land11091541}. Examples of other approaches include continuous metric for to measure the degree of forest degradation \cite{SHAPIRO2021107268}
  
-While remote sensing data acquisition process and techniques of image processing by GIS have demonstrated advanced over the recent decades, algorithms of modelling geospatial data are not as straightforward to handle and require automation, which is possible using the programming approaches. A large number of methods on forest monitoring by remote sending data have been proposed over the years. Popular cases include the use of multi-source data, such as fusion of LiDAR, radar and optical data, very high-resolution satellite images and unmanned aerial vehicles (UAV) \cite{rs12071087}. The application of land-use and land-cover change \cite{lambin2003dynamics}, classification and clustering \cite{976841}, and fusion of remote sensing data with reference maps for change detection \cite{rs14164126}. Typically, methods of forest mapping are based on the use of the Landsat imagery \cite{1294510,Zhangetal2006,KIM2014178}, as well as SAR \cite{rs11242999,858324,7326669,6352093,8035264} or MODIS data \cite{HANSEN20082495,ZHANG201974} for forest land cover classification. 
-
-In this paper, we propose the use of R programming language as a means to process and classify Landsat images based on RSToolbox, raster and terra packages. The application of R for spatial analysis 
+While remote sensing data acquisition process and techniques of image processing by GIS have demonstrated advanced over the recent decades \cite{CHUMA2021100083,Westmanetal1989}, algorithms of modelling geospatial data are not as straightforward to handle and require automation, which is possible using the programming approaches. A large number of methods on forest monitoring by remote sending data have been proposed over the years. Popular cases include the use of multi-source data, such as fusion of LiDAR, radar and optical data, very high-resolution satellite images and unmanned aerial vehicles (UAV) \cite{rs12071087}. The application of land-use and land-cover change \cite{lambin2003dynamics}, classification and clustering \cite{976841}, and fusion of remote sensing data with reference maps for change detection \cite{rs14164126}. Typically, methods of forest mapping are based on the use of the Landsat imagery \cite{1294510,Zhangetal2006,KIM2014178}, as well as SAR \cite{rs11242999,858324,7326669,6352093,8035264} or MODIS data \cite{HANSEN20082495,ZHANG201974} for forest land cover classification. In this paper, we propose the use of R programming language as a means to process and classify Landsat images based on RSToolbox, raster and terra packages.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Study Area}
@@ -178,7 +176,7 @@ This article proposes a general a fully automated method for classifying satelli
 
 The first step in workflow included data capture. The data were captured from the \href{https://glovis.usgs.gov/app}{USGS GloVis} data repository which offers a global coverage of the publicly available satellite images with open access. We selected the three areas of Bumba, Basoko and Kisangani and collected the Landsat-8 OLI/TIRS imagery for the dates 2013 and 2022. The additional image for 2015 was captured for Kisangani due to the higher cloud coverage in 2013.  The geographic map in Figure \ref{fig01} has been plotted using the Generic Mapping Tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns located in consecutive order southwards: Bumba, Basoko, Kisangani. The collected data were inspected for metadata using the R Listing \ref{lst:01}. 
 
-\begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, label={lst:01}]
+\begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:01}]
 library(rgdal)
 library(raster)
 # Set up working directory
@@ -258,18 +256,20 @@ We used the 'rgdal' library of R to retrieve the coordinates, check the topology
 
 \subsection{Plotting band composites}
 
-The next step included generating the colour composites by combination of various band triplets using libraries 'raster' and 'terra' of R. Here the main idea of the machine-assisted classifier by R packages consists in the identification of spectral reflectance of pixels constituting 11 bands of the Landsat-8 OLI-TIRS for thematic mapping. The  The remote sensing instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, for NDVI calculation we only need the Red and NIR bands (4 and 5, respectively). However, to illustrate the structure of Landsat scene, the image of all the bands is given as a representation of the monochrome multi-facetted plot, Figure \ref{fig02}. Here the bands have 30-m resolution, while the panchromatic band (8) contains a higher resolution among the of multispectral bands. 
+The next step included inspecting the structure of Landsat bands. The image of all the bands is visualized as a representation of the monochrome multi-facetted plot, Figure \ref{fig02}. The most multispectral bands have 30-m resolution, while panchromatic band (B8) has a higher resolution (15 m) and the two TIRS (B10 and B11) have a coarse 100-m resolution. 
 
 \begin{figure}[H]
-\makebox[\textwidth][r]{\includegraphics[width=1.3\textwidth]{Fig_02.jpg}}%
+\makebox[\textwidth][r]{\includegraphics[width=1.1\textwidth]{Fig_02.jpg}}%
 	\caption{Composite of monochrome 11 bands: Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river). Multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
 	\label{fig02}
 \end{figure} 
 
+The next step included generating the colour composites by combination of various band triplets using libraries 'raster' and 'terra' of R. Here the main idea of the machine-assisted classifier by R packages consists in the identification of spectral reflectance of pixels constituting 11 bands of the Landsat-8 OLI-TIRS for thematic mapping. The remote sensing instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, for NDVI calculation we only need the Red and NIR bands (4 and 5, respectively). 
+
 The composition of the red, green and blue colours creates the images with varied hue, saturation and intensity representation owing to the pixel brightness as spectral reflectance of the objects and surfaces on the Earth. Therefore, we mixed the bands to form various colour composites and inspect the land cover types. The selected and most representative band composites for the three studied regions were plotted as natural and false colour composites, which were generated using the code by library 'raster'. The code snippet is given for the town of Basoko, and applied similarly for the rest of the scenes, Listing \ref{lst:02}. 
 
 \begin{lstlisting}[language=r, caption=R code used for colour composites by libraries raster and
-terra; here a case of Bumba town applied likewise for all the other images, label={lst:02}]
+terra; here a case of Bumba town applied likewise for all the other images, label={lst:02},basicstyle=\scriptsize]
 setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
 # Importing data
 Landsat_Bumba2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
@@ -297,7 +297,7 @@ plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS 
 
 The multi-facetted plot of the individual bands of the Landsat OLI/TIRS image has been plotted using libraries 'raster' and 'terra' (version 1.2.11), by the code in Listing \ref{lst:03}. Here the case is given for the image covering Basoko (2022), applied for other scenes. 
 
-\begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, label={lst:03}]
+\begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, basicstyle=\scriptsize, label={lst:03}]
 library(raster)
 library(terra)
 # Setup working directory
@@ -380,7 +380,7 @@ The colour products for all the three cities were prepared using the combination
 \subsection{k-means Clustering}
 The \emph{k}-means clustering of R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partition without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using automatic approach. The algorithm has been performed using \emph{k}-means clustering method, which presents a machine learning approach for clustering pixels according to their intensity and brightness into the defined groups (or clusters), Listing \ref{lst:04}. Modelling   changes in forest structure by examining land-use categories is a commonly accepted practice for land cover mapping \cite{Manakos,WILKIE1988307,4780136,rs11242999,land11060787}.
 
-\begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, label={lst:04}]
+\begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:04}]
 # Set up working directory
 setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
 # Importing data
@@ -436,7 +436,7 @@ The algorithm of \emph{k}-means clustering is computationally demanding by R, ye
 \subsection{NDVI calculation}
 Next, we adapted the algorithm of NDVI for extracting the information on vegetation for knowledge on plant coverage in the three target areas along the Congo River. The NDVI has been generated using composite band arithmetic operations using the ratio of the difference and sum of reflected NIR and visible red wavelength. The approach of NDVI is grounded on the calculation of ratios in the reflectance between Red and NIR bands of the image (Band 4 and 5), as arithmetical variables using existing formula $NDVI=(NIR-Red)/(NIR+Red)$. The NDVI computation has been performed using the multi-band manipulation using R library terra, Listing \ref{lst:05}. 
 
-\begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town (2013) with the same principle applied for all other images, label={lst:05}]
+\begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town (2013) with the same principle applied for all other images, basicstyle=\scriptsize, label={lst:05}]
 # Set up working directory
 setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
 # Importing data
@@ -464,6 +464,20 @@ Apparently, the combination of a high reflectance in NIR and lower reflectance i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
 \section{Results and Discussion}
+
+The classes of land cover types were defined as follows:
+\begin{enumerate}
+	\item	Swamp forest
+	\item	Humid tropical forest;
+	\item	Secondary forest;
+	\item	Urban areas and impervious surfaces;
+	\item Inundated grassland;
+	\item Deciduous forest;
+	\item Shrubland and grassland;
+	\item Cropland and mosaic forest;
+	\item Savannah with sparse trees;
+	\item Water bodies;
+\end{enumerate} 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -494,20 +508,6 @@ Apparently, the combination of a high reflectance in NIR and lower reflectance i
 }
 \caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig05}
 \end{figure}
-
-The classes of land cover types were defined as follows:
-\begin{enumerate}
-	\item	Swamp forest
-	\item	Humid tropical forest;
-	\item	Secondary forest;
-	\item	Urban areas and impervious surfaces;
-	\item Inundated grassland;
-	\item Deciduous forest;
-	\item Shrubland and grassland;
-	\item Cropland and mosaic forest;
-	\item Savannah with sparse trees;
-	\item Water bodies;
-\end{enumerate} 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
