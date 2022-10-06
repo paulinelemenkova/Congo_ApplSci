@@ -418,7 +418,7 @@ plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Baso
 legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
 \end{lstlisting}
 
-The image for classification was generated using stacking the data which enabled to create a RasterStack as a collection of RasterLayer objects generated from raster layers of selected bands with the same spatial extent and resolution (30 m for the most Landsat-8 OLI/TIRS bands). Afterwards, the RasterStack was merged into the RasterBrick, which is a multi-layer raster object created from the multi-layer files, i.e., RasterStack made up of Landsat band. The similarity between RasterStack and RasterBrick classes is that the both are generated with a stack of the raster Landsat bands. However, the processing time for the RasterBrick is shorter in R environment compared to the RasterStack, as RasterBrick is less flexible and is merged already as a single file. The procedure and the output of the \emph{k}-means clustering is presented in Figure \ref{fig04} which shows the console of the RStudio with statistical information on cluster centroids and sum of squares for each processed map. The cluster map on the right of the print screen depicts the class memberships of the pixels, in this case with an example of Basoko town (2013), Figure \ref{fig04} . 
+The image for classification was generated using stacking the data which enabled to create a RasterStack as a collection of RasterLayer objects generated from raster layers of selected bands with the same spatial extent and resolution (30 m for the most Landsat-8 OLI/TIRS bands). Afterwards, the RasterStack was merged into the RasterBrick, which is a multi-layer raster object created from the multi-layer files, i.e., RasterStack made up of Landsat band. The similarity between RasterStack and RasterBrick classes is that the both are generated with a stack of the raster Landsat bands. However, the processing time for the RasterBrick is shorter in R environment compared to the RasterStack, as RasterBrick is less flexible and is merged already as a single file. The procedure and the output of the \emph{k}-means clustering is presented in Figure \ref{fig04} which shows the console of the RStudio with statistical information on cluster centroids and sum of squares for each processed map. The cluster map on the right of the print screen depicts the class memberships of the pixels, in this case with an example of Basoko town (2013), Figure \ref{fig04}. 
 
 \begin{figure}[H]
 \centering
@@ -465,19 +465,7 @@ Apparently, the combination of a high reflectance in NIR and lower reflectance i
 %\newpage
 \section{Results and Discussion}
 
-The classes of land cover types were defined as follows:
-\begin{enumerate}
-	\item	Swamp forest
-	\item	Humid tropical forest;
-	\item	Secondary forest;
-	\item	Urban areas and impervious surfaces;
-	\item Inundated grassland;
-	\item Deciduous forest;
-	\item Shrubland and grassland;
-	\item Cropland and mosaic forest;
-	\item Savannah with sparse trees;
-	\item Water bodies;
-\end{enumerate} 
+According to this classification of land cover types, a model of land cover types for 9-year time span showing changes in the three target regions with persistent tropical moist forest along the flow of Congo River was developed and visualized, Figure \ref{fig05}, Figure \ref{fig06} and Figure \ref{fig07} for Bumba, Basoko and Kisangani, respectively. The pairwise examination of the classified images allows to examine the changes in forest structure owing to the anthropogenic activities with urban growth and environmental drivers initiated by climate change. The classes of land cover types were defined as follows: Swamp forest; Humid tropical forest; Secondary forest; Urban areas and impervious surfaces; Inundated grassland; Deciduous forest; Shrubland and grassland; Cropland and mosaic forest; Savannah with sparse trees; Water bodies. The model was done by comparing the results of vegetation types classified on the Landsat imagery in 2013 and those in 2022. The additional image was selected for the Kisingani for the 2015 due to the cloudiness of the image in 2013.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -509,6 +497,8 @@ The classes of land cover types were defined as follows:
 \caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig05}
 \end{figure}
 
+As demonstrated on the resulting plots, the pixel-based models use 10 land-cover categories. The integration of two Landsat OLI/TIRS images for land cover mapping by R language is a challenging and promising approach and can be recommended for the future similar studies on rainforest mapping using remote sensing data. The final outputs as classified maps contained 10 land cover classes recorded from the 30 m raster grids equivalent to the resolution of the input Landsat OLI/TIRS data. 
+
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
@@ -528,25 +518,17 @@ The classes of land cover types were defined as follows:
 		\centering
 			\includegraphics[width=0.85\textwidth]{Fig_06c.jpg}
 		\caption{Monochrome image for Basoko region: 2022.}
-	\end{subfigure}%
-%		\pgfmathsetlength{\imagewidth}{\linewidth}%
- %  		\pgfmathsetlength{\imagescale}{\imagewidth/10}%
- %  		\begin{tikzpicture}
-   %			\draw [thick,red,->] (0,4) -- (3,4);
-%		\end{tikzpicture}
+	\end{subfigure}
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
 		\includegraphics[width=0.95\textwidth]{Fig_06d.jpg}
 		\caption{Classified scene using \emph{k}-means clustering: 2022.}
 	\end{subfigure}%
-
 }
 \caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
 \end{figure}
-%\begin{tikzpicture}
- %  	\draw [red,->] (0,0) -- (5cm,0.0);
-%\end{tikzpicture}
-%------------
+
+The land cover classification using R approach by RStoolbox was successful, as demonstrated above. However, the pixel-based approach of the raw data results in the grid structure of the landscape with resolution corresponding to the initial data. For more details data, Sentinel scenes can be considered for more fine-resolution classification. The continued increase of volume of spatial Earth observation data from the satellite images and novel directions in image analysis techniques using programming tools encourage the development of object based approaches. Thus, natural variations into the classification process can be omitted by applying the object based image analysis for detecting landscape structure which can be considered as a further development of the R programming methods.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
