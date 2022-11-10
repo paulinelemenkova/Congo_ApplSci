@@ -1,0 +1,676 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[applsci,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+
+%=================================================================
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2022}
+\copyrightyear{2022}
+%\externaleditor{Academic Editor: Firstname Lastname}
+\datereceived{} 
+%\daterevised{} % Only for the journal Acoustics
+\dateaccepted{} 
+\datepublished{} 
+%\datecorrected{} % Corrected papers include a "Corrected: XXX" date in the original paper.
+%\dateretracted{} % Corrected papers include a "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{gensymb} % for degree symbol
+\usepackage{lscape}
+\usepackage{pxfonts}
+\usepackage{graphicx}
+\usepackage{tikz}
+	\newlength\imagewidth
+	\newlength\imagescale
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{RGB}{255,255,255}
+\definecolor{SlateGray}{HTML}{708090}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    keywordstyle=\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{SlateGray},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t, 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=topline|bottomline,
+    }
+
+\lstset{style=mystyle}
+\captionsetup[lstlisting]{position=top, margin=0cm,labelfont={bf, small, stretch=1.17}, labelsep=colon, textfont={small, stretch=1.17}, aboveskip=6pt, singlelinecheck=off, justification=justified}
+	
+\usepackage{soul} % highlighting text
+
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{R Libraries for Remote Sensing Data Classification by k-means Clustering and NDVI Computation in Congo River Basin, DRC}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{R Libraries for Remote Sensing Data Classification by k-means Clustering and NDVI Computation in Congo River Basin, DRC}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-5759-1089} % Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Polina Lemenkova $^{1}$\orcidA{} and Olivier Debeir $^{1}\orcidB{}$}
+% \dagger,\ddagger
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Polina Lemenkova $^{1}$ and Olivier Debeir $^{1}$}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Lemenkova, P.; Debeir, O.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (EPB, Brussels Faculty of Engineering), Laboratory of Image Synthesis and Analysis, Building L, Campus de Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, B-1050, Brussels, Belgium}
+
+% Contact information of the corresponding author
+\corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32471860459 (P.L.)}
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{
+In this paper, we show that processing of the remote sensing data can be performed using libraries of R language. The classification tasks can be formulated using the k-means clustering algorithms and achieved using RStoolbox package, computing the Normalized Difference Vegetation Index (NDVI) from the Landsat-8 OLI-TIRS satellite image is achieved using the terra library and data handling is processed using integration of raster and rgdal libraries. Our proposed framework of image processing using R programming approach is designed to exploit parameters of image bands as cues to detect land cover types and vegetation parameters via the digital numbers (DN)s of the pixels corresponding to the spectral reflectance of the objects represented on the Earth's surface. Our method is effective for processing time-series of the images taken in various periods to monitor landscape dynamics in the region of Congo River basin. Application of scripts towards geospatial data is effective and robust method contrasting to GIS approaches due to high automation and machine-based graphical data processing. Furthermore, the algorithms of R libraries are adjusted to spatial operations, such as projection and transformation, topology  of classified objects and geolocation. We validated the functionality of R programming for Earth observation data on the publicly available datasets of Landsat-8 OLI-TIRS covering the three spots of interest along the river of Congo: the towns of Bumba, Basoko and Kisangani for the years 2013, 2015 and 2022, respectively. We also demonstrated the performance of graphical data handling for cartographic visualization using R libraries RColorBrewer, viridis, viridisLite, pals, colorspace and graphics. In all cases the R programming approach proposes the results in geoinformation data processing and mapping better than state-of-the-art GIS software for remote sensing data processing.
+}
+
+% Keywords
+\keyword{image processing; remote sensing; Landsat; R language; programming; cartography; mapping; data visualization; NDVI ; Africa} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+\PACS{91.10.Da; 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+\MSC{86A30; 86-08; 86A99; 86A04}
+\JEL{Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Diversity
+%\LSID{\url{http://}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Applied Sciences
+\featuredapplication{Libraries of R programming language \emph{RStoolbox}, \emph{raster} and \emph{terra} were used to classify Landsat OLI-TIRS satellite images by \emph{k}-means clustering and NDVI computation for comparative vegetation mapping of tropical rainforests for the period of 2013-2022 in the three target areas (Bumba, Basoko, Kisangani) of middle Congo River Basin, central Africa, D.R.C.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Satellite image processing is a fundamental problem in remote sensing data analysis. In this paper, we present an R programming language \cite{RCoreTeam} applied towards the unsupervised classification and calculation of the Normalized Difference Vegetation Index (NDVI) using the Landsat-8 OLI/TIRS data on Congo. Motivated by recent reports regarding the environmental changes in rainfall tropical forests of central Africa \cite{Wasseige,lescuyer2010chainsaw,Jayathilake,POTAPOV2012106,Shapiro,7326202}, we applied multi-temporal data covering identical selected regions along the stream of the middle Congo River Basin, with a time span of 2013 to 2022, to demonstrate the dynamics of the landscapes over the years using Landsat satellite images. Our methods apply the k-means automated clustering and the calculation of the NDVI bands using R libraries RStoolbox \cite{RStoolbox}, terra \cite{RTerra}, raster \cite{Hijmans} and auxiliary graphical packages: RColorBrewer \cite{Neuwirth} and viridis \cite{viridis}. 
+
+Satellite images processed by remote sensing processing tools, are often used in mapping landscape dynamics as a way to detect land cover changes through exploiting underlying similarities and differences in pixels of the image dataset in the Landsat \cite{SIKUZANI2020e01333,DUVEILLER20081969} or Sentinel scenes \cite{9554698,Lemenkova202021,9553905} or their integration \cite{ZHANG2021112470,CHEN2021102386}. Some of these methods of image processing use time series comparison of the spatial resolution imagery \cite{7326202,6352722}, topological data extraction by spectral analysis derived from spatial SAR data \cite{1027205,520569}, and photogrammetric LiDAR data processing for detection of forest canopy \cite{rs13183777}. Additionally, some of the methods of image processing use supervised classification include the automated extraction of training samples and national reference maps \cite{rs12172705}, regression tree analysis for tree height canopy modelling in evergreen forest tree coverage \cite{HANSEN2016221}, and statistical approaches for detecting forest degradation \cite{7326141}, to mention some of them.
+
+The brightness of pixels in the satellite images correspond to the spectral reflectance of various surfaces and objects on the Earth, e.g., built-up urban area, bare soil and deserts, forest of various types, water bodies, etc. Since the absorption of the solar radiation varies in these objects, their spectral reflection is different, correspondently. Such fundamental properties of optics of the surface and materials form a basis for environmental applications of satellite imagery generated by the sensors embedded onboard of the space born satellites \cite{Lillesand}. These differences in the spectral signatures of the objects and surfaces are detectable on the spectral bands of satellite imagery and digital numbers (DNs) of the pixels in the bitmap images and can be used for land cover mapping \cite{Manakos}. 
+
+Spectral bands that comprise the satellite imagery each consists of a matrix of pixels with different intensity of the wavelengths of light, visible on the image as colours of various hues and shadowing. The Landsat OLI/TIRS consists of 11 bands including spectral, thermal and near-infrared (NIR). Of these, the red and NIR bands, which correspond to channels 4 and 5, are specifically useful for vegetation analysis and forest mapping. This is explained by the chlorophyll reflectance of plants in the red/NIR zones. Thus, the arithmetic combination of bands 4-5 can be used for computing the Normalized Difference Vegetation Index (NDVI) and other existing vegetation indices as indicators of vegetation health, vigour, and plant phenology, as reported in previous studies \cite{SOUDANI2012234,Lemenkova202019,1026428,HMIMINA2013145}.
+
+Modelling, reconstruction and prognosis of forest degradation poses a challenge for both environmental research efforts as well as socio-economic applications, since deforestation affects the current land use policy and agro-industrial development of central African countries \cite{TEGEGNE2016312,f13091508}. Economic activities, such as timber production, road expansion, logging and manufacturing, are directly related to deforestation \cite{BRANDT201615,TRITSCH2020106660,Lietal2015}. Another source of deforestation results from the high consumption of wood from the population to make a living through agriculture and woodcutting \cite{Iloweka}. At the same time, deforestation and unbalanced functioning of forest ecosystems has environmental consequences, e.g., land degradation, desertification, the loss of wildlife habitat and soil erosion \cite{AQUILAS2022100553}. Assessment of the degree of deforestation is possible by comparison of forest areas on older maps with those detected on the remote sensing data \cite{rs12040638,land10101042,Zhangetal2005}, analysis of landscape dynamics by time series of images \cite{land11091541}. Examples of other approaches include continuous metric for to measure the degree of forest degradation \cite{SHAPIRO2021107268}
+ 
+While remote sensing data acquisition process and techniques of image processing by GIS have demonstrated advanced over the recent decades \cite{CHUMA2021100083,Westmanetal1989}, algorithms of modelling geospatial data are not as straightforward to handle and require automation, which is possible using the programming approaches. A large number of methods on forest monitoring by remote sending data have been proposed over the years. Popular cases include the use of multi-source data, such as fusion of LiDAR, radar and optical data, very high-resolution satellite images and unmanned aerial vehicles (UAV) \cite{rs12071087}. The application of land-use and land-cover change \cite{lambin2003dynamics}, classification and clustering \cite{976841}, and fusion of remote sensing data with reference maps for change detection \cite{rs14164126}. Typically, methods of forest mapping are based on the use of the Landsat imagery \cite{1294510,Zhangetal2006,KIM2014178}, as well as SAR \cite{rs11242999,858324,7326669,6352093,8035264} or MODIS data \cite{HANSEN20082495,ZHANG201974} for forest land cover classification. In this paper, we propose the use of R programming language as a means to process and classify Landsat images based on RSToolbox, raster and terra packages.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Study Area}
+
+The images used in this work were obtained for the region of Democratic Republic of Congo (DRC) with the three target areas located in the middle region of the Congo River Basin, according to the regional basin division \cite{MUSHI201964}. The surrounding the towns Bumba, Basoko and Kisangani, lying on the Congo River, which serves as the main transportation artery for all these three cities (Figure \ref{fig01}). 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=12.0 cm]{Fig_01}
+	\caption{Topographic map of Congo River Basin with the DCR. Cartography: Generic Mapping Tools (GMT). Data source: GEBCO/SRTM. Mapping: authors.
+	\label{fig01}}
+\end{figure} 
+
+Kisangani is the capital of Tshopo province, situated at the confluence of the Congo, Lualaba, Tshopo, and Lindi rivers and is strategically located at the crossroads between eastern and western parts of Congo. Basoko town is situated in the confluence of Aruwimi tributary into the Congo River. Bumba is a small town and river port in Mongala Province, northern DRC. Being a part of the Congo River Basin, the cities have a tropical monsoon climate with dry months during winter period, humid summer-autumn seasons with heavy rainfalls and periodically flooded areas \cite{6571272}. Such climate setting, characterised by heavy rainfalls interspersed with dry season climate in Congo Basin create favourable conditions for the distribution of world's largest tropical humid forests \cite{Washington}. 
+
+The importance of the study area is explained by the crucial environmental role of the Congo River Basin. It contains over half of the African tropical moist forests \cite{Sayer1992}, and largely contributes to the Earth's atmosphere circulation on the planetary scale. Besides, tropical rainforests of Congo are a key factor in producing the oxygen and regulating global temperature through the absorption of solar radiation by forest massifs. Moreover, forest resources offer critical and principal support to the local rural livelihoods and socioeconomic wellbeing of local population \cite{f13010130} which often includes forest-related practices, such as forest clearing. As a result, land use and shifting agriculture become the major causes of hydrological flow regime \cite{4780136} and deforestation along with the increased population density and associated urban growth \cite{Wilkie1994}. At the same time, primary forests are essential ecosystems that play a key role in mitigating climate change \cite{SOMORIN2012288,BELE20151}. Conserving natural resources in the Congo tropical rainforests recently launched global initiatives, such as Reducing Emissions from Deforestation and Forest Degradation (\href{https://www.fao.org/redd/overview/en/}{REDD+}) \cite{land11060918,SUFOKANKEU2020102081} or Global Rain Forest Mapping (GRFM) project \cite{1025720}. On a regional and local level, practicing agroforests serve as ecosystem services responding to climate change mitigation strategy \cite{Batsietal2021}. Nevertheless, Congo River Basin remains the least studied regions in Africa and the global tropics \cite{Washingtonetal2006}. The approach we present here contributes to the environmental analysis of the selected regions of Congo River Basin using remote sensing data and R programming.
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+\section{Materials and Methods}
+
+This article proposes a general a fully automated method for classifying satellite images using R libraries by machine based \emph{k}-means clustering which requires no prior information and no learning on land cover classes. On one hand, the nature of land cover types is captured by considering the spectral attributes of the pixels in the respective Landsat bands. By carefully analysing these attributes, we reveal and demonstrate that the irregularity of the spectrum in wavelength corresponding to the landscape properties is highly related to the reflectance of of the surface which results in the brightness of pixels on the image. Thus, we applied the computational model of R to effectively capture and visualise this irregularity and transfer it from the frequency optical domain to the geo-information domain.   
+
+\subsection{Data capture and inspection}
+
+The first step in workflow included data capture. The data were captured from the \href{https://glovis.usgs.gov/app}{USGS GloVis} data repository which offers a global coverage of the publicly available satellite images with open access. We selected the three areas of Bumba, Basoko and Kisangani and collected the Landsat-8 OLI/TIRS imagery for the dates 2013 and 2022. The additional image for 2015 was captured for Kisangani due to the higher cloud coverage in 2013.  The geographic map in Figure \ref{fig01} has been plotted using the Generic Mapping Tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns located in consecutive order southwards: Bumba, Basoko, Kisangani. The collected data were inspected for metadata using the R Listing \ref{lst:01}. 
+
+\begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:01}]
+library(rgdal)
+library(raster)
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data: Landsat OLI/TIRS image for Basoko, Congo (2013):
+Landsat_Basoko2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Printing the list
+list.files()
+# Reading in files as SpatialGridDataFrame objects :
+BasokoBand1 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoBand2 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoBand3 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoBand4 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoBand5 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoBand6 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoBand7 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Visualizing and checking the class of random bands
+plot(BasokoBand1)
+res(BasokoBand1)
+class(BasokoBand5)
+## [1] "SpatialGridDataFrame"
+## attr(,"package")
+## [1] "sp"
+slotNames(BasokoBand5)
+# [1] "data"        "grid"        "bbox"        "proj4string"
+summary(BasokoBand5@data)
+# Min.   : 6637
+# 1st Qu.:14955
+# Median :15669
+# Mean   :15752
+# 3rd Qu.:16579
+# Max.   :27433
+# NA's   :17221239
+# Check the topology of the class
+str(BasokoBand5@grid)
+#Formal class 'GridTopology' [package "sp"] with 3 slots
+# ..@ cellcentre.offset: Named num [1:2] 696300 43500
+#  .. ..- attr(*, "names")= chr [1:2] "x" "y"
+#  ..@ cellsize         : num [1:2] 30 30
+#  ..@ cells.dim        : int [1:2] 7591 7741
+# Check up spatial dimension
+BasokoBand5@grid@cellcentre.offset
+# x      y
+# 696300  43500
+BasokoBand5@grid@cellsize
+# [1] 30 30
+BasokoBand5@bbox
+#      min    max
+# x 696285 924015
+# y 43485 275715
+BasokoBand5@proj4string
+# generating RasterLayers of Landsat bands
+BasokoB1 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoB2 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoB3 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoB4 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoB5 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoB6 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoB7 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Creating a facetted stack from the Landsat OLI-TIRS bands:
+image <- stack(BasokoB1, BasokoB2, BasokoB3, BasokoB4, BasokoB5, BasokoB6, BasokoB7)
+# Visualizing the image with separated bands:
+plot(image)
+# Check metadata:
+nlayers(image)
+res(image)
+# Creating the object of RasterLayer class for one random band (here: Band 2)
+Basoko2013_B2 <- raster(Landsat_Basoko2013[2])
+Basoko2013_B2
+# Plotting one randon band
+plot(Basoko2013_B2,
+     main = "Landsat OLI/TIRS 2013 band 2\nBasoko, central Congo",
+     col = gray(0:100 / 100))
+\end{lstlisting}
+
+We used the 'rgdal' library of R to retrieve the coordinates, check the topology and spatial dimension of the dataset stored in the SpatialGridDataFrame class. The RasterLayers were generated as arrays of pixels from the individual separated bands of the Landsat scenes. Afterwards, the facetted stack was created from the Landsat OLI-TIRS bands using stack() function of by 'raster' R library by concatenating multiple bands into a single bitmap image which uses the data on where the coordinates of each band originated. The resulting image was visualized by plot() function of R. We also analysed the number of layers and spatial dimension of in the new multi-layer object of R. The resolution of all the layers was 30 m except for the panchromatic band (15 m) and the two last TIRS layers with coarse 100-m resolution. The selected band was plotted in monochrome visualization. The data analysis and inspection has been performed using Listing \ref{lst:01}.
+
+\subsection{Plotting band composites}
+
+The next step included inspecting the structure of Landsat bands. The image of all the bands is visualized as a representation of the monochrome multi-facetted plot, Figure \ref{fig02}. The most multispectral bands have 30-m resolution, while panchromatic band (B8) has a higher resolution (15 m) and the two TIRS (B10 and B11) have a coarse 100-m resolution. 
+
+\begin{figure}[H]
+\makebox[\textwidth][r]{\includegraphics[width=1.1\textwidth]{Fig_02.jpg}}%
+	\caption{Composite of monochrome 11 bands: Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river). Multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
+	\label{fig02}
+\end{figure} 
+
+The next step included generating the colour composites by combination of various band triplets using libraries 'raster' and 'terra' of R. Here the main idea of the machine-assisted classifier by R packages consists in the identification of spectral reflectance of pixels constituting 11 bands of the Landsat-8 OLI-TIRS for thematic mapping. The remote sensing instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, for NDVI calculation we only need the Red and NIR bands (4 and 5, respectively). 
+
+The composition of the red, green and blue colours creates the images with varied hue, saturation and intensity representation owing to the pixel brightness as spectral reflectance of the objects and surfaces on the Earth. Therefore, we mixed the bands to form various colour composites and inspect the land cover types. The selected and most representative band composites for the three studied regions were plotted as natural and false colour composites, which were generated using the code by library 'raster'. The code snippet is given for the town of Basoko, and applied similarly for the rest of the scenes, Listing \ref{lst:02}. 
+
+\begin{lstlisting}[language=r, caption=R code used for colour composites by libraries raster and
+terra; here a case of Bumba town applied likewise for all the other images, label={lst:02},basicstyle=\scriptsize]
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Importing data
+Landsat_Bumba2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Printing the list
+list.files()
+# creating SpatRaster object
+landsat <- rast(Landsat_Bumba2013)
+# check properties
+landsat
+# combining bands for natural colour composite, here using bands 4, 3 and 2.
+landsatRGB <- landsat[[c(4,3,2)]]
+# check up metadata
+landsatRGB
+# visualising  natural colour composite on screen
+plotRGB(landsatRGB, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_178058_20131223_20200912_02_T1: Bumba, Congo", cex.main=0.9, axes=FALSE)
+# combining bands for false colour composite, here using bands 5, 4 and 3.
+landsatFCC <- landsat[[c(5,4,3)]]
+# visualising false colour composite on screen
+plotRGB(landsatFCC, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1_B: Basoko, central Congo", cex.main=0.9, axes=FALSE)
+\end{lstlisting}
+
+The multi-facetted plot of the individual bands of the Landsat OLI/TIRS image has been plotted using libraries 'raster' and 'terra' (version 1.2.11), by the code in Listing \ref{lst:03}. Here the case is given for the image covering Basoko (2022), applied for other scenes. 
+
+\begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, basicstyle=\scriptsize, label={lst:03}]
+library(raster)
+library(terra)
+# Setup working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+b1 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B1.TIF') # Ultra Blue/Aerosol
+b2 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B2.TIF') # Blue
+b3 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B3.TIF') # Green
+b4 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B4.TIF') # Red
+b5 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B5.TIF') # Near Infrared NIR
+b6 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B6.TIF') # Green
+b7 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B7.TIF') # Red
+b9 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B8.TIF') # Panchromatic
+b8 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B9.TIF') # Cirrus
+b10 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B10.TIF') # TIRS 1
+b11 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B11.TIF') # TIRS 2
+# Defining the color palette
+colors <- kovesi.cyclic_grey_15_85_c0(100)
+# Plotting 11 individual layers (raw bands) of the Landsat-8 image.
+par(mfrow = c(4, 3), mar=c(0, 5, 0, 0), mai = c(0.1, 0.1, 0.1, 0.1)) # c(bottom, left, top, right)
+plot(b1, main = "Ultra Blue (B1)", col = colors, axes = FALSE, legend = TRUE)
+plot(b2, main = "Blue (B2)", col = colors, axes = FALSE, legend = TRUE)
+plot(b3, main = "Green (B3)", col = colors, axes = FALSE, legend = TRUE)
+plot(b4, main = "Red (B4)", col = colors, axes = FALSE, legend = TRUE)
+plot(b5, main = "NIR (B5)", col = colors, axes = FALSE, legend = TRUE)
+plot(b6, main = "SWIR (B6)", col = colors, axes = FALSE, legend = TRUE)
+plot(b7, main = "SWIR (B7)", col = colors, axes = FALSE, legend = TRUE)
+plot(b8, main = "Panchromatic (B8)", col = colors, axes = FALSE, legend = TRUE)
+plot(b9, main = "Cirrus (B9)", col = colors, axes = FALSE, legend = TRUE)
+plot(b10, main = "TIRS 1 (B10)", col = colors, axes = FALSE, legend = TRUE)
+plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
+\end{lstlisting}
+
+The generated images reveal spatial details which can be better discerned in intensity of pixels in false colour composites for water areas and more sharpened representation of urban areas in the natural colour composites showing the spatial detail in the three images: Bumba, Basoko and Kisangani, Figure \ref{fig03}.
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03a.jpg}
+		\caption{Bumba: natural colour composite, 2013}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03b.jpg}
+		\caption{Bumba: false colour composite: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03c.jpg}
+		\caption{Basoko: natural colour composite: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03d.jpg}
+		\caption{Basoko: false colour composite: 2013}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_03e.jpg}
+		\caption{Kisangani: Natural colour composite: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_03f.jpg}
+		\caption{Kisangani: False colour composite: 2013}
+	\end{subfigure}%
+
+}
+\caption{Natural (bands 2-3-4) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio}\label{fig03}
+\end{figure}
+
+The colour products for all the three cities were prepared using the combination of bands 2-3-4 (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands is converted to the colours with the intensity channel corresponding to the resolution of the original bands (30 m). A hue, saturation and intensity transformation of each of the triplets are processed and resampled by R package 'terra' to form the output image, Figure \ref{fig03}.
+
+\subsection{k-means Clustering}
+The \emph{k}-means clustering of R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partition without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using automatic approach. The algorithm has been performed using \emph{k}-means clustering method, which presents a machine learning approach for clustering pixels according to their intensity and brightness into the defined groups (or clusters), Listing \ref{lst:04}. Modelling   changes in forest structure by examining land-use categories is a commonly accepted practice for land cover mapping \cite{Manakos,WILKIE1988307,4780136,rs11242999,land11060787}.
+
+\begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:04}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Importing data
+Landsat_Basoko2022 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Printing the list
+list.files()
+# Creating the object of RasterLayer class for one band
+Basoko2022_B2 <- raster(Landsat_Basoko2022[2])
+Basoko2022_B2
+# Generating the color palette table
+colors <- kovesi.linear_grey_10_95_c0(100)
+# Plotting one band
+plot(Basoko2022_B2,
+    main = "Landsat OLI/TIRS 2022 band 2 Basoko, Congo \nLC08_L1TP_177059_20220208_20220212_02_T1", font.main=2, cex.main = 0.90, axes = FALSE, box = FALSE, legend = FALSE, col = colors)
+# Stacking the data to create a RasterStack. 
+Landsat_Basoko2022_stack <- stack(Landsat_Basoko2022)
+# Turning a stack into a brick. 
+# Landsat_Basoko2022_brick <- brick(Landsat_Basoko2022_stack)
+Landsat_Basoko2022_brick <- brick(Basoko2022_B2)
+# Viewing brick attributes
+Landsat_Basoko2022_brick
+# Plotting the RGB triplet from the RasterBrick
+olpar <- par(no.readonly = TRUE) # back-up par
+par(mfrow=c(1,1))
+plotRGB(Landsat_Basoko2022_brick)
+## Running the classification
+set.seed(25)
+unC <- unsuperClass(Landsat_Basoko2022_brick, nSamples = 100, nClasses = 10, nStarts = 5)
+unC
+# Creating the color palette table
+colors <- kovesi.diverging_rainbow_bgymr_45_85_c67(10)
+# Plotting a map
+plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Basoko, Congo  \nL1TP_177059_20220208_20220212_02_T1 (2022)", font.main=2, cex.main = 0.95, col = colors, axes = FALSE, box = FALSE, legend = FALSE)
+# Adding legend
+legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
+The image for classification was generated using stacking the data which enabled to create a RasterStack as a collection of RasterLayer objects generated from raster layers of selected bands with the same spatial extent and resolution (30 m for the most Landsat-8 OLI/TIRS bands). Afterwards, the RasterStack was merged into the RasterBrick, which is a multi-layer raster object created from the multi-layer files, i.e., RasterStack made up of Landsat band. The similarity between RasterStack and RasterBrick classes is that the both are generated with a stack of the raster Landsat bands. However, the processing time for the RasterBrick is shorter in R environment compared to the RasterStack, as RasterBrick is less flexible and is merged already as a single file. The procedure and the output of the \emph{k}-means clustering is presented in Figure \ref{fig04} which shows the console of the RStudio with statistical information on cluster centroids and sum of squares for each processed map. The cluster map on the right of the print screen depicts the class memberships of the pixels, in this case with an example of Basoko town (2013), Figure \ref{fig04}. 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=15.0 cm]{Fig_04.jpg}
+	\caption{Executing the \emph{k}-means clustering classification algorithm in RStudio using the RStoolbox package. Parameters of cluster centroids and sum of squares by cluster are displayed in the console of R. Spatial parameters of the output map are listed. Here the example of Landsat image of the Basoko.
+	\label{fig04}}
+\end{figure} 
+
+Thus, the automatic clustering analysis has been performed without prior knowing of class membership of those pixels. Based on the automatic analysis of pixel brightness, the pixels of a given symbol were partitioned into the same spectral class which belongs to one of the 10 clusters. The clusters were identified by associating the pixels from the images with the available information of spectral reflectance and presented as the output maps in Figure \ref{fig05} (Bumba), Figure \ref{fig06} (Basoko) and Figure \ref{fig07} (Kisangani). 
+
+We defined 10 classes for the unsupervised classification approach to produce the thematic maps of vegetation and land cover classes using the existing classification adopted from previous studies \cite{Bwangoy}: swamp forest; humid tropical forest; secondary forest; urban areas and impervious surfaces; inundated grassland; deciduous forest; shrubland and grassland; cropland and mosaic forest; savannah with sparse trees; water bodies. 
+
+The algorithm of \emph{k}-means clustering is computationally demanding by R, yet it is crucial to the concept of remote sensing data processing due to the effectiveness and importance of the output. Thus, land cover types are not known beforehand and defined by the machine method of image analysis based on the spectral signatures of the objects partitioned into the series of clusters. The data were divided automatically into the 10 clusters using the search for spectral class for each pixel in the image. 
+
+\subsection{NDVI calculation}
+Next, we adapted the algorithm of NDVI for extracting the information on vegetation for knowledge on plant coverage in the three target areas along the Congo River. The NDVI has been generated using composite band arithmetic operations using the ratio of the difference and sum of reflected NIR and visible red wavelength. The approach of NDVI is grounded on the calculation of ratios in the reflectance between Red and NIR bands of the image (Band 4 and 5), as arithmetical variables using existing formula $NDVI=(NIR-Red)/(NIR+Red)$. The NDVI computation has been performed using the multi-band manipulation using R library terra, Listing \ref{lst:05}. 
+
+\begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town (2013) with the same principle applied for all other images, basicstyle=\scriptsize, label={lst:05}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data
+filenames <- paste0('LC08_L1TP_177059_20131216_20200912_02_T1_B', 1:7, ".tif")
+filenames
+landsat <- rast(filenames)
+landsat
+vi <- function(img, k, i) {
+  bk <- img[[k]]
+  bi <- img[[i]]
+  vi <- (bk - bi) / (bk + bi)
+  return(vi)
+}
+# plotting the NDVI. For Landsat NIR = 5, red = 4.
+ndvi <- vi(landsat, 5, 4)
+colors <- brewer.pal(10, "RdYlGn")
+plot(ndvi, col=colors, font.main = 1, main = "NDVI for Landsat-9 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1: Basoko, Congo DC (2013)", cex.main=0.95, axes = FALSE, legend = FALSE)
+legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
+Calculation of the NDVI enabled to exploit the knowledge from the spectral reflectance regarding vegetation coverage, since ratios of NIR/Red spectral bands lessen the influence from the ground relief, rocks and soils. Thus, the methodological advantage of the NDVI consists in the reinforcement of the slight differences and nuances in the spectral reflectance characteristics of vegetation. This enables to better distinct vegetation covered areas and discern them from all other land cover types. Using pairwise representations of the 9-year time series of Landsat OLI/TIRS (2013 to 2022), we calculated the NDVI data for the three target regions along the Congo river: Bumba, Basoko and Kisangani. Here we computed the values of NDVI for each couple of images, respectively, to show the dynamics of the vegetation growth in middle Congo in Figure \ref{fig08}. The NDVI is computed for each pixel, with brighter green hues indicating more dense and healthy plant canopy and contrariwise. 
+
+Apparently, the combination of a high reflectance in NIR and lower reflectance in the Red band results in higher NDVI values (around 1), and represent spectral signature of vegetation. Such values refer to the healthy plant coverage, typical for the tropical rainforest and other regions of dense canopy, while bank areas of Congo river, bare land, sparsely vegetated areas and urban spaces near Bumba, Basoko and Kisangani have lower NDVI values. Thus, dark brown to black areas of the NDVI with values around zero are non-vegetated areas. Middle values indicate various types of shrubland, riparian plant communities along the river Congo and tributaries. Thus, the general approach is that in the NDVI scale ranging from 0 to 1, higher values (ca. from 0.7 to 1.0) are indicated by the vegetation, while lower values (from 0.0 to 0.3) represent the non-vegetated areas. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+\section{Results and Discussion}
+
+According to this classification of land cover types, a model of land cover types for 9-year time span showing changes in the three target regions with persistent tropical moist forest along the flow of Congo River was developed and visualized, Figure \ref{fig05}, Figure \ref{fig06} and Figure \ref{fig07} for Bumba, Basoko and Kisangani, respectively. The pairwise examination of the classified images allows to examine the changes in forest structure owing to the anthropogenic activities with urban growth and environmental drivers initiated by climate change. The classes of land cover types were defined as follows: Swamp forest; Humid tropical forest; Secondary forest; Urban areas and impervious surfaces; Inundated grassland; Deciduous forest; Shrubland and grassland; Cropland and mosaic forest; Savannah with sparse trees; Water bodies. The model was done by comparing the results of vegetation types classified on the Landsat imagery in 2013 and those in 2022. The additional image was selected for the Kisingani for the 2015 due to the cloudiness of the image in 2013.
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_05a.jpg}
+		\caption{Monochrome image for Bumba region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_05b.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_05c.jpg}
+		\caption{Monochrome image for Bumba region: 2022.}
+	\end{subfigure}
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_05d.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+
+}
+\caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig05}
+\end{figure}
+
+As demonstrated on the resulting plots, the pixel-based models use 10 land-cover categories. The integration of two Landsat OLI/TIRS images for land cover mapping by R language is a challenging and promising approach and can be recommended for the future similar studies on rainforest mapping using remote sensing data. The final outputs as classified maps contained 10 land cover classes recorded from the 30 m raster grids equivalent to the resolution of the input Landsat OLI/TIRS data. 
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_06a.jpg}
+		\caption{Monochrome image for Basoko region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_06b.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_06c.jpg}
+		\caption{Monochrome image for Basoko region: 2022.}
+	\end{subfigure}
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_06d.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+}
+\caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
+\end{figure}
+
+The land cover classification using R approach by RStoolbox was successful, as demonstrated above. However, the pixel-based approach of the raw data results in the grid structure of the landscape with resolution corresponding to the initial data. For more details data, Sentinel scenes can be considered for more fine-resolution classification. The continued increase of volume of spatial Earth observation data from the satellite images and novel directions in image analysis techniques using programming tools encourage the development of object based approaches. Thus, natural variations into the classification process can be omitted by applying the object based image analysis for detecting landscape structure which can be considered as a further development of the R programming methods.
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.88\textwidth]{Fig_07a.jpg}
+		\caption{Monochrome image for Kisangani area, B5 (NIR): 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_07b.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2013.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.97\textwidth]{Fig_07c.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2015.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.96\textwidth]{Fig_07d.jpg}
+		\caption{Classified scene using \emph{k}-means clustering: 2022.}
+	\end{subfigure}%
+}
+\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig07}
+\end{figure}
+
+\subsection{NDVI}
+
+The three exemplars of the NDVI computed from the Red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and various vegetation coverage, see Figure \ref{fig08}. In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey. Denoting those shades and hues are understood from the inspection of the relevant land cover types in previous maps. NDVI is used for the assessment of vegetation along the Congo flow where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for the environmental monitoring is that it well corresponds to the crop biomass accumulation as well as to botanical parameters, such as leaf chlorophyll levels, LAI, and active radiation absorbed by a crop canopy through photosynthesis. 
+
+Figure \ref{fig08} shows three examples of NDVI maps derived from the three dates of Landsat imagery in Bumba, Basoko and Kisangani regions, respectively. Here values 0.0 to 0.1 signify water areas (Congo river and tributaries); values 0.1 to 0.2 represent river banks; values 0.2 to 0.3 belong to class of non-vegetated areas; pixels with values 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with diverse types of crops; bright pixels of class 0.6 to 0.7 are secondary forests; values of 0.7 to 0.8 are densely vegetated lands and mosaic forests; the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_08a.jpg}
+		\caption{Bumba region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_08b.jpg}
+		\caption{Bumba region: 2022}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_08c.jpg}
+		\caption{Basoko region: 2013.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_08d.jpg}
+		\caption{Basoko region: 2022.}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_08e.jpg}
+		\caption{Kisangani region: 2013}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_08f.jpg}
+		\caption{Kisangani region: 2022}
+	\end{subfigure}%
+
+}
+\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangali. Mapping: RStudio. Source: authors.}\label{fig08}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+We have presented an R-based method to process satellite images with a case of NDVI and unsupervised clustering. We integrated several libraries of R and applied their algorithms for band arithmetics and classification of scenes with a special focus on monitoring vegetation and tropical rainforests of central Africa. The selected functions of RSToolbox were used as operators for band calculations and grouping the pixels into 10 land cover classes. We performed experiments on cartographic data processing by R language using a series of Landsat-8 OLI/TIRS images for the three targeted town spots located along the Congo River and compared the dynamics. We observed that land cover changes since 2013 until 2022 which is reflected in the NDVI models for the three target areas: Bumba, Basoko, Kisangani. This situations explains the existing cases of deforestation in the tropical regions of Congo, central Africa. 
+
+Although state-of-the-art GIS have already achieved solutions in remote sensing data processing and classification specifically with reported cases on Landsat images, the automation of image classification is still a challenging problem due to presence of complex background noise on the image scene and restricted functionality of the conventional tools in many GIS. We have proposed an automatic image processing using R scripts for image classification base don k-means clustering algorithm in RSToolbox library and band algebra for NDVI computations using terra package. Experimental results on vegetation index for three different datasets taken on years 2013 and 2022, in conjunction with clustering show that the proposed approach of R programming is able to divide the image scene on the defined number of classes using the performance of unsupervised \emph{k}-means machine learning algorithm of RSToolbox.
+
+We demonstrated a set of images based on the high-level classification of the Landsat-8 OLI-TIRS raster imagery. Based on these images, we were able to confirm that the distribution of the rainforest vegetation experience changes caused by the diverse factors, both social and climatic, which affect the sate of the tropical forests and contribute to the decline and deforestation. We also provided new findings as processed images for the the specific regions situated along the middle part of Congo River Basin and compared the regions. The results of the R performance demonstrated the probabilistic model of vegetation distribution over the targeted areas based on the robust segmentation of the images. 
+
+Libraries of R language offer a powerful framework for modelling real-valued geospatial input Earth observation data from space borne satellite missions. In particular, we have explored the suitability of R programming for processing Landsat-8 OLI-TIRS images which contain 11 bands which correspond to various wavelengths and have mostly 30-m resolution (excluding the panchromatic scene in band 8 with higher 15-m resolution and TIRS bands 10 and 11 with coarse 100-m resolution). Unlike the conventional GIS solutions, which are limited to default parameters embedded graphical user interface, R language proposes flexible command-line solutions with extended operational support of bitmap image processing and diverse suitability of map algebra and computations of bands, as shown in this paper. The limitations of the presented work include the restricted approach of geometric and spectral characteristics of pixels. Future works can be extended towards the semantic segmentation of the detected land cover classes, as well as the analysis of the topology of the classes for object based image analysis.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{6pt} 
+
+\funding{The APC was funded by the Multidisciplinary Digital Publishing Institute (MDPI).}
+
+\institutionalreview{Not applicable}
+
+\informedconsent{Not applicable}
+
+\dataavailability{Not applicable} 
+
+\acknowledgments{We thank the two anonymous reviewers for comments and reading of this manuscript}
+
+\conflictsofinterest{The authors declare no conflict of interest} 
+
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+CPT & Colour Palette Table \\
+DCW & Digital Chart of the World \\
+DN & Digital Number \\
+GEBCO & General Bathymetric Chart of the Oceans \\
+GDAL & Geospatial Data Abstraction Library \\
+GIS & Geographic Information System \\
+GloVis & Global Visualization Viewer \\
+GMT & Generic Mapping Tools \\
+Landsat 8-9 OLI/TIRS & Landsat 8-9 Operational Land Imager and Thermal Infrared \\
+LAI & Leaf Area Index \\
+LiDAR & Light Detection and Ranging \\ 
+NASA & National Aeronautics and Space Administration \\
+NDVI & Normalized Difference Vegetation Index \\
+NGA & National Geospatial-Intelligence Agency \\
+NIR & Near Infrared \\
+REDD+ & Reducing Emissions from Deforestation and Forest Degradation \\
+SAR & Synthetic Aperture Radar \\
+SRTM & Shuttle Radar Topography Mission \\
+SWIR & Short Wave InfraRed \\
+UAV & Unmanned Aerial Vehicle \\
+USGS & United States Geological Survey \\
+\end{tabular}
+}
+
+\reftitle{References}
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{Congo.bib}
+%\nocite{*}
+
+\end{document}
+
