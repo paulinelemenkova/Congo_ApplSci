@@ -155,18 +155,18 @@ While \hl{the techniques of the} remote sensing data acquisition\hl{ }and\hl{ }i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Study Area}
 
-The images used in this work were obtained for the region of Democratic Republic of Congo (DRC) with the three target areas located in the middle region of the Congo River Basin, according to the regional basin division \cite{MUSHI201964}. The surrounding the towns Bumba, Basoko and Kisangani, lying on the Congo River, which serves as the main transportation artery for all these three cities (Figure \ref{fig01}). 
+The \hl{dataset contains satellite images} obtained for the region of Democratic Republic of Congo (DRC) with the three target areas located in the middle region of the Congo River Basin, according to the regional\hl{ }division \cite{MUSHI201964}. The surroundings\hl{ }of the the towns Bumba, Basoko and Kisangani \hl{are located} on the Congo River, which serves as the main transportation artery \hl{in the region} (Figure \ref{fig01}). 
 
-Kisangani is the capital of Tshopo province, situated at the confluence of the Congo, Lualaba, Tshopo, and Lindi rivers and is strategically located at the crossroads between eastern and western parts of Congo. Basoko town is situated in the confluence of Aruwimi tributary into the Congo River. Bumba is a small town and river port in Mongala Province, northern DRC. Being a part of the Congo River Basin, the cities have a tropical monsoon climate with dry months during winter period, humid summer-autumn seasons with heavy rainfalls and periodically flooded areas \cite{6571272}. Such climate setting, characterised by heavy rainfalls interspersed with dry season climate in Congo Basin create favourable conditions for the distribution of world's largest tropical humid forests \cite{Washington}. 
+Kisangani is the capital of \hl{the} Tshopo province, situated at the confluence of the \hl{rivers} Congo, Lualaba, Tshopo, and Lindi\hl{. It is }strategically located at the crossroads between \hl{the} eastern and western parts of Congo. Basoko town is situated in the confluence of \hl{the} Aruwimi tributary into the Congo River. Bumba is a small town and \hl{a} river port in \hl{the} Mongala Province, northern \hl{part of the} DRC. \hl{As} a part of the Congo River Basin, \hl{these} cities have a tropical monsoon climate with dry\hl{ }winter period, humid summer-autumn seasons with heavy \hl{precipitation} and periodically flooded areas \cite{6571272}. Such climate setting, characterised by\hl{ }rainfalls interspersed with dry season climate in Congo Basin create favourable conditions for the distribution of world's largest tropical humid forests \cite{Washington}. 
 
-The importance of the study area is explained by the crucial environmental role of the Congo River Basin. It contains over half of the African tropical moist forests \cite{Sayer1992}, and largely contributes to the Earth's atmosphere circulation on the planetary scale. Besides, tropical rainforests of Congo are a key factor in producing the oxygen and regulating global temperature through the absorption of solar radiation by forest massifs. Moreover, forest resources offer critical and principal support to the local rural livelihoods and socioeconomic wellbeing of local population \cite{f13010130} which often includes forest-related practices, such as forest clearing. As a result, land use and shifting agriculture become the major causes of hydrological flow regime \cite{4780136} and deforestation along with the increased population density and associated urban growth \cite{Wilkie1994}. 
+The importance of the study area is explained by the crucial environmental role of the Congo River Basin. It contains over half of the African tropical moist forests \hl{with Salonga National Park being the largest rain forest park in the world }\cite{Sayer1992}, and \hl{it} largely contributes to the Earth's atmosphere circulation on the planetary scale. Besides, \hl{the} tropical rainforests of Congo are a key factor in producing the oxygen and regulating global temperature through the absorption of solar radiation by forest massifs. Moreover, forest resources offer critical and principal support to the\hl{ welfare of the }rural livelihoods and socioeconomic wellbeing of local population \cite{f13010130} which\hl{ }includes forest-related practices\hl{ }such as forest clearing. As a result, land use and shifting agriculture become the major causes of hydrological flow regime\hl{, environmental changes from regional to global scale} \cite{4780136}\hl{, as well as }deforestation along with the increased population density and associated urban growth \cite{Wilkie1994}. 
 
-At the same time, primary forests are essential ecosystems that play a key role in mitigating climate change \cite{SOMORIN2012288,BELE20151}. Conserving natural resources in the Congo tropical rainforests recently launched global initiatives, such as Reducing Emissions from Deforestation and Forest Degradation (\href{https://www.fao.org/redd/overview/en/}{REDD+}) \cite{land11060918,SUFOKANKEU2020102081} or Global Rain Forest Mapping (GRFM) project \cite{1025720}. On a regional and local level, practicing agroforests serve as ecosystem services responding to climate change mitigation strategy \cite{Batsietal2021}. Nevertheless, Congo River Basin remains the least studied regions in Africa and the global tropics \cite{Washingtonetal2006}. The approach we present here contributes to the environmental analysis of the selected regions of Congo River Basin using remote sensing data and R programming.
+At the same time, primary forests are essential ecosystems that play a key role in mitigating climate change \hl{which raises the need for taking actions on mitigating the effects from deforestation and resilient development in forest degradation}\cite{SOMORIN2012288,BELE20151}. Conserving natural resources in\hl{ }Congo tropical rainforests recently launched global initiatives, such as Reducing Emissions from Deforestation and Forest Degradation (\href{https://www.fao.org/redd/overview/en/}{REDD+}) \cite{land11060918,SUFOKANKEU2020102081} or Global Rain Forest Mapping (GRFM) project \cite{1025720}. On a regional and local level, practicing agroforests serve as ecosystem services responding to \hl{the} climate change mitigation strategy \cite{Batsietal2021}. Nevertheless, Congo River Basin remains the least studied region\hl{ }in Africa and \hl{in} the global tropics \cite{Washingtonetal2006}. The approach we present here contributes to the \hl{development of methods for the }environmental analysis of the selected regions of Congo River Basin using remote sensing data and R programming.
 
 \begin{figure}[H]
 \centering
 	\includegraphics[width=12.0 cm]{Fig_01}
-	\caption{Topographic map of Congo River Basin with the DCR. Cartography: Generic Mapping Tools (GMT). Data source: GEBCO/SRTM. Mapping: authors.
+	\caption{\hl{Study area with the location of the three target cities in }Congo River Basin\hl{, }DCR. Cartography: Generic Mapping Tools (GMT). Data source: GEBCO/SRTM. Map \hl{source}: authors.
 	\label{fig01}}
 \end{figure} 
 
@@ -652,6 +652,7 @@ GDAL & Geospatial Data Abstraction Library \\
 GIS & Geographic Information System \\
 GloVis & Global Visualization Viewer \\
 GMT & Generic Mapping Tools \\
+\hl{GRFM} & \hl{Global Rain Forest Mapping} \\
 Landsat 8-9 OLI/TIRS & Landsat 8-9 Operational Land Imager and Thermal Infrared \\
 LAI & Leaf Area Index \\
 LiDAR & Light Detection and Ranging \\ 
@@ -659,7 +660,7 @@ NASA & National Aeronautics and Space Administration \\
 NDVI & Normalized Difference Vegetation Index \\
 NGA & National Geospatial-Intelligence Agency \\
 NIR & Near Infrared \\
-REDD+ & Reducing Emissions from Deforestation and Forest Degradation \\
+REDD & Reducing Emissions from Deforestation and Forest Degradation \\
 SAR & Synthetic Aperture Radar \\
 SRTM & Shuttle Radar Topography Mission \\
 SWIR & Short Wave InfraRed \\
