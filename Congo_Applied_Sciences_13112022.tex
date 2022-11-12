@@ -45,6 +45,11 @@
 \usepackage{tikz}
 	\newlength\imagewidth
 	\newlength\imagescale
+\usepackage{tabularx}
+\usepackage[autostyle]{csquotes}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -200,7 +205,61 @@ This article proposes a general a fully automated method for classifying satelli
 
 \subsection{Data}
 
-The first step in workflow included data \hl{download} from the \href{https://glovis.usgs.gov/app}{USGS GloVis} data repository which offers a global coverage of the publicly available satellite images with open access. We selected the three areas of Bumba, Basoko and Kisangani and collected the Landsat-8 OLI/TIRS imagery for the dates 2013 and 2022. The additional image for 2015 was \hl{selected} for Kisangani due to the higher cloud coverage in 2013. The geographic map in Figure \ref{fig01} has been plotted using the Generic Mapping Tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns located in consecutive order southwards: Bumba, Basoko, Kisangani. The collected data were inspected for metadata using\hl{ }R Listing \ref{lst:01}. 
+The first step in workflow included data \hl{download} from the \href{https://glovis.usgs.gov/app}{USGS GloVis} data repository which offers a global coverage of the publicly available satellite images with open access. We selected the three areas of Bumba, Basoko and Kisangani and collected the Landsat-8 OLI/TIRS imagery for the dates 2013 and 2022. \hl{The exact Landsat Product IDs are summarised in Table} \ref{tab1}. \hl{Main characteristics of the imagery are summarised in Table} \ref{tab2}. 
+\begin{table}[H] 
+\caption{\hl{Landsat-8 OLI/TIRS Product ID and Scene ID} \label{tab1}}
+	\newcolumntype{C}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{| p{2.3cm} | p{6.3cm} | p{5.3cm} |}
+\toprule
+\textbf{Region, year} & \textbf{Landsat Product ID} & \textbf{Landsat Scene ID}\\
+\midrule
+	Basoko, 2013 & LC08\_L1TP\_177059\_20131216\_20200912\_02\_T1 & LC81770592013350LGN01\\
+	Basoko, 2022 & LC08\_L1TP\_177059\_20220208\_20220212\_02\_T1 & LC81770592022039LGN00 \\
+	Bumba, 2013 & LC08\_L1TP\_178058\_20131223\_20200912\_02\_T1 & LC81780582013357LGN01 \\
+	Bumba, 2022 & LC08\_L1TP\_178058\_20220130\_20220204\_02\_T1 & LC81780582022030LGN00 \\
+	Kisangani, 2013 & LC08\_L1TP\_176060\_20130413\_20200913\_02\_T1 & LC81760602013103LGN02 \\
+	Kisangani, 2015 & LC08\_L1TP\_176060\_20150113\_20200910\_02\_T1 & LC81760602015013LGN01 \\
+	Kisangani, 2022 & LC08\_L1TP\_176060\_20220217\_20220302\_02\_T1 & LC81760602022048LGN00 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{threeparttable}
+\caption{\hl{Main technical characteristics of the Landsat-8 OLI/TIRS imagery}}
+    \centering
+   \small
+    \setlength\tabcolsep{3pt} % default: 6pt
+%    \begin{tabularx}{\linewidth}{| l | l | l | l | l | l | l | l |}
+ %   \begin{tabularx}{\linewidth}{| p{1.5in} | p{1.5in} | p{1.5in} | p{1.5in} | p{1.5in} | p{1.5in} | p{1.5in} | p{1.5in} |}
+	 \begin{tabular*}{5in}{@{\extracolsep{\fill}}| p{1.5cm} | p{1.4cm} | p{1.4cm} | p{1.4cm} | p{1.4cm} | p{1.6cm} | p{1.6cm} | p{1.6cm} |}
+%	\begin{tabularx}{\textwidth}{@{} ll *{6}{Y} @{}}
+    \toprule
+        \textbf{Parameters} & \textbf{Basoko (2013)} & \textbf{Basoko (2022)} & \textbf{Bumba (2013)} & \textbf{Bumba (2022)} & \textbf{Kisangani (2013)} & \textbf{Kisangani (2015)} & \textbf{Kisangani (2022)} \\ \hline
+        \midrule
+        Date & 2013-12-16 & 2022-02-08 & 2013-12-23 & 2022-01-30 & 2013-04-13 & 2015-01-13 & 2022-02-17 \\ \hline
+        TWRS P. & 177 & 177 & 178 & 178 & 176 & 176 & 176 \\ \hline
+        WRS Row & 59 & 59 & 58 & 58 & 60 & 60 & 60 \\ \hline
+        WRS Path & 177 & 177 & 178 & 178 & 176 & 176 & 176 \\ \hline
+        Cloudiness & 0.00 & 0.00 & 0.04 & 0.00 & 5.85 & 1.36 & 0.48 \\ \hline
+        SA & 136.79 & 119.87 & 137.58 & 126.05 & 70.20 & 129.08 & 112.70 \\ \hline
+        UTM Zone & 34 & 34 & 34 & 34 & 35 & 35 & 35 \\ \hline
+        GCP Ver. & 5 & 5 & 5 & 5 & 5 & 5 & 5 \\ \hline
+        GCP Mod. & 662 & 621 & 817 & 741 & 435 & 754 & 658 \\ \hline
+        GRMSEM & 3.713 & 5.635 & 2.864 & 6.014 & 6.870 & 1.283 & 5.280 \\
+        \bottomrule
+%    \end{tabularx}\label{tab:01}
+\end{tabular*}\label{tab2}
+ \begin{tablenotes}
+      \small
+      \item \hl{Abbreviations used in the Table 2: SA -- Sun Azimuth. Date stands for the acquisition date of the scene; GCP Ver. -- GCP Version; TWRS P. -- Target WRS Path; GCP Mod. -- GCP Model; GRMSEM -- Geometric RMSE Model.}
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+\hl{The common technical parameters for all the scenes are as follows: Spacecraft ID -- Landsat 8; Origin: USGS; Station ID -- LGN; Sensor ID -- OLI\_TIRS; Processing level -- L1TP; Collection Number -- 2; Collection category -- T1;  Output format -- GEOTIFF; WRS type -- 2; Datum and Ellipsoid -- WGS84; Data Source Elevation -- GLS2000; GCP Version -- 5.}
+
+The additional image for 2015 was \hl{selected} for Kisangani due to the higher cloud coverage in 2013. The geographic map in Figure \ref{fig01} has been plotted using the Generic Mapping Tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns located in consecutive order southwards: Bumba, Basoko, Kisangani. The collected data were inspected for metadata using\hl{ }R Listing \ref{lst:01}. 
 
 \begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:01}]
 library(rgdal)
