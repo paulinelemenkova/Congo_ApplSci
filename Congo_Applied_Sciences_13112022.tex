@@ -185,7 +185,16 @@ This article proposes a general a fully automated method for classifying satelli
 	\label{fig:work}}
 \end{figure} 
 
-\hl{The functionality of R programming presents a set of modular functions for the automation of image classification applications from Earth observation, spatial and remote sensing data. The packages of 'terra' and 'raster' includes functionality of pre- and post-processing of both data types (vector and raster), and extensible features for spatial data analysis. Raster data analysis includes reading the information on spectral reflectance of the image bands automated processing of the stacked bands, feature extraction for unsupervised classification using clustering, creating multi-layer layers, performing map algebra using raster bands, visualising the thematic maps as overlays, classification and basic statistical analysis such as histograms.} 
+\hl{The functionality of R programming presents a set of modular functions for the automation of image classification applications from Earth observation, spatial and remote sensing data, Figure} \ref{fig:work}. 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{R_funct.jpg}
+	\caption{\hl{The functionality of R packages used for satellite image processing and classification in this study. Major packages include terra, raster, Rstoolbox, rgdal, rgeos, cluster, graphics, RColorBrewer.}
+	\label{fig:work}}
+\end{figure} 
+
+\hl{The packages of 'terra' and 'raster' includes functionality of pre- and post-processing of both data types (vector and raster), and extensible features for spatial data analysis. Raster data analysis includes reading the information on spectral reflectance of the image bands automated processing of the stacked bands, feature extraction for unsupervised classification using clustering, creating multi-layer layers, performing map algebra using raster bands, visualising the thematic maps as overlays, classification and basic statistical analysis such as histograms.}
 
 \hl{R operates with major features of spatial data, such as dimensions, resolution, reading data extent (min/max analysis), plotting the data, manipulating with Coordinate Reference Systems (CRS), reprojecting the data, assigning the CRS and transforming the data. Important function of R 'terra' package consists in creating the SpatRaster objects, which is a class of raster data with a longitude/latitude CRS as spatial parameters and specific geometry of file (cells arranged in rows/columns of the internal grid). Moreover, the 'terra' package enables cartographic visualization of the continuous fields including topographic elevation, vegetation based on the classified land cover types, climate data in spatial context (regional variations of temperature, and precipitation). Besides, R enables to perform data clipping using overlay of spatial data and imagery over their area of interest.}
 
