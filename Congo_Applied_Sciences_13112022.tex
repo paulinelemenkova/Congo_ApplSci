@@ -259,6 +259,8 @@ The first step in workflow included data \hl{download} from the \href{https://gl
 
 \hl{The common technical parameters for all the scenes are as follows: Spacecraft ID -- Landsat 8; Origin: USGS; Station ID -- LGN; Sensor ID -- OLI\_TIRS; Processing level -- L1TP; Collection Number -- 2; Collection category -- T1;  Output format -- GEOTIFF; WRS type -- 2; Datum and Ellipsoid -- WGS84; Data Source Elevation -- GLS2000; GCP Version -- 5.}
 
+\hl{The used images are categorised by the L1TP Level 1 Precision Terrain (Corrected), which are the DNs in a 16-bit integer format, converted to Top of Atmosphere (TOA) spectral reflectance (Bands 1--9) or radiance (Bands 1--11) using scaling factors} \cite{Engebretson}. \hl{The L1TP images include radiometric, geometric, and precision correction, and use a Digital Elevation Model (DEM) to correct errors caused by local topographic relief; the accuracy of the precision/terrain-corrected product depends on the Ground Control Points (GCPs) obtained from the GLS2000 dataset, and resolution of the DEM. Thus, the geometric accuracy of the L1TP Landsat images is valiadated using the ground control points (GCP) which are derived from the GLS2000 library. These data are used for computing the RMSE of the geometric residuals on the terrain-corrected images}, \cite{Engebretson}. 
+
 The additional image for 2015 was \hl{selected} for Kisangani due to the higher cloud coverage in 2013. The geographic map in Figure \ref{fig01} has been plotted using the Generic Mapping Tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns located in consecutive order southwards: Bumba, Basoko, Kisangani. The collected data were inspected for metadata using\hl{ }R Listing \ref{lst:01}. 
 
 \begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:01}]
@@ -337,21 +339,19 @@ plot(Basoko2013_B2,
      col = gray(0:100 / 100))
 \end{lstlisting}
 
-We used the 'rgdal' library of R to retrieve the coordinates, check the topology and spatial dimension of the dataset stored in the SpatialGridDataFrame class. The RasterLayers were generated as arrays of pixels from the individual separated bands of the Landsat scenes. Afterwards, the facetted stack was created from the Landsat OLI-TIRS bands using stack() function of by 'raster' R library by concatenating multiple bands into a single bitmap image which uses the data on where the coordinates of each band originated. The resulting image was visualized by plot() function of R. We also analysed the number of layers and spatial dimension of in the new multi-layer object of R. The resolution of all the layers was 30 m except for the panchromatic band (15 m) and the two last TIRS layers with coarse 100-m resolution. The selected band was plotted in monochrome visualization. The data analysis and inspection has been performed using Listing \ref{lst:01}.
+We \hl{explored} the 'rgdal' library of R to retrieve the coordinates, check the topology and spatial dimension of the dataset stored in the SpatialGridDataFrame class. \hl{A topology refers to the arrangement of the images that defines the coincident geometry of the feature classes from the Landsat dataset. It reads the contextual information from the structure data based on spatial relationships: the adjacency of the coordinates and connectivity of overlapping images}. The RasterLayers were generated as \hl{the} arrays of pixels from the individual\hl{ }bands of the Landsat scenes. Afterwards, the facetted stack was created \hl{using} the Landsat OLI-TIRS bands \hl{by} stack() function\hl{. To this end, the 'raster' R library was applied for} concatenating \hl{the} multiple bands into a single bitmap image which uses the data on \hl{the origin of} the coordinates of each band. The resulting image was visualized by \hl{the} plot() function of R. \hl{The} number of layers and spatial dimension of in the new multi-layer object of R \hl{were inspected by 'raster' library}. The resolution of all the layers was 30 m except for the panchromatic band (15 m) and the two last TIRS layers with \hl{a coarser} resolution \hl{100 m}. The selected band was plotted in \hl{a grayscale} monochrome visualization. The data analysis and inspection has been performed using Listing \ref{lst:01}.
 
 \subsection{Plotting band composites}
 
-The next step included inspecting the structure of Landsat bands. The image of all the bands is visualized as a representation of the monochrome multi-facetted plot, Figure \ref{fig02}. The most multispectral bands have 30-m resolution, while panchromatic band (B8) has a higher resolution (15 m) and the two TIRS (B10 and B11) have a coarse 100-m resolution. 
+\hl{We explored} the structure of Landsat bands \hl{by inspecting the metadata}. The image of all the bands is visualized as a representation of the monochrome multi-facetted plot \hl{in} Figure \ref{fig02}. The most \hl{of the}multispectral bands have 30-m resolution, while \hl{the} panchromatic band (B8) has a higher resolution (15 m) and the two TIRS (B10 and B11) have a coarse 100-m resolution. \hl{Generating} colour composites by combination of various band triplets \hl{provides more information which can be effectively exploited} using libraries 'raster' and 'terra' of R. Here the\hl{ }idea of the machine-assisted classifier by R packages consists in the identification of spectral reflectance of pixels constituting \hl{the }11 bands for thematic mapping. 
+
+The \hl{sensor} instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, for NDVI calculation we only need the Red and NIR bands (4 and 5, respectively). \hl{However, combining the bands in various RGB triplets enables to highlight diverse objects on the surface, to discriminate and capture information on a wider variety of objects.} \hl{Thus, the} composition of\hl{ }red, green and blue colours creates the images with varied hue, saturation and intensity representation owing to the pixel brightness as spectral reflectance of the objects and surfaces on the Earth. Therefore,\hl{ }the bands \hl{were mixed }to form various colour composites and inspect the land cover types. The selected and most representative band composites for the three \hl{main} studied regions were plotted as natural and false colour composites, \hl{respectively}, which were generated\hl{ using }library 'raster'. The \hl{relevant }code snippet is given for the town of Basoko, and \hl{was} applied similarly for the rest of the \hl{Landsat-8 OLI-TIRS} scenes \hl{with changed parameters}, Listing \ref{lst:02}. 
 
 \begin{figure}[H]
 \makebox[\textwidth][r]{\includegraphics[width=1.1\textwidth]{Fig_02.jpg}}%
-	\caption{Composite of monochrome 11 bands: Landsat-9 OLI/TIRS C1 for Basoko region (Arowumi tributary and Congo river). Multi-spectral image 'LC09\_L1TP\_197055\_20220111\_20220122\_02\_T': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
+	\caption{Composite of monochrome 11 bands: Landsat-\hl{8} OLI/TIRS C1 for Basoko region (Arowumi and Congo \hl{rivers}). Multi-spectral image 'LC81770592022039LGN00': Ultra Blue (B1), Blue (B2), Green (B3), Red (B4), Near Infrared (NIR) (B5), Shortwave Infrared (SWIR) 1 (B6), Shortwave Infrared (SWIR) 2 (B7), Panchromatic (B8), Cirrus (B9), Thermal Infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
 	\label{fig02}
 \end{figure} 
-
-The next step included generating the colour composites by combination of various band triplets using libraries 'raster' and 'terra' of R. Here the main idea of the machine-assisted classifier by R packages consists in the identification of spectral reflectance of pixels constituting 11 bands of the Landsat-8 OLI-TIRS for thematic mapping. The remote sensing instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, for NDVI calculation we only need the Red and NIR bands (4 and 5, respectively). 
-
-The composition of the red, green and blue colours creates the images with varied hue, saturation and intensity representation owing to the pixel brightness as spectral reflectance of the objects and surfaces on the Earth. Therefore, we mixed the bands to form various colour composites and inspect the land cover types. The selected and most representative band composites for the three studied regions were plotted as natural and false colour composites, which were generated using the code by library 'raster'. The code snippet is given for the town of Basoko, and applied similarly for the rest of the scenes, Listing \ref{lst:02}. 
 
 \begin{lstlisting}[language=r, caption=R code used for colour composites by libraries raster and
 terra; here a case of Bumba town applied likewise for all the other images, label={lst:02},basicstyle=\scriptsize]
@@ -415,7 +415,7 @@ plot(b10, main = "TIRS 1 (B10)", col = colors, axes = FALSE, legend = TRUE)
 plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 \end{lstlisting}
 
-The generated images reveal spatial details which can be better discerned in intensity of pixels in false colour composites for water areas and more sharpened representation of urban areas in the natural colour composites showing the spatial detail in the three images: Bumba, Basoko and Kisangani, Figure \ref{fig03}.
+The generated images reveal spatial details which can be better discerned in intensity of pixels in false colour composites for water areas and more sharpened representation of urban areas in the natural colour composites showing the spatial detail in the three images: Bumba, Basoko and Kisangani, Figure \ref{fig03}. The colour products for all the three cities were prepared using the combination of bands \hl{4-3-2} (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands is converted to the colours with the intensity channel corresponding to the resolution of the original bands (30 m). A hue, saturation and intensity transformation of each of the triplets are processed and resampled by R package 'terra' to form the output image, Figure \ref{fig03}.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -459,8 +459,6 @@ The generated images reveal spatial details which can be better discerned in int
 }
 \caption{Natural (bands \hl{4-3-2}) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio}\label{fig03}
 \end{figure}
-
-The colour products for all the three cities were prepared using the combination of bands \hl{4-3-2} (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands is converted to the colours with the intensity channel corresponding to the resolution of the original bands (30 m). A hue, saturation and intensity transformation of each of the triplets are processed and resampled by R package 'terra' to form the output image, Figure \ref{fig03}.
 
 \subsection{k-means Clustering}
 The \emph{k}-means clustering of R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partition without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using automatic approach. The algorithm has been performed using \emph{k}-means clustering method, which presents a machine learning approach for clustering pixels according to their intensity and brightness into the defined groups (or clusters), Listing \ref{lst:04}. Modelling   changes in forest structure by examining land-use categories is a commonly accepted practice for land cover mapping \cite{Manakos,WILKIE1988307,4780136,rs11242999,land11060787}.
@@ -728,6 +726,7 @@ The following abbreviations are used in this manuscript:\\
 \begin{tabular}{@{}ll}
 CPT & Colour Palette Table \\
 DCW & Digital Chart of the World \\
+\hl{DEM} & \hl{Digital Elevation Model} \\
 DN & Digital Number \\
 \hl{GCP} & \hl{Ground Control Points} \\
 GEBCO & General Bathymetric Chart of the Oceans \\
@@ -740,6 +739,7 @@ GMT & Generic Mapping Tools \\
 Landsat 8-9 OLI/TIRS & Landsat 8-9 Operational Land Imager and Thermal Infrared \\
 LAI & Leaf Area Index \\
 LiDAR & Light Detection and Ranging \\ 
+\hl{L1TP} & {Level 1 Terrain Precision (Corrected)} \\
 NASA & National Aeronautics and Space Administration \\
 NDVI & Normalized Difference Vegetation Index \\
 NGA & National Geospatial-Intelligence Agency \\
