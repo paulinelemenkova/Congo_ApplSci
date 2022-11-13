@@ -550,7 +550,7 @@ Apparently, the combination of a \hl{higher} reflectance in NIR and \hl{a} lower
 
 \subsection{Image classification}
 
-According to this classification of land cover types, a model of land cover types for 9-year time span showing changes in the three target regions with persistent tropical moist forest along the flow of Congo River was developed and visualized, Figure \ref{fig05}, Figure \ref{fig06} and Figure \ref{fig07} for Bumba, Basoko and Kisangani, respectively. The pairwise examination of the classified images allows to examine the changes in forest structure owing to the anthropogenic activities with urban growth and environmental drivers initiated by climate change. The classes of land cover types were defined as follows: Swamp forest; Humid tropical forest; Secondary forest; Urban areas and impervious surfaces; Inundated grassland; Deciduous forest; Shrubland and grassland; Cropland and mosaic forest; Savannah with sparse trees; Water bodies. The model was done by comparing the results of vegetation types classified on the Landsat imagery in 2013 and those in 2022. The additional image was selected for the Kisingani for the 2015 due to the cloudiness of the image in 2013.
+\hl{Figure} \ref{fig07} \hl{shows changes in} land cover types\hl{ in Bumba region }for 9-year time\hl{ }according to the\hl{ k-means }classification \hl{by R}.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -582,7 +582,7 @@ According to this classification of land cover types, a model of land cover type
 \caption{Bumba town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig05}
 \end{figure}
 
-As demonstrated on the resulting plots, the pixel-based models use 10 land-cover categories. The integration of two Landsat OLI/TIRS images for land cover mapping by R language is a challenging and promising approach and can be recommended for the future similar studies on rainforest mapping using remote sensing data. The final outputs as classified maps contained 10 land cover classes recorded from the 30 m raster grids equivalent to the resolution of the input Landsat OLI/TIRS data. 
+\hl{Pairwise} examination of the classified images allows to examine the changes in forest structure \hl{which are caused by} the anthropogenic activities\hl{, including }urban growth\hl{, }and environmental drivers initiated by climate change. \hl{To this end, we present the results of the classification of the }three target regions \hl{showing changes in} tropical moist forest along the flow of Congo River\hl{, as shown in }Figure \ref{fig05}, Figure \ref{fig06} and Figure \ref{fig07} for Bumba, Basoko and Kisangani, respectively. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -613,7 +613,9 @@ As demonstrated on the resulting plots, the pixel-based models use 10 land-cover
 \caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for year 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors.}\label{fig06}
 \end{figure}
 
-The land cover classification using R approach by RStoolbox was successful, as demonstrated above. However, the pixel-based approach of the raw data results in the grid structure of the landscape with resolution corresponding to the initial data. For more details data, Sentinel scenes can be considered for more fine-resolution classification. The continued increase of volume of spatial Earth observation data from the satellite images and novel directions in image analysis techniques using programming tools encourage the development of object based approaches. Thus, natural variations into the classification process can be omitted by applying the object based image analysis for detecting landscape structure which can be considered as a further development of the R programming methods.
+\hl{Classes} of \hl{the} land cover types were defined as follows: Swamp forest; Humid tropical forest; Secondary forest; Urban areas and impervious surfaces; Inundated grassland; Deciduous forest; Shrubland and grassland; Cropland and mosaic forest; Savannah with sparse trees; Water bodies. The model was done by comparing the results of \hl{the} vegetation types classified \hl{based} on the Landsat imagery in 2013 and\hl{ }2022. The additional image was selected for the Kisingani for\hl{ }2015 due to the cloudiness of the image in 2013.\hl{ }As demonstrated on the resulting plots, the pixel-based models use 10 land-cover categories. The integration of \hl{the} two Landsat OLI/TIRS images for land cover mapping by R language is a challenging and promising approach \hl{which} can be recommended for\hl{ }future similar studies on rainforest mapping\hl{. }The final outputs as classified maps contained 10 land cover classes recorded from the 30 m raster grids equivalent to the resolution of the \hl{initial} input Landsat OLI/TIRS data. 
+
+\hl{Land} cover classification using R approach \hl{for processing remote sensing data} by RStoolbox \hl{is a promising and effective approach}. However, \hl{a} pixel-based \hl{data processing} of the \hl{satellite images} results in the grid structure of the landscape with resolution corresponding to the initial data. For more details data, Sentinel scenes can be considered \hl{as well }for \hl{a} more fine-resolution classification. The continued increase of \hl{the} volume of spatial Earth observation data from the satellite images and novel directions in image analysis techniques using programming tools encourage the development of object based approaches. \hl{Therefore}, \hl{technical} variations in\hl{ }the classification process can be omitted by applying the object based image analysis for detecting \hl{the} landscape structure\hl{. This }can be considered as a further development of the R programming methods.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -646,9 +648,7 @@ The land cover classification using R approach by RStoolbox was successful, as d
 
 \subsection{NDVI}
 
-The three exemplars of the NDVI computed from the Red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and various vegetation coverage, see Figure \ref{fig08}. In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey. Denoting those shades and hues are understood from the inspection of the relevant land cover types in previous maps. NDVI is used for the assessment of vegetation along the Congo flow where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for the environmental monitoring is that it well corresponds to the crop biomass accumulation as well as to botanical parameters, such as leaf chlorophyll levels, LAI, and active radiation absorbed by a crop canopy through photosynthesis. 
-
-Figure \ref{fig08} shows three examples of NDVI maps derived from the three dates of Landsat imagery in Bumba, Basoko and Kisangani regions, respectively. Here values 0.0 to 0.1 signify water areas (Congo river and tributaries); values 0.1 to 0.2 represent river banks; values 0.2 to 0.3 belong to class of non-vegetated areas; pixels with values 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with diverse types of crops; bright pixels of class 0.6 to 0.7 are secondary forests; values of 0.7 to 0.8 are densely vegetated lands and mosaic forests; the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
+\hl{Three examples} of the NDVI computed from the Red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and vegetation coverage,\hl{ }Figure \ref{fig08}. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -692,6 +692,10 @@ Figure \ref{fig08} shows three examples of NDVI maps derived from the three date
 }
 \caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangali. Mapping: RStudio. Source: authors.}\label{fig08}
 \end{figure}
+
+In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey. Denoting those shades and hues are understood from the inspection of the relevant land cover types in previous maps. NDVI is used for the assessment of \hl{various} vegetation along the Congo flow where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for the environmental monitoring is that it well corresponds to the crop biomass accumulation as well as to botanical parameters, such as leaf chlorophyll levels, LAI, and active radiation absorbed by a crop canopy through photosynthesis. 
+
+Figure \ref{fig08} shows three examples of NDVI maps derived from the three dates of Landsat imagery in Bumba, Basoko and Kisangani regions, respectively. Here values 0.0 to 0.1 signify water areas (Congo river and tributaries); values 0.1 to 0.2 represent river banks; values 0.2 to 0.3 belong to class of non-vegetated areas; pixels with values 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with diverse types of crops; bright pixels of class 0.6 to 0.7 are secondary forests; values of 0.7 to 0.8 are densely vegetated lands and mosaic forests; the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
