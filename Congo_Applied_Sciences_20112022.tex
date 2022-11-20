@@ -534,7 +534,7 @@ plot(ndvi, col=colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS C1 ima
 legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
 \end{lstlisting}
 
-Calculation of the NDVI enabled to exploit the information derived from spectral reflectance regarding vegetation coverage. This is enabled due to the parameters of the ratios of NIR/Red spectral bands which lessen the influence from the ground relief, rocks and soils. Thus, the methodological advantage of the NDVI consists in the reinforcement of the slight differences and nuances in spectral reflectance characteristics of vegetation. This enables to better distinct forest covered areas, discriminate various vegetation classes and discern them from all other land cover types. Using pairwise representations of the 9-year time series of Landsat OLI/TIRS (2013 to 2022), we calculated the NDVI for the three target regions along the Congo river: Bumba, Basoko and Kisangani. Here we computed the values of NDVI for each couple of images, respectively, to show the dynamics of the vegetation growth in middle Congo, as shown in Figure \ref{fig08}. The NDVI is computed for each pixel, with brighter green hues indicating more dense and healthy plant canopy, and contrariwise. 
+Calculation of the NDVI enabled to exploit the information derived from spectral reflectance regarding vegetation coverage. This is enabled due to the parameters of the ratios of NIR/Red spectral bands which lessen the influence from the ground relief, rocks and soils. Thus, the methodological advantage of the NDVI consists in the reinforcement of the slight differences and nuances in spectral reflectance characteristics of vegetation. This enables to better distinct forest covered areas, discriminate various vegetation classes and discern them from all other land cover types. Using pairwise representations of the 9-year time series of Landsat OLI/TIRS (2013 to 2022), we calculated the NDVI for the three target regions along the Congo river: Bumba, Basoko and Kisangani. Here we computed the values of NDVI for each couple of images, respectively, to show the dynamics of the vegetation growth in middle Congo, as shown in Figure \ref{fig:10}. The NDVI is computed for each pixel, with brighter green hues indicating more dense and healthy plant canopy, and contrariwise. 
 
 Apparently, the combination of a higher reflectance in NIR and a lower reflectance in Red bands results in a higher NDVI values in general, that is, around 1, which represents spectral signature of vegetation. Such values refer to the healthy plant coverage, typical for the tropical rainforest and other regions of dense canopy, while bank areas of Congo river, bare land, sparsely vegetated areas and urban spaces near Bumba, Basoko and Kisangani have lower NDVI values, respectively. For instance, dark brown to black areas of the NDVI with values around zero are non-vegetated areas and water areas have negative values below \hl{zero}. Middle values indicate various types of shrubland, riparian plant communities along the river Congo and tributaries. Thus, the general approach is that in the NDVI the scale is ranging from -1 to 1 with positive values from 0 to 1 indicating the terrain areas, while water surfaces have values below 0. Higher NDVI values (ca. from 0.7 to 1.0) are indicated by the healthy vegetation, while lower values (from 0.0 to 0.3) represent the non-vegetated areas, correspondingly. 
 
@@ -582,7 +582,7 @@ Pairwise examination of the classified images allows to examine the changes in f
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
 			\includegraphics[width=0.85\textwidth]{Fig_06a.jpg}
-		\caption{Monochrome image for Basoko region: 2013.}
+		\caption{\hl{True-colour composite }image for Basoko region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
@@ -595,7 +595,7 @@ Pairwise examination of the classified images allows to examine the changes in f
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
 			\includegraphics[width=0.85\textwidth]{Fig_06c.jpg}
-		\caption{Monochrome image for Basoko region: 2022.}
+		\caption{\hl{True-colour composite }image for Basoko region: 2022.}
 	\end{subfigure}
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
@@ -641,18 +641,18 @@ Land cover classification using R approach for processing remote sensing data by
 
 \subsection{NDVI}
 
-Three examples of the NDVI computed from the Red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and vegetation coverage, Figure \ref{fig08}. 
+Three examples of the NDVI computed from the Red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and vegetation coverage, Figure \ref{fig:10}. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_08a.jpg}
+			\includegraphics[width=0.87\textwidth]{Fig_10a.jpg}
 		\caption{Bumba region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_08b.jpg}
+		\includegraphics[width=0.87\textwidth]{Fig_10b.jpg}
 		\caption{Bumba region: 2022}
 	\end{subfigure}%
 }\\
@@ -660,12 +660,12 @@ Three examples of the NDVI computed from the Red/NIR bands of the Landsat OLI-TI
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_08c.jpg}
+			\includegraphics[width=0.87\textwidth]{Fig_10c.jpg}
 		\caption{Basoko region: 2013.}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_08d.jpg}
+		\includegraphics[width=0.87\textwidth]{Fig_10d.jpg}
 		\caption{Basoko region: 2022.}
 	\end{subfigure}%
 }\\
@@ -673,22 +673,22 @@ Three examples of the NDVI computed from the Red/NIR bands of the Landsat OLI-TI
 \makebox[0.90\linewidth][r]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.87\textwidth]{Fig_08e.jpg}
+			\includegraphics[width=0.87\textwidth]{Fig_10e.jpg}
 		\caption{Kisangani region: 2013}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.87\textwidth]{Fig_08f.jpg}
+		\includegraphics[width=0.87\textwidth]{Fig_10f.jpg}
 		\caption{Kisangani region: 2022}
 	\end{subfigure}%
 
 }
-\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangani. Mapping: RStudio. Source: authors.}\label{fig08}
+\caption{NDVI computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for year 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangani. Mapping: RStudio. Source: authors.}\label{fig:10}
 \end{figure}
 
-In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey\hl{, Figure} \ref{fig08}. Denoting those shades and hues are understood from the inspection of the relevant land cover types in previous maps. The NDVI is used for the assessment of various vegetation along the Congo flow where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for the environmental monitoring is that it well corresponds to the crop biomass accumulation, as well as to the botanical parameters, for example, such as leaf chlorophyll levels, LAI, and active radiation absorbed by a crop canopy through a photosynthesis process. 
+In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey\hl{, Figure} \ref{fig:10}. Denoting those shades and hues are understood from the inspection of the relevant land cover types in previous maps. The NDVI is used for the assessment of various vegetation along the Congo flow where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for the environmental monitoring is that it well corresponds to the crop biomass accumulation, as well as to the botanical parameters, for example, such as leaf chlorophyll levels, LAI, and active radiation absorbed by a crop canopy through a photosynthesis process. 
 
-Figure \ref{fig08} demonstrates the three examples of the NDVI maps derived from the three dates of Landsat imagery in Bumba, Basoko and Kisangani regions, respectively. Here the values -1.0 to 0.1 signify water areas (Congo river and tributaries); values 0.1 to 0.2 represent river banks; values 0.2 to 0.3 belong to the class of the non-vegetated areas; pixels with values 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with the diverse types of crops; bright pixels of class 0.6 to 0.7 are secondary forests; values of 0.7 to 0.8 are densely vegetated lands and mosaic forests; finally, the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
+Figure \ref{fig:10} demonstrates the three examples of the NDVI maps derived from the three dates of Landsat imagery in Bumba, Basoko and Kisangani regions, respectively. Here the values -1.0 to 0.1 signify water areas (Congo river and tributaries); values 0.1 to 0.2 represent river banks; values 0.2 to 0.3 belong to the class of the non-vegetated areas; pixels with values 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with the diverse types of crops; bright pixels of class 0.6 to 0.7 are secondary forests; values of 0.7 to 0.8 are densely vegetated lands and mosaic forests; finally, the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
