@@ -1,0 +1,1727 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[applsci,article,accept,pdftex,moreauthors]{Definitions/mdpi} 
+
+%=================================================================
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2022}
+\copyrightyear{2022}
+\externaleditor{Academic Editor(s): {Firstname Lastname} %MDPI: Please add academic editor if available.
+}
+\datereceived{6 October 2022} 
+%\daterevised{} % Only for the journal Acoustics
+\dateaccepted{30 November 2022} 
+\datepublished{} 
+%\datecorrected{} % Corrected papers include a "Corrected: XXX" date in the original paper.
+%\dateretracted{} % Corrected papers include a "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{caption}
+
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{\alph{subfigure}}
+\DeclareCaptionLabelFormat{subcaptionlabel}{\normalfont(\textbf{#2}\normalfont)}
+\captionsetup[subfigure]{labelformat=subcaptionlabel}
+%\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{gensymb} % for degree symbol
+\usepackage{lscape}
+\usepackage{pxfonts}
+\usepackage{graphicx}
+\usepackage{tikz}
+	\newlength\imagewidth
+	\newlength\imagescale
+\usepackage{tabularx}
+\usepackage[autostyle]{csquotes}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{RGB}{255,255,255}
+\definecolor{SlateGray}{HTML}{708090}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    keywordstyle=\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{SlateGray},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t, 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=topline|bottomline,
+    }
+
+\lstset{style=mystyle}
+\captionsetup[lstlisting]{position=top, margin=0cm,labelfont={bf, small, stretch=1.17}, labelsep=colon, textfont={small, stretch=1.17}, aboveskip=6pt, singlelinecheck=off, justification=justified}
+	
+\usepackage{soul} % highlighting text
+
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{R Libraries for Remote Sensing Data Classification by K-Means Clustering and NDVI Computation in Congo River Basin, DRC}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{R Libraries for Remote Sensing Data Classification by K-Means Clustering and NDVI Computation in Congo River Basin, DRC}
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-5759-1089} % Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{\hl{Polina Lemenkova} %MDPI: Please carefully check the accuracy of names and affiliations.
+ \hl{*} %MDPI: Newly added * for Correspondence author, please confirm
+\orcidA{} and Olivier Debeir \orcidB{}}
+% \dagger,\ddagger
+%\longauthorlist{yes}
+%MDPI: Important information:
+%1. The initial layout for your manuscript was done by our layout team. Please do not change the layout, otherwise we cannot proceed to the next step.
+%2. Please do not delete our comments.
+%3. Please revise and answer all questions that we proposed, such as: “It should be italic”; “I confirm”; “I have checked and revised all.”
+%Please directly correct on this version. 
+
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Polina Lemenkova and Olivier Debeir}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Lemenkova, P.; Debeir, O.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address[1]{%
+Laboratory of Image Synthesis and Analysis, École Polytechnique de Bruxelles (EPB, Brussels Faculty of Engineering), Université Libre de \hl{Bruxelles,} %MDPI: The provided information should be arranged from subordinate to superior, we revised aff order, please confirm
+ Building L, Campus de Solbosch, ULB---LISA CP165/57, Avenue~Franklin D. Roosevelt 50, \mbox{B-1050 Brussels, Belgium}; {olivier.debeir@ulb.be}}
+
+% Contact information of the corresponding author
+\corres{\hangafter=1 \hangindent=1.05em \hspace{-0.82em}Correspondence: \hl{polina.lemenkova@ulb.be}; Tel.: +32-471-860-459}%MDPI: This is an important note to let you know that to protect the privacy of the author's contact information, we will only display the corresponding authors' contact information on the published paper. However, we hope the contact information of the other authors can also be confirmed or corrected during the proofreading stage, which will be recorded in our database to furnish the author's integrated publication history and also contribute to our future communications
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{In this paper, an image analysis framework is formulated for Landsat-8 OLI-TIRS scenes using the R programming language. The libraries of R are shown to be effective in remote sensing data processing tasks, such as classification using k-means clustering and computing the Normalized Difference Vegetation Index (NDVI). The data are processed using an integration of the RStoolbox, terra, raster, rgdal and auxiliary packages of R. The proposed approach to image processing using R is designed to exploit the parameters of image bands as cues to detect land cover types and vegetation parameters corresponding to the spectral reflectance of the objects represented on the Earth's surface. Our method is effective at processing the time series of the images taken at various periods to monitor the landscape dynamics in the middle part of the Congo River basin, D.R.C. Whereas previous approaches primarily used GIS software, we proposed to explicitly use the scripting methods for satellite image analysis by applying the extended functionality of R. The application of scripts for geospatial data is an effective and robust method compared with the traditional approaches due to its high automation and machine-based graphical processing. The algorithms of the R libraries are adjusted to spatial operations, such as projections and transformations, object topology, classification and map algebra. The data include Landsat-8 OLI-TIRS covering the three regions along the Congo river, Bumba, Basoko and Kisangani, for the years 2013, 2015 and 2022. We also validate the performance of graphical data handling for cartographic visualization using R libraries for visualising changes in land cover types by k-means clustering and calculation of the NDVI for vegetation analysis.
+}
+% Keywords
+\keyword{image processing; remote sensing; Landsat; R language; programming; cartography; mapping; data visualization; NDVI; Africa} 
+
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+\PACS{\hl{91.10.Da;} %MDPI: For this journal, these ``PACS/MSC/JEL Classification'' parts are not necessary, please confirm if these parts should be retained.
+ 91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
+\MSC{86A30; 86-08; 86A99; 86A04}
+\JEL{Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Diversity
+%\LSID{\url{http://}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Applied Sciences
+\featuredapplication{Libraries of the R programming language, including \emph{RStoolbox}, \emph{raster} and \emph{terra}, were used to classify Landsat OLI-TIRS satellite images by \emph{k}-means clustering and NDVI computation for comparative vegetation mapping of tropical rainforests for the period of 2013-2022 in the three target areas (Bumba, Basoko, Kisangani) of the middle Congo River Basin, central Africa, D.R.C.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Satellite image processing is a fundamental problem in remote sensing data analysis and is a key step towards the automatic visualization of the Earth's landscapes. The significance of the satellite images for visualising the Earth is that they incorporate rich information about the land cover types, which can be derived from the interpretation of the pixels. The brightness of pixels in the satellite images correspond to the spectral reflectance of various surfaces and objects: built-up urban areas, bare soil, deserts, forest and various vegetation types, water areas, etc. Since the absorption of solar radiation varies in these objects, their spectral reflection is different. Such fundamental properties of optics of the materials form a basis for the environmental applications of satellite imagery generated by the sensors onboard the satellites \cite{Lillesand}. The differences in spectral signatures of the surfaces are detectable in bands, or channels, of the satellite imagery and digital numbers (DNs) of the pixels in bitmap images, which can be used for land cover mapping \cite{Manakos}. 
+
+Satellite images processed by remote sensing tools are often used to visualise landscape dynamics as a way to detect land cover changes by exploiting the similarities and differences in pixels of the images from Landsat \cite{SIKUZANI2020e01333,DUVEILLER20081969} or Sentinel \cite{9554698,Lemenkova202021,9553905} or their integration~\cite{ZHANG2021112470,CHEN2021102386}. Some of the methods of image processing use time series analysis using fine spatial resolution imagery \cite{7326202,6352722}, topological data extraction by spectral analysis derived from SAR \cite{1027205,520569}, photogrammetry {or} LiDAR processing to analyse forest canopy {by collecting 3D data}~\cite{rs13183777}. Additionally, image processing may use a supervised classification approach, which includes automated extraction of the training samples and reference maps~\cite{rs12172705}, regression tree analysis for canopy height modelling \cite{HANSEN2016221}, or statistical methods to analyse forest degradation \cite{7326141}.
+
+The spectral bands that comprise the satellite imagery consist of a matrix of pixels. Different intensities of the wavelengths of light of the pixels are visible on the image as colours of various hues and shadowing. The Landsat OLI/TIRS consists of 11 bands, including spectral bands: ultra violet (UV), visual, near-infrared (NIR), short-wave infrared (SWIR) and thermal infrared (TIR). Red and NIR bands, which correspond to channels 4 and 5, are specifically useful for vegetation analysis and forest mapping, as has been demonstrated in related works \cite{DALPONTE2020102206,HUANG2022100006,WANG2022113021}. This is explained by the chlorophyll reflectance of plants in the red/NIR zones, which can be used as an arithmetic combination of bands 4--5 for computing the Normalized Difference Vegetation Index (NDVI) \cite{HUETE2002195} or other vegetation indices \cite{JIANG20083833,HUETE1988295} as indicators of vegetation health, vigour, and plant phenology, as reported earlier \cite{SOUDANI2012234,Lemenkova202019,1026428,HMIMINA2013145}.
+
+The modelling, reconstruction and prognosis of tropical forest degradation in Africa poses a challenge for both environmental research as well as socio-economic applications, since deforestation affects the current land use policies and agro-industrial development of central African countries \cite{TEGEGNE2016312,f13091508}. In addition to climate factors, selected human activities, such as timber production, road expansion, logging and manufacturing, contribute to deforestation \cite{BRANDT201615,TRITSCH2020106660,Lietal2015}. Another factor includes the high consumption of wood by local population through agriculture and woodcutting \cite{Iloweka}. At the same time, deforestation and the unbalanced functioning of forest ecosystems have wider effects and environmental consequences including land degradation, desertification, the loss of wildlife habitat and soil erosion \cite{AQUILAS2022100553}. Analysis of deforestation is possible by comparing forest areas on older maps with those detected on the remote sensing data \cite{rs12040638,land10101042,Zhangetal2005} or landscape dynamics evaluated by time series of images \cite{land11091541}. Other approaches include continuous metrics to measure the degree of forest degradation \cite{SHAPIRO2021107268}
+ 
+While the techniques of the remote sensing data acquisition and image processing by GIS have demonstrated advances over recent decades \cite{CHUMA2021100083,Westmanetal1989}, the algorithms of geospatial data modelling are not as straightforward regarding handling the data automatically. At the same time, the required automation is possible using the programming approaches. A large number of methods focused on forest monitoring by the remotely sensed data have been proposed over recent years \cite{6350700,773475,PU2019268,6049235,OHMANN20143}. Popular cases include the use of multi-source data, such as a fusion of LiDAR, radar and optical data, very high-resolution satellite images and unmanned aerial vehicles (UAV) \cite{rs12071087}, as well as the application of land use/land cover LULC change \cite{lambin2003dynamics}, classification and clustering \cite{976841}, and integration of the remote sensing data with reference maps for change detection \cite{rs14164126}. Typically, methods of forest mapping are based on the use of Landsat imagery \cite{1294510,Zhangetal2006,KIM2014178}, though others utilize SAR \cite{rs11242999,858324,7326669,6352093,8035264} or MODIS scenes \cite{HANSEN20082495,ZHANG201974} for land cover classification in forest areas. 
+
+Compared with GIS, the use of programming languages for image processing presents new \textls[-15]{possibilities in mapping through the extended functionality of algorithms and has received much attention in the geoscience community \cite{TRUJILLOJIMENEZ2022100703,VANSTRIEN2022105462,RODRIGUES2022711,5981114,ROBERTS2022105192}. As previous work shows~\cite{LIAQAT2021100587,ASUQUOENOH2022,RAWAT201577},} \linebreak integrating spatial information from the satellite images using various perceptual tasks, such as object recognition, location, classification and interpretation, are necessary for disambiguating visually similar land cover classes of the Earth's surface representing the landscapes. The automatic recognition of the diverse land cover classes on various periods facilitates the recognition of the environmental changes. However, misclassifications remain in challenging situations with similar classes with human-based interpretation using supervised classification GIS for image analysis \cite{HUSSAIN2022103117,ABDELSADEK2022815,HEDAYATI202273}. This requires us to recognise and classify all possible occurrences of pixels in the scenes automatically, which is a computationally effective task using programming algorithms.
+
+In this paper, we propose an application of R programming language \cite{RCoreTeam} as a means to process and classify satellite images. Specifically, we presented the unsupervised classification of the Landsat-8 OLI/TIRS data and calculation of the Normalized Difference Vegetation Index (NDVI) based on RSToolbox, raster and terra packages. Motivated by recent reports regarding the environmental changes in rainfall tropical forests of central Africa \cite{Wasseige,lescuyer2010chainsaw,Jayathilake,POTAPOV2012106,Shapiro,7326202}, we applied multi-temporal data covering identical selected regions along the middle Congo River Basin with a time span of 2013 to 2022. The practical aim is to demonstrate the dynamics of the landscapes within a decade using Landsat satellite images. Our methods apply k-means automated clustering and calculate the NDVI index using the R libraries RStoolbox \cite{RStoolbox}, terra \cite{RTerra}, and raster \cite{Hijmans} and auxiliary graphical packages such as RColorBrewer \cite{Neuwirth} and viridis \cite{viridis}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Study Area}
+
+The dataset contains satellite images obtained for the region of the Democratic Republic of Congo (DRC) with the three target areas located in the middle region of the Congo River Basin, according to the regional division \cite{MUSHI201964}. The surroundings of the towns Bumba, Basoko and Kisangani are located on the Congo River, which serves as the main transportation artery in the region (Figure \ref{fig:01}). 
+
+Kisangani is the capital of the Tshopo province, situated at the confluence of the rivers Congo, Lualaba, Tshopo, and Lindi. It is strategically located at the crossroads between the eastern and western parts of Congo. Basoko town is situated in the confluence of the Aruwimi tributary into the Congo River. Bumba is a small town and a river port in the Mongala Province, which is in the northern part of the DRC. As a part of the Congo River Basin, these cities have a tropical monsoon climate with a dry winter period and humid summer-autumn seasons with heavy precipitation and periodically flooded areas \cite{6571272}. Such a climate setting, characterised by rainfalls interspersed with a dry season climate, in the Congo Basin creates favourable conditions for the distribution of the world's largest tropical humid forests \cite{Washington}. 
+
+The importance of the study area is explained by the crucial environmental role of the Congo River Basin. It contains over half of the African tropical moist forests, with Salonga National Park being the largest rain forest park in the world \cite{Sayer1992}, and it largely contributes to the Earth's atmosphere's circulation on the planetary scale. Furthermore, the tropical rainforests of Congo are a key factor in producing oxygen and regulating global temperature through the absorption of solar radiation by forest massifs. Moreover, forest resources offer critical and principal support to the welfare of rural livelihoods and the socioeconomic wellbeing of the local population \cite{f13010130}, which includes forest-related practices such as forest clearing. As a result, land use and shifting agriculture have become the major causes of the hydrological flow regime, environmental changes from the regional to global scale \cite{4780136}, as well as deforestation, along with the increased population density and associated urban growth \cite{Wilkie1994}. 
+
+At the same time, primary forests are essential ecosystems that play a key role in mitigating climate change, which raises the need to take action by mitigating the effects from deforestation and resilient development in forest degradation \cite{SOMORIN2012288,BELE20151}. Efforts to conserve natural resources in Congo tropical rainforests recently launched global initiatives, such as Reducing Emissions from Deforestation and Forest Degradation (\href{https://www.fao.org/redd/overview/en/}{REDD+}) \cite{land11060918,SUFOKANKEU2020102081} and the Global Rain Forest Mapping (GRFM) project \cite{1025720}. On a regional and local level, practicing agroforests serve as ecosystem services responding to the climate change mitigation strategy~\cite{Batsietal2021}. Nevertheless, the Congo River Basin remains the least studied region in Africa and in the global tropics \cite{Washingtonetal2006}. The approach we present here contributes to the development of methods for the environmental analysis of the selected regions of the Congo River Basin using remote sensing data and R programming.
+
+\vspace{-6pt}
+\begin{figure}[H]
+	\hspace{-0.3cm}\includegraphics[width=14.0 cm]{Fig_01}
+	\caption{Study area with the location of the three target cities in Congo River Basin, DCR. Cartography: Generic Mapping Tools (GMT). Data source: GEBCO/SRTM. Map source: authors.
+	\label{fig:01}}
+\end{figure} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+
+This article proposes a general, fully automated method for classifying satellite images using R libraries by machine-based \emph{k}-means clustering, which requires no prior information and no learning on land cover classes. On one hand, the nature of land cover types is captured by considering the spectral attributes of the pixels in the respective Landsat bands. By carefully analysing these attributes, we reveal and demonstrate that the irregularity of the spectrum in the wavelength corresponding to the landscape properties is highly related to the reflectance of  the surface, which results in the brightness of pixels in the image. Thus, we applied the computational model of R to effectively capture and visualise this irregularity and transfer it from the frequency optical domain to the geo-information domain.   
+
+\subsection{Research Design}
+Within the scope of the current study, the functionality of R is focused on the K-means clustering classification algorithm of RStoolbox to process the satellite images, with the aim of visualising and comparing the extent of vegetation in the central Congo River Basin for different years using a general workflow approach, as seen in Figure \ref{fig:02}. The Landsat satellite images taken in 2013, 2015 and 2022 were used to visualise change detection between land cover or forest types. Thus, the algorithms of R support the operational monitoring of the dynamics of land cover types derived from the images. However, the packages of R can also be applied to additional applications of geospatial data analysis where automated image classification is needed. Examples of such cases include monitoring the desertification using time series of images, analysis of urban growth using retrospective data overlaid with current maps and actual images, or forest fire monitoring. 
+
+\vspace{-5pt}
+\begin{figure}[H]
+	\includegraphics[width=13.5 cm]{Fig_02.jpg}
+	\caption{Workflow of the study project summarising general steps of the study, including aim and objectives, methodology and results used in a framework of R application for remote sensing data processing and land cover change detection by unsupervised classification (k-means clustering) of Landsat satellite images for selected regions of Congo, D.R.C.
+	\label{fig:02}}
+\end{figure} 
+
+The functionality of R programming presents a set of modular functions for the automation of image classification applications from Earth observation, spatial and remote sensing data, as seen in Figure \ref{fig:03}. 
+
+The packages of 'terra' and 'raster' include the functionality of pre- and post-processing of both data types (vector and raster), as well as extensible features for spatial data analysis. Raster data analysis includes reading the information on the spectral reflectance of the image bands, automated processing of the stacked bands, feature extraction for unsupervised classification using clustering, creating multi-layer {colour composites}, performing map algebra using raster bands, visualising the thematic maps as overlays, classification and basic statistical analysis, such as histograms.
+
+\vspace{-5pt}
+\begin{figure}[H]
+%	\begin{adjustwidth}{-\extralength}{0cm}
+%\centering %% If there is a figure in wide page, please release command \centering
+\includegraphics[width=13.50 cm]{Fig_03.jpg}
+%\end{adjustwidth}
+	\caption{The functionality of R packages used for satellite image processing and classification in this study. Major packages include terra, raster, Rstoolbox, rgdal, rgeos, cluster, graphics, and RColorBrewer.
+	\label{fig:03}}
+\end{figure} 
+
+
+
+R operates with major features of spatial data, such as dimensions, resolution, reading data extent (min/max analysis), plotting the data, manipulating with Coordinate Reference Systems (CRS), reprojecting the data, assigning the CRS and transforming the data. An important function of R 'terra' package consists of creating the SpatRaster objects, which are a class of raster data with a longitude/latitude CRS as spatial parameters and a specific geometry of the file (cells are arranged in the rows/columns of the internal grid). Moreover, the 'terra' package enables the cartographic visualization of continuous fields, including topographic elevation, vegetation based on the classified land cover types, and climate data in a spatial context (regional variations in temperature and precipitation). Furthermore, R enables us to perform data clipping using an overlay of spatial data and imagery over their area of interest.
+
+\subsection{Data}
+
+The first step in the workflow included downloading data from the \href{https://glovis.usgs.gov/app}{USGS GloVis} data repository, which offers a global coverage of the publicly available satellite images with open access. We selected the three areas of Bumba, Basoko and Kisangani and collected the Landsat-8 OLI/TIRS imagery for the dates 2013 and 2022. The exact Landsat Product IDs are summarised in Table \ref{tab1}. The main characteristics of the imagery are summarised in Table \ref{tab2}. 
+\begin{table}[H] 
+\caption{Landsat-8 OLI/TIRS Product ID and Scene ID. \label{tab1}}
+	\newcolumntype{C}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{p{2.3cm}p{6.3cm}p{5.3cm}}
+\toprule
+\textbf{Region, Year} & \textbf{Landsat Product ID} & \textbf{Landsat Scene ID}\\
+\midrule
+	Basoko, 2013 & LC08\_L1TP\_177059\_20131216\_20200912\_02\_T1 & LC81770592013350LGN01\\
+	Basoko, 2022 & LC08\_L1TP\_177059\_20220208\_20220212\_02\_T1 & LC81770592022039LGN00 \\
+	Bumba, 2013 & LC08\_L1TP\_178058\_20131223\_20200912\_02\_T1 & LC81780582013357LGN01 \\
+	Bumba, 2022 & LC08\_L1TP\_178058\_20220130\_20220204\_02\_T1 & LC81780582022030LGN00 \\
+	Kisangani, 2013 & LC08\_L1TP\_176060\_20130413\_20200913\_02\_T1 & LC81760602013103LGN02 \\
+	Kisangani, 2015 & LC08\_L1TP\_176060\_20150113\_20200910\_02\_T1 & LC81760602015013LGN01 \\
+	Kisangani, 2022 & LC08\_L1TP\_176060\_20220217\_20220302\_02\_T1 & LC81760602022048LGN00 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The common technical parameters for all the scenes are as follows: spacecraft ID---Landsat 8; origin: USGS; station ID---LGN; sensor ID---OLI\_TIRS; processing level---L1TP; collection number---2; collection category---T1;  output format---GEOTIFF; WRS type---2; datum and ellipsoid---WGS84; data source elevation---GLS2000; GCP version---5.
+\begin{table}[H]
+\caption{Main technical characteristics of the Landsat-8 OLI/TIRS imagery.}
+\footnotesize
+	\begin{adjustwidth}{-\extralength}{0cm}
+\centering %% If there is a figure in wide page, please release command \centering
+ \begin{tabular*}{7.3in}{@{\extracolsep{\fill}}p{1.5cm}p{1.4cm}p{1.4cm}p{1.4cm}p{1.4cm}p{1.6cm}p{1.6cm} p{1.6cm}}
+    \toprule
+       \vspace{-1.5pt} \textbf{Parameters} & \textbf{Basoko (2013)} & \textbf{Basoko (2022)} & \textbf{Bumba (2013)} & \textbf{Bumba (2022)} & \textbf{Kisangani (2013)} & \textbf{Kisangani (2015)} & \textbf{Kisangani (2022)} \\
+        \midrule
+        Date & 16 December 2013 & 8 February 2022 & 23 December 2013 & 30 January 2022 & 13 April 2013 & 13 January 2015 & 17 February 2022 \\   \midrule
+        TWRS P. & 177 & 177 & 178 & 178 & 176 & 176 & 176 \\   \midrule
+        WRS Row & 59 & 59 & 58 & 58 & 60 & 60 & 60 \\   \midrule
+        WRS Path & 177 & 177 & 178 & 178 & 176 & 176 & 176 \\   \midrule
+        Cloudiness & 0.00 & 0.00 & 0.04 & 0.00 & 5.85 & 1.36 & 0.48 \\   \midrule
+        UTM Zone & 34 & 34 & 34 & 34 & 35 & 35 & 35 \\  
+        \bottomrule
+        
+\end{tabular*}\label{tab2}
+\end{adjustwidth}
+
+        \noindent{\footnotesize{Abbreviations used in Table \ref{tab2}: SA---sun zzimuth. Date stands for the acquisition date of the scene; GCP Ver.---GCP version; TWRS P.---target WRS path; GCP Mod.---GCP model; GRMSEM---geometric RMSE model.}}
+
+\end{table}
+
+
+
+The used images are categorised by the L1TP Level 1 Precision Terrain (corrected), which are the DNs in a 16-bit integer format, converted to the top-of-atmosphere (TOA) spectral reflectance (Bands 1--9) or radiance (Bands 1--11) using scaling factors \cite{Engebretson}. The L1TP images include radiometric, geometric, and precision correction and use a digital elevation model (DEM) to correct errors caused by the local topographic relief; the accuracy of the precision/terrain-corrected product depends on the ground control points (GCPs) obtained from the GLS2000 dataset and the resolution of the DEM. Thus, the geometric accuracy of the L1TP Landsat images is valiadated using the ground control points (GCP), which are derived from the GLS2000 library. These data are used for computing the RMSE of the geometric residuals on the terrain-corrected images \cite{Engebretson}. 
+
+An additional image for 2015 was selected for Kisangani due to the higher cloud coverage in 2013. The geographic map in Figure \ref{fig:01} has been plotted using the generic mapping tools (GMT) defined by scripts following the existing methodology \cite{Lemenkova202212,Lemenkova202217,Lemenkova2022b}. The study area encompasses the middle Congo river basin with the three specific towns of Bumba, Basoko, and Ksangani, located in consecutive order southwards. The collected data were inspected for metadata using R Listing \ref{lst:01}. 
+
+\begin{lstlisting}[language=r, caption=R code used for data inspection by rGDAL and raster libraries; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:01}]
+library(rgdal)
+library(raster)
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data: Landsat OLI/TIRS image for Basoko, Congo (2013):
+Landsat_Basoko2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Printing the list
+list.files()
+# Reading in files as SpatialGridDataFrame objects :
+BasokoBand1 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoBand2 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoBand3 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoBand4 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoBand5 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoBand6 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoBand7 <- readGDAL("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Visualizing and checking the class of random bands
+plot(BasokoBand1)
+res(BasokoBand1)
+class(BasokoBand5)
+## [1] "SpatialGridDataFrame"
+## attr(,"package")
+## [1] "sp"
+slotNames(BasokoBand5)
+# [1] "data"        "grid"        "bbox"        "proj4string"
+summary(BasokoBand5@data)
+# Min.   : 6637
+# 1st Qu.:14955
+# Median :15669
+# Mean   :15752
+# 3rd Qu.:16579
+# Max.   :27433
+# NA's   :17221239
+# Check the topology of the class
+str(BasokoBand5@grid)
+#Formal class 'GridTopology' [package "sp"] with 3 slots
+# ..@ cellcentre.offset: Named num [1:2] 696300 43500
+#  .. ..- attr(*, "names")= chr [1:2] "x" "y"
+#  ..@ cellsize         : num [1:2] 30 30
+#  ..@ cells.dim        : int [1:2] 7591 7741
+# Check up spatial dimension
+BasokoBand5@grid@cellcentre.offset
+# x      y
+# 696300  43500
+BasokoBand5@grid@cellsize
+# [1] 30 30
+BasokoBand5@bbox
+#      min    max
+# x 696285 924015
+# y 43485 275715
+BasokoBand5@proj4string
+# generating RasterLayers of Landsat bands
+BasokoB1 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B1.TIF")
+BasokoB2 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B2.TIF")
+BasokoB3 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B3.TIF")
+BasokoB4 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B4.TIF")
+BasokoB5 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B5.TIF")
+BasokoB6 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B6.TIF")
+BasokoB7 <- raster("LC08_L1TP_177059_20131216_20200912_02_T1_B7.TIF")
+# Creating a facetted stack from the Landsat OLI-TIRS bands:
+image <- stack(BasokoB1, BasokoB2, BasokoB3, BasokoB4, BasokoB5, BasokoB6, BasokoB7)
+# Visualizing the image with separated bands:
+plot(image)
+# Check metadata:
+nlayers(image)
+res(image)
+# Creating the object of RasterLayer class for one random band (here: Band 2)
+Basoko2013_B2 <- raster(Landsat_Basoko2013[2])
+Basoko2013_B2
+# Plotting one randon band
+plot(Basoko2013_B2,
+     main = "Landsat OLI/TIRS 2013 band 2\nBasoko, central Congo",
+     col = gray(0:100 / 100))
+\end{lstlisting}
+
+\vspace{6pt}
+We explored the 'rgdal' library of R to retrieve the coordinates and check the topology and spatial dimensions of the dataset stored in the SpatialGridDataFrame class. AThetopology refers to the arrangement of the images that defines the coincident geometry of the feature classes from the Landsat dataset. It reads the contextual information from the structure data based on spatial relationships, specifically the adjacency of the coordinates and connectivity of overlapping images. The RasterLayers were generated as the arrays of pixels from the individual bands of the Landsat scenes. Afterwards, a facetted stack was created using the Landsat OLI-TIRS bands via the stack() function. To this end, the 'raster' R library was applied to concatenate the multiple bands into a single bitmap image, which used the data on the origin of the coordinates of each band. The resulting image was visualized by the plot() function of R. The number of layers of and spatial dimension in the new multi-layer object of R were inspected by the 'raster' library. The resolution of all the layers was 30 m, except for the panchromatic band (15 m) and the two last TIRS layers, with a coarser resolution of 100 m. The selected band was plotted in a grayscale monochrome visualization. The data analysis and inspection was performed using Listing \ref{lst:01}.
+
+\subsection{Plotting Band Composites}
+
+We explored the structure of the Landsat bands by inspecting the metadata. The image of all the bands is visualized as a representation of the monochrome multi-facetted plot in Figure \ref{fig:04}. The majority of the multispectral bands have 30 m resolution, while the panchromatic band (B8) has a higher resolution (15 m), and the two TIRS (B10 and B11) have a coarse 100 m resolution. Generating colour composites by a combination of various band triplets provides more information, which can be effectively exploited using the 'raster' and 'terra' libraries of R. Here the idea of the machine-assisted classifier by R packages consists of the identification of the spectral reflectance of the pixels constituting the 11 bands for thematic mapping. 
+
+The sensor instruments of Landsat-8 OLI-TIRS record more channels of data than are actually needed for vegetation applications. For instance, to calculate the NDVI, we only need the Red and NIR bands (4 and 5, respectively). However, combining the bands in various RGB triplets enables us to highlight diverse objects on the surface to discriminate and capture information on a wider variety of objects. Thus, the composition of red, green and blue colours creates images with varied hue, saturation and intensity representations owing to the pixel brightness as the spectral reflectance of the objects and surfaces on the Earth. Therefore, the bands were mixed to form various colour composites and inspect the land cover types. The selected and most representative band composites for the three main studied regions were plotted as natural and false colour composites, respectively, which were generated using the 'raster' library. A relevant code snippet is given for the town of Basoko and was applied similarly for the rest of the Landsat-8 OLI-TIRS scenes with changed parameters, as per Listing \ref{lst:02}. 
+
+\begin{figure}[H]
+
+%\begin{adjustwidth}{-\extralength}{0cm}
+%\centering %% If there is a figure in wide page, please release command \centering
+\makebox[\textwidth][c]{\hspace{-1cm}\includegraphics[width=1.05\textwidth]{Fig_04.jpg}}%
+%\end{adjustwidth}
+	\caption{\hl{Composite} %MDPI: Please use commas to separate thousands for numbers with five or more digits (not four digits) in the picture, e.g., "10000" should be "10,000".
+ of monochrome 11 bands: Landsat-8 OLI/TIRS C1 for Basoko region (Arowumi and Congo rivers). Multi-spectral image 'LC81770592022039LGN00': ultra blue (B1), blue (B2), green (B3), red (B4), near infrared (NIR) (B5), shortwave infrared (SWIR) 1 (B6), shortwave infrared (SWIR) 2 (B7), panchromatic (B8), cirrus (B9), thermal infrared (TIRS) 1 (B10), TIRS2 (B11). Plotting: R.}
+	\label{fig:04}
+\end{figure} 
+
+
+
+The multi-facetted plot of the individual bands of the Landsat OLI/TIRS image has been plotted using libraries 'raster' and 'terra' (version 1.2.11), by the code in Listing \ref{lst:03}. Here the case is given for the image covering Basoko (2022), applied for other scenes. 
+
+\newpage
+\begin{lstlisting}[language=r, caption=R code used for colour composites by libraries raster and
+terra; here a case of Bumba town applied likewise for all the other images, label={lst:02},basicstyle=\scriptsize]
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Importing data
+Landsat_Bumba2013 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Bumba_LC08_L1TP_178058_20131223_20200912_02_T1")
+# Printing the list
+list.files()
+# creating SpatRaster object
+landsat <- rast(Landsat_Bumba2013)
+# check properties
+landsat
+# combining bands for natural colour composite, here using bands 4, 3 and 2.
+landsatRGB <- landsat[[c(4,3,2)]]
+# check up metadata
+landsatRGB
+# visualising  natural colour composite on screen
+plotRGB(landsatRGB, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS C1 image LC08_L1TP_178058_20131223_20200912_02_T1: Bumba, Congo", cex.main=0.9, axes=FALSE)
+# combining bands for false colour composite, here using bands 5, 4 and 3.
+landsatFCC <- landsat[[c(5,4,3)]]
+# visualising false colour composite on screen
+plotRGB(landsatFCC, r=1, g=2, b=3, axes=FALSE, stretch="lin")
+# plotting and saving the file
+plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1_B: Basoko, central Congo", cex.main=0.9, axes=FALSE)
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, basicstyle=\scriptsize, label={lst:03}]
+library(raster)
+library(terra)
+# Setup working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+b1 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B1.TIF') # Ultra Blue/Aerosol
+b2 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B2.TIF') # Blue
+b3 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B3.TIF') # Green
+b4 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B4.TIF') # Red
+b5 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B5.TIF') # Near Infrared NIR
+b6 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B6.TIF') # Green
+b7 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B7.TIF') # Red
+b8 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B8.TIF') # Panchromatic
+b9 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B9.TIF') # Cirrus
+b10 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B10.TIF') # TIRS 1
+b11 <- rast('LC08_L1TP_177059_20220208_20220212_02_T1_B11.TIF') # TIRS 2
+# Defining the color palette
+colors <- kovesi.cyclic_grey_15_85_c0(100)
+# Plotting 11 individual layers (raw bands) of the Landsat-8 image.
+par(mfrow = c(4, 3), mar=c(0, 5, 0, 0), mai = c(0.1, 0.1, 0.1, 0.1)) # c(bottom, left, top, right)
+plot(b1, main = "Ultra Blue (B1)", col = colors, axes = FALSE, legend = TRUE)
+plot(b2, main = "Blue (B2)", col = colors, axes = FALSE, legend = TRUE)
+plot(b3, main = "Green (B3)", col = colors, axes = FALSE, legend = TRUE)
+plot(b4, main = "Red (B4)", col = colors, axes = FALSE, legend = TRUE)
+plot(b5, main = "NIR (B5)", col = colors, axes = FALSE, legend = TRUE)
+plot(b6, main = "SWIR (B6)", col = colors, axes = FALSE, legend = TRUE)
+plot(b7, main = "SWIR (B7)", col = colors, axes = FALSE, legend = TRUE)
+plot(b8, main = "Panchromatic (B8)", col = colors, axes = FALSE, legend = TRUE)
+plot(b9, main = "Cirrus (B9)", col = colors, axes = FALSE, legend = TRUE)
+plot(b10, main = "TIRS 1 (B10)", col = colors, axes = FALSE, legend = TRUE)
+plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
+\end{lstlisting}
+
+\vspace{6pt}
+
+The generated images reveal spatial details that can be better discerned in the intensity of pixels in false colour composites for water areas and more sharpened representations of urban areas in the natural colour composites showing spatial details in the three target areas: Bumba, Basoko and Kisangani (Figure~\ref{fig:05}). The colour products for all the three regions were prepared using the combination of bands 4-3-2 (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands was converted to the colours with the intensity channel corresponding to the resolution of the original bands (30~m). Hue, saturation and intensity transformations of each of the triplets were processed and resampled by R package 'terra' to form the output image, as seen in Figure~\ref{fig:05}.
+
+
+
+\vspace{-6pt}
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering %% If there is a figure in wide page, please release command \centering
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.8\textwidth]{Fig_05a.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{Fig_05b.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.8\textwidth]{Fig_05c.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{Fig_05d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.8\textwidth]{Fig_05e.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{Fig_05f.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+
+}
+\end{adjustwidth}
+\caption{Natural (bands 4-3-2) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS. \label{fig:05}}
+%image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio. (\textbf{a}) Bumba: natural colour composite, 2013. (\textbf{b}) Bumba: false colour composite: 2013. (\textbf{c}) Basoko: natural colour composite: 2013. (\textbf{d}) Basoko: false colour composite: 2013. (\textbf{e}) Kisangani: Natural colour composite: 2013. (\textbf{f}) Kisangani: False colour \hl{composite: 2013.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+%%}
+\end{figure}
+
+\begin{figure*}
+\captionof*{figure}{Natural (bands 4-3-2) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio. (\textbf{a}) Bumba: natural colour composite, 2013. (\textbf{b}) Bumba: false colour composite: 2013. (\textbf{c}) Basoko: natural colour composite: 2013. (\textbf{d}) Basoko: false colour composite: 2013. (\textbf{e}) Kisangani: Natural colour composite: 2013. (\textbf{f})~Kisangani: False colour \hl{composite: 2013.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+}
+\end{figure*}
+
+
+The above-demonstrated scripts show the key advantage of R, which consists of the optimization of the workflow of remote sensing data processing. Moreover, it illustrates its advanced analysis capabilities aimed at processing raster data by scripting. Scripts can be re-used with modified lines of code for the next images as a consecutive work, rather than repeated as a whole process of image analysis for each image, as in GIS, which is a fundamentally different approach compared to GIS. This is especially true for processing big Earth observation data, which play a key role in geoscience. The rapid development of remote sensing technologies has resulted in an increased amount of available satellite images, which requires advanced technologies for processing these large massifs of spatial data. In contrast to the traditional software, programming languages provide an effective solution to handle such volumes of spatial data by scripting. R, as an example of a high-level programming language, effectively solves the problem of the optimization of image processing.
+
+\subsection{K-Means Clustering}
+The \hl{\emph{k}-means} %MDPI: Please confirm if k should be normal foramt in "k-means", and unify the writing of the full text
+ clustering of the R package RasterStack is a method by which pixels are assigned to spectral classes by machine-based partitions without prior knowledge of those classes. It is a straightforward way to produce a map of land cover classes using an automatic approach to image classification. The algorithm has been executed using an image-partitioning algorithm that infers the labels of the land cover classes by analysing intra-class similarity and, vice versa, the contrast between the classes. This method presents a machine learning approach for assigning pixels into the defined groups (or coherent clusters) according to their intensity and brightness, as seen in Listing \ref{lst:04}. The clustering and classification of data is a commonly accepted practice for land cover mapping aimed at modelling changes in a forest structure by examining land-use categories  \cite{Manakos,WILKIE1988307,4780136,rs11242999,land11060787}.
+
+\begin{lstlisting}[language=r, caption=R code used for running the unsupervised classification by k-means clustering; here a case of Basoko town applied for all other images, basicstyle=\scriptsize, label={lst:04}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Importing data
+Landsat_Basoko2022 <- list.files("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20220208_20220212_02_T1")
+# Printing the list
+list.files()
+# Creating the object of RasterLayer class for one band
+Basoko2022_B2 <- raster(Landsat_Basoko2022[2])
+Basoko2022_B2
+# Generating the color palette table
+colors <- kovesi.linear_grey_10_95_c0(100)
+# Plotting one band
+plot(Basoko2022_B2,
+    main = "Landsat OLI/TIRS 2022 band 2 Basoko, Congo \nLC08_L1TP_177059_20220208_20220212_02_T1", font.main=2, cex.main = 0.90, axes = FALSE, box = FALSE, legend = FALSE, col = colors)
+# Stacking the data to create a RasterStack. 
+Landsat_Basoko2022_stack <- stack(Landsat_Basoko2022)
+# Turning a stack into a brick. 
+# Landsat_Basoko2022_brick <- brick(Landsat_Basoko2022_stack)
+Landsat_Basoko2022_brick <- brick(Basoko2022_B2)
+# Viewing brick attributes
+Landsat_Basoko2022_brick
+# Plotting the RGB triplet from the RasterBrick
+olpar <- par(no.readonly = TRUE) # back-up par
+par(mfrow=c(1,1))
+plotRGB(Landsat_Basoko2022_brick)
+## Running the classification
+set.seed(25)
+unC <- unsuperClass(Landsat_Basoko2022_brick, nSamples = 100, nClasses = 10, nStarts = 5)
+unC
+# Creating the color palette table
+colors <- kovesi.diverging_rainbow_bgymr_45_85_c67(10)
+# Plotting a map
+plot(unC$map, main = "K-means Clustering for Landsat-\hl{8} OLI/TIRS C1 image of Basoko, Congo  \nL1TP_177059_20220208_20220212_02_T1 (2022)", font.main=2, cex.main = 0.95, col = colors, axes = FALSE, box = FALSE, legend = FALSE)
+# Adding legend
+legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
+\vspace{6pt}
+The image for classification was generated by stacking the data, which enabled us to create the RasterStack as a collection of RasterLayer objects. In turn, they were generated from the raster layers of the selected bands with the same spatial extent and resolution, that is, 30 m for the most of the Landsat-8 OLI/TIRS bands. Afterwards, RasterStack was merged into a RasterBrick, which is a multi-layer raster object created from the multi-layer files of RasterStack, made up of Landsat bands. The similarity between the RasterStack and RasterBrick classes consists in the fact that both are generated with a stack of the raster Landsat bands. However, the processing time for the RasterBrick is shorter in the R environment compared to the RasterStack because RasterBrick is less flexible and is merged already as a single file. The procedure and the output of the \emph{k}-means clustering is presented in Figure \ref{fig:06}, which shows the console of the RStudio with statistical information on cluster centroids and the sum of squares for each processed map, respectively. The cluster map on the right of the print screen depicts the class memberships of the pixels; in this case, we give the example of Basoko town in the year 2013, as seen in Figure \ref{fig:06}. 
+
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering %% If there is a figure in wide page, please release command \centering
+	\includegraphics[width=17.0 cm]{Fig_06.jpg}
+\end{adjustwidth}
+	\caption{Executing the \emph{k}-means clustering classification algorithm in RStudio using the RStoolbox package. Parameters of cluster centroids and sum of squares by cluster are displayed in the console of R. Spatial parameters of the output map are listed. Here is shown the example of Landsat image of~Basoko.
+	\label{fig:06}}
+\end{figure} 
+
+Thus, the automatic clustering analysis by R has been performed without prior knowledge of class membership of those pixels using a principle of partitioning { of the }raster file based on the generalization of the matrix of cells. Based on the automatic analysis of pixel brightness, the pixels of a given symbol were partitioned into the same spectral class, which belongs to one of the 10 clusters. The advantage of this approach is that it works quickly and straightforwardly when operating complex scenes. The clusters were identified by associating the pixels from the images with the available information of spectral reflectance and presented as the output maps in Figure \ref{fig:07} (Bumba), Figure \ref{fig:08} (Basoko) and Figure \ref{fig:09} (Kisangani). 
+
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_07a.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.7\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_07b.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=0.85\textwidth]{Fig_07c.jpg}
+		\caption{\centering}
+	\end{subfigure}
+	\begin{subfigure}[b]{.7\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{Fig_07d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+
+}
+\caption{\hl{Bumba} %MDPI: We moved Figures 7--9 AFTER where it is first mentioned in the text.
+ town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) Monochrome image for Bumba region: 2013. (\textbf{b}) Classified scene using \emph{k}-means clustering: 2013. (\textbf{c}) Monochrome image for Bumba region: 2022. (\textbf{d}) Classified scene using \emph{k}-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+}\label{fig:07}
+\end{figure}
+
+
+
+The unsupervised learning algorithm of R incorporates the parameter estimation for pixels under a partitioning framework using cell's brightness, which corresponds to the spectral reflectance of the objects in a matrix of the raster scene. The algorithm of \emph{k}-means clustering is computationally demanding by R, yet it is crucial to the concept of remote sensing due to the effectiveness and importance of the output in satellite image processing. Thus, land cover types are not known beforehand and defined by the machine method of image analysis based on the spectral signatures of the objects partitioned into the series of clusters. The data were divided automatically into the ten clusters using the search for the spectral class for each pixel in the image. 
+Using this approach, we defined 10 classes in a process of the unsupervised classification approach to produce the thematic maps with discriminated vegetation and land cover classes using the existing classification adopted from previous studies \cite{Bwangoy}: swamp forest; humid tropical forest; secondary forest; urban areas and impervious surfaces; inundated grassland; deciduous forest; shrubland and grassland; cropland and mosaic forest; savannah with sparse trees; water bodies. 
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=0.82\textwidth]{Fig_08a.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.7\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{Fig_08b.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+			\includegraphics[width=0.82\textwidth]{Fig_08c.jpg}
+		\caption{\centering}
+	\end{subfigure}
+	\begin{subfigure}[b]{.7\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{Fig_08d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}
+\caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors. (\textbf{a})~{True-colour composite }image for Basoko: 2013. (\textbf{b}) Classified scene using \emph{k}-means clustering: 2013. (\textbf{c}) {True-colour composite }image for Basoko: 2022. (\textbf{d}) Classified scene using \emph{k}-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+}\label{fig:08}
+\end{figure}
+
+\vspace{-9pt}
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.45\textwidth}
+		\centering
+			\includegraphics[width=0.84\textwidth]{Fig_09a.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.65\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{Fig_09b.jpg}
+		\caption{\centering}
+	\end{subfigure}}%
+	\vspace{6pt}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.65\textwidth}
+			\hspace{0.9cm}\includegraphics[width=0.9\textwidth]{Fig_09c.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.65\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{Fig_09d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}
+\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013, 2015 and 2022 and the classified outputs by \emph{k}-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) {True-colour composite }image, Kisangani, 2013. (\textbf{b}) Classified scene using \emph{k}-means clustering: 2013. (\textbf{c}) Classified scene using \emph{k}-means clustering: 2015. (\textbf{d}) Classified scene using \emph{k}-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+}\label{fig:09}
+\end{figure}
+
+\subsection{NDVI Calculation}
+The NDVI is a key vegetation indicator to describe vegetation dynamics and vigour. It is effectively applied to environmental management and monitoring the responses of tropical rainforests to climate change and anthropogenic activities. Therefore, the use of the NDVI is crucial to reveal the health of the terrestrial ecosystems in central Africa, which are threatened by the deforestation. As a robust traditional estimation method to determine vegetation coverage, NDVI is deservedly applied in a variety of the remote sensing studies due to its effectiveness and reliability. The visualization of the NDVI is indispensable in areas where fieldwork and ground point collection is hardly accessible, such as the tropical African regions of central Congo. Therefore, we adapted the algorithm of the NDVI to extract the information on vegetation for knowledge on plant coverage in the three target areas in the Congo Basin. The NDVI has been generated using composite band arithmetic operations by the ratio of difference and the sum of the reflected NIR and visible red wavelength. The NDVI approach is grounded in the calculation of ratios in the reflectance between the red and NIR bands of the image (Bands 4 and 5) as arithmetical variables using the existing formula $NDVI=(NIR-Red)/(NIR+Red)$. The NDVI computation has been performed using multi-band manipulation by R library terra, as per Listing \ref{lst:05}. 
+
+
+
+
+
+
+\begin{lstlisting}[language=r, caption=R code using library terra used for calculation the NDVI; here a case of Basoko town (2013) with the same principle applied for all other images, basicstyle=\scriptsize, label={lst:05}]
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/53_UC_k_means/Basoko_LC08_L1TP_177059_20131216_20200912_02_T1")
+# Importing data
+filenames <- paste0('LC08_L1TP_177059_20131216_20200912_02_T1_B', 1:7, ".tif")
+filenames
+landsat <- rast(filenames)
+landsat
+vi <- function(img, k, i) {
+  bk <- img[[k]]
+  bi <- img[[i]]
+  vi <- (bk - bi) / (bk + bi)
+  return(vi)
+}
+# plotting the NDVI. For Landsat NIR = 5, red = 4.
+ndvi <- vi(landsat, 5, 4)
+colors <- brewer.pal(10, "RdYlGn")
+plot(ndvi, col=colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS C1 image LC08_L1TP_177059_20131216_20200912_02_T1: Basoko, Congo DC (2013)", cex.main=0.95, axes = FALSE, legend = FALSE)
+legend(, x = "topleft", inset = 0.13, legend=c("0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
+\end{lstlisting}
+
+\vspace{6pt}
+
+The calculation of the NDVI enabled us to exploit the information derived from spectral reflectance regarding vegetation coverage. This was enabled due to the parameters of the ratios of NIR/red spectral bands, which lessen the influence from the ground relief, rocks and soils. Thus, the methodological advantage of the NDVI consists of the reinforcement of the slight differences and nuances in the spectral reflectance characteristics of vegetation. This enables us to better distinguish forest-covered areas, discriminate various vegetation classes, and discern them from all other land cover types. Using pairwise representations of the 9-year time series of Landsat OLI/TIRS (2013 to 2022), we calculated the NDVI for the three target regions along the Congo river: Bumba, Basoko and Kisangani. Here we computed the values of the NDVI for each couple of images, respectively, to show the dynamics of the vegetation growth in middle Congo, as shown in Figure \ref{fig:10}. The NDVI is computed for each pixel, with brighter green hues indicating more dense and healthy plant canopy, and contrariwise. 
+
+Apparently, the combination of a higher reflectance in the NIR and a lower reflectance in the red bands results in higher NDVI values in general, that is, around 1, which represents the spectral signature of vegetation. Such values refer to healthy plant coverage, typical for tropical rainforests and other regions of dense canopy, while bank areas of Congo river, bare land, sparsely vegetated areas and urban spaces near Bumba, Basoko and Kisangani have lower NDVI values. For instance, dark brown to black areas of the NDVI with values around zero are non-vegetated areas, and water areas have negative values below {zero}. Middle values indicate various types of shrubland andriparian plant communities along the river Congo and tributaries. Thus, the general approach is that in the NDVI, the scale ranges from -1 to 1, with positive values from 0 to 1 indicating the terrain areas, while water surfaces have values below 0. Higher NDVI values (ca. from 0.7 to 1.0) indicate healthy vegetation, while lower values (from 0.0 to 0.3) represent non-vegetated areas. 
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_10a.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_10b.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_10c.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_10d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}
+\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.87\textwidth]{Fig_10e.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.87\textwidth]{Fig_10f.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+
+}
+\caption{\hl{NDVI} %MDPI: We moved this figure AFTER where it is first mentioned in the text.
+ computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for years 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangani. Mapping: RStudio. Source: authors. (\textbf{a}) Bumba region: 2013. (\textbf{b}) Bumba region: 2022. (\textbf{c}) Basoko region: 2013. (\textbf{d}) Basoko region: 2022. (\textbf{e}) Kisangani region: 2013. (\textbf{f}) Kisangani \hl{region: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+}\label{fig:10}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results and Discussion}
+
+\subsection{Image Classification}
+
+Figure \ref{fig:09} shows changes in land cover types in the Bumba region for a 9-year time period according to the k-means classification by R.
+
+
+
+Pairwise examination of the classified images allows us to examine the changes in forest structure that are caused by anthropogenic activities, including urban growth, and environmental drivers initiated by climate change. To this end, we present the results of the classification of the three target regions showing changes in the tropical moist forest along the flow of Congo River, as shown in Figures \ref{fig:07}--\ref{fig:09} for Bumba, Basoko and Kisangani, respectively. 
+
+
+Classes of the land cover types were defined as follows: swamp forest; humid tropical forest; secondary forest; urban areas and impervious surfaces; inundated grassland; deciduous forest; shrubland and grassland; cropland and mosaic forest; savannah with sparse trees; and water bodies. The model was carried out by comparing the results of the vegetation types classified based on the Landsat imagery in 2013 and 2022. An additional image was selected for the Kisingani for 2015 due to the cloudiness of the image in 2013. As demonstrated in the resulting plots, the pixel-based models use 10 land-cover categories. The integration of the two Landsat OLI/TIRS images for land cover mapping by the R language is a challenging and promising approach that can be recommended for future similar studies on rainforest mapping. The final outputs as classified maps contained 10 land cover classes recorded from the 30 m raster grids equivalent to the resolution of the initial input Landsat OLI/TIRS data. 
+
+Land cover classification using the R approach to process remote sensing data by RStoolbox is a promising and effective approach. However, the pixel-based data processing of the satellite images results in the grid structure of the landscape with resolution corresponding to the initial data. For more detailed data, Sentinel scenes can be considered as well for a more fine-resolution classification. The continued increase in the volume of spatial Earth observation data from the satellite images and novel directions in image analysis techniques using programming tools encourage the development of object-based approaches. Therefore, technical variations in the classification process can be omitted by applying object-based image analysis to detect the landscape structure. This can be considered a further development of the R programming methods.
+
+
+
+\subsection{NDVI}
+
+Three examples of the NDVI computed from the red/NIR bands of the Landsat OLI-TIRS images have heterogeneous landscapes and vegetation coverage, as seen in Figure~\ref{fig:10}. 
+
+
+
+In the NDVI maps, healthy vegetated areas are bright, water is light to dark brown, and soils and bare ground areas are beige and bluish to slate grey, as seen in Figure~\ref{fig:10}. Denoting those shades and hues can be understood from the inspection of the relevant land cover types in previous maps. The NDVI is used for the assessment of various types of vegetation along the Congo flow, where the environmental effects from the hydrology on plant growth are more distinct. Moreover, the significance of the NDVI for environmental monitoring is that it well corresponds to crop biomass accumulation, as well as to botanical parameters, for example, leaf chlorophyll levels, LAI, and the active radiation absorbed by a crop canopy through the photosynthesis process. 
+
+Figure \ref{fig:10} demonstrates the three examples of the NDVI maps derived from the three dates of Landsat imagery in the Bumba, Basoko and Kisangani regions, respectively. Here, values from $-$1.0 to 0.1 signify water areas (Congo river and tributaries); values from 0.1 to 0.2 represent river banks; values from 0.2 to 0.3 belong to the class of the non-vegetated areas; pixels with values from 0.3 to 0.4 represent seasonally flooded and inundated areas, wetlands and swamps; values from 0.4 to 0.5 are savannah with sparse trees; pixels of class 0.5 to 0.6 are primarily irrigated agricultural fields with diverse types of crops; bright pixels of the class 0.6 to 0.7 are secondary forests; values from 0.7 to 0.8 are densely vegetated lands and mosaic forests; finally, the areas with NDVI values greater than 0.8 are dense humid tropical forests. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+%We have presented 
+In this study, we demonstrated methods of geospatial information processing and mapping by R that outperform existing traditional software due to the automation of data computation {and} the functionality of {the} high-level language. The approaches of map algebra utilise scripts to process remotely sensed data using interactive steps that are completely different from the built-in functions of the traditional software since they use the syntax of R rather {than} the GUI interface. 
+
+The scripting method of the satellite image processing is presented in this paper with a case study of three cities {of the D.R.C. }located along the Congo River in central Africa. We present a method based on the R programming language that offers an integration of several libraries and applies algorithms for band arithmetics, classification, and computing the NDVI indices {by} unsupervised clustering. A special focus is given to monitoring vegetation {in} the tropical rainforests of Congo. Empirically, we showed that this {R} approach can determine the complexity of landscapes through the classification of pixels, grouping them into 10 land cover classes using selected functions of RSToolbox as operators for band calculations. Moreover, we performed experiments on cartographic data processing with R using a series of Landsat-8 OLI/TIRS images and compared landscape dynamics. We observed land cover changes from 2013 to 2022, which illustrate the deforestation in tropical regions of Congo, as reflected in the NDVI for the three target locations: Bumba, Basoko and Kisangani.
+
+The proposed method of programming for satellite image classification is not a replacement for the state-of-the-art methods of remote sensing data processing{ but an extended methodological approach. }The existing solutions based on GIS can be used as quality and conceptually sound methods of image processing in remote sensing, given proper care in supervised classification. A variety of efficient cases on image processing exist, as reported in many studies. Importantly, the automation of image classification is still a challenging problem due to the presence of complex background noise on the image scene and the restricted functionality of the conventional tools in many GIS. In contrast to the traditional software, R supports deep learning analysis through several packages that enhance data processing and enable semantic segmentation. The examples include the 'deepnet' toolkit and its dependent library 'deepr', which enhances the training or predicting process or fine-tunes machine learning methods with 'RcppDL'. As such, deep learning with R can be used with the aim of simplifying the workflow of satellite image pre- and post-processing, as well as optimising the operations and abstraction of objects during classification, which is required by a variety of remote sensing applications.
+
+{A method of }automatic image processing using R scripts {is demonstrated }for image classification based on the k-means clustering algorithm in the RSToolbox library and band algebra for NDVI computations by the terra package. We consider the algorithms of R by computing the raster data and visualising changes in the current forest stage on the built maps. The experimental results on the vegetation index for the three different datasets taken in the years 2013 and 2022 use attributes of various land cover classes to visualise the changes in the land cover types of the forest regions of central Congo. A scripting approach to image clustering shows that {programming by} R is able to divide the image scene on the defined number of classes using the unsupervised \emph{k}-means algorithm of RSToolbox. We demonstrate a set of images based on high-level classification of the Landsat-8 OLI-TIRS raster imagery. Based on the analysis of these images, we confirm that the distribution of the vegetation in rainforest regions of central Africa experience changes. The driving factors are diverse and include both social and climatic processes, which affect tropical forests and contribute to deforestation. The images are processed automatically and compared for the target regions {located} along the middle part of Congo River Basin. The results of R {programming} demonstrate the probabilistic model of vegetation distribution over the study areas based on robust image {processing}. 
+
+The libraries of the R language offer improved performance in image processing through a powerful framework for raster data processing. In particular, R presents {a }practical application for modelling real-time Earth observation data from space borne satellite missions. In particular, we { }explored the suitability of R programming for processing Landsat-8 OLI-TIRS images that contain 11 bands, which correspond to various wavelengths and 30-m resolution. Unlike the conventional GIS, limited to the default software parameters of the embedded graphical user interface, R proposes flexible command-line solutions. These include {the }extended operational support of bitmap image processing and the diverse suitability of map algebra and computations of bands, as shown in this paper. The limitations of the presented work include the restricted approach to the geometric and spectral characteristics of bands. Future works can be extended towards the semantic segmentation of the detected land cover classes using deep learning methods, as well as the analysis of the topology of classes for object-based image analysis.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6pt} 
+
+\authorcontributions{\textls[-15]{Software, methodology, data curation, formal analysis, validation, visualisation}\linebreak---P.L.; 
+supervision, project administration, conceptualisation, resources, investigation, funding acquisition---O.D.; writing---original draft preparation, P.L.; writing---review and editing, P.L. and O.D. All authors have read and agreed to the published version of the~manuscript.}
+
+\funding{This research was funded by the Editorial Office of the Applied Sciences, Multidisciplinary Digital Publishing Institute (MDPI), by providing a 100\% discount for APC for the publication of this~manuscript.}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Not applicable.} 
+
+\acknowledgments{We thank the three anonymous reviewers for their careful reading, critical reviews, and constructive comments that helped to improve the previous version of the manuscript.}
+
+\conflictsofinterest{The authors declare no conflict of interest.} 
+
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+CPT & Colour Palette Table \\
+DCW & Digital Chart of the World \\
+DEM & Digital Elevation Model \\
+DN & Digital Number \\
+GCP & Ground Control Points \\
+GEBCO & General Bathymetric Chart of the Oceans \\
+GDAL & Geospatial Data Abstraction Library \\
+GIS & Geographic Information System \\
+GLS & Global Land Survey \\
+GloVis & Global Visualization Viewer \\
+GMT & Generic Mapping Tools \\
+GRFM & Global Rain Forest Mapping \\
+Landsat 8-9 OLI/TIRS & Landsat 8--9 Operational Land Imager and Thermal Infrared \\
+LAI & Leaf Area Index \\
+LiDAR & Light Detection and Ranging \\ 
+L1TP & {Level 1 Terrain Precision (Corrected)} \\
+NASA & National Aeronautics and Space Administration \\
+NDVI & Normalized Difference Vegetation Index \\
+NGA & National Geospatial-Intelligence Agency \\
+NIR & Near Infrared \\
+REDD & Reducing Emissions from Deforestation and Forest Degradation \\
+\end{tabular}
+
+
+\noindent 
+\begin{tabular}{@{}ll}
+
+
+RMSE~~~~~~~~~~~~~~~~~~~~~~ ~~~~& Root Mean Square Error \\
+SAR & Synthetic Aperture Radar \\
+SRTM & Shuttle Radar Topography Mission \\
+SWIR & Short Wave Infrared \\
+UAV & Unmanned Aerial Vehicle \\
+USGS & United States Geological Survey \\
+UTM & Universal Transverse Mercator \\
+WRS & Worldwide Reference System \\
+\end{tabular}
+}
+
+\begin{adjustwidth}{-\extralength}{0cm}
+\reftitle{References}
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+
+\begin{thebibliography}{999}
+
+\bibitem[Lillesand \em{et~al.}(2015)Lillesand, Kiefer, and Chipman]{Lillesand}
+Lillesand, T.; Kiefer, R.W.; Chipman, J.
+\newblock {\em Remote Sensing and Image Interpretation}, 7th ed.; Wiley:  {Hoboken, NJ, USA,} %MDPI: Newly added information, please confirm
+  2015.
+
+\bibitem[Manakos and Braun(2014)]{Manakos}
+Manakos, I.; Braun, M., {Land Use and Land Cover Mapping in Europe. Practices
+  \& Trends}.
+\newblock In {\em Remote Sensing and Digital Image Processing}; Springer:
+  Dordrecht, The Netherlands,  2014; Volume~18, p. 436.
+\newblock {{https://doi.org/10.1007/978-94-007-7969-3}}.
+
+\bibitem[Sikuzani \em{et~al.}(2020)Sikuzani, Muteya, and
+  Bogaert]{SIKUZANI2020e01333}
+Sikuzani, Y.U.; Muteya, H.K.; Bogaert, J.
+\newblock Miombo woodland, an ecosystem at risk of disappearance in the Lufira
+  Biosphere Reserve (Upper Katanga, DR Congo)? A 39-years analysis based on
+  Landsat images.
+\newblock {\em Glob. Ecol. Conserv.} {\bf 2020}, {\em 24},~e01333.
+\newblock {{https://doi.org/10.1016/j.gecco.2020.e01333}}.
+
+\bibitem[Duveiller \em{et~al.}(2008)Duveiller, Defourny, Desclée, and
+  Mayaux]{DUVEILLER20081969}
+Duveiller, G.; Defourny, P.; Desclée, B.; Mayaux, P.
+\newblock Deforestation in Central Africa: Estimates at regional, national and
+  landscape levels by advanced processing of systematically-distributed Landsat
+  extracts.
+\newblock {\em Remote Sens. Environ.} {\bf 2008}, {\em
+  112},~{1969--1981.}
+\newblock {{https://doi.org/10.1016/j.rse.2007.07.026}}.
+
+\bibitem[Ygorra \em{et~al.}(2021)Ygorra, Frappart, Wigneron, Moisy, Catry,
+  Baup, Hamunyela, and Riazanoff]{9554698}
+Ygorra, B.; Frappart, F.; Wigneron, J.P.; Moisy, C.; Catry, T.; Baup, F.;
+  Hamunyela, E.; Riazanoff, S.
+\newblock Deforestation Monitoring Using Sentinel-1 SAR Images in Humid
+  Tropical Areas.
+\newblock In Proceedings of the 2021 IEEE International Geoscience and Remote
+  Sensing Symposium IGARSS,  {Brussels, Belgium, 11--16 July 2021;} 
+ pp. 5957--5960.
+\newblock {{https://doi.org/10.1109/IGARSS47720.2021.9554698}}.
+
+\bibitem[Lemenkova(2020)]{Lemenkova202021}
+Lemenkova, P.
+\newblock {Sentinel-2 for High Resolution Mapping of Slope-Based Vegetation
+  Indices Using Machine Learning by SAGA GIS}.
+\newblock {\em Transylv. Rev. Syst. Ecol. Res.}
+  {\bf 2020}, {\em 22},~17--34.
+\newblock {{https://doi.org/10.2478/trser-2020-0015}}.
+
+\bibitem[Dalimier \em{et~al.}(2021)Dalimier, Claverie, Goffart, Jungers,
+  Lamarche, De~Maet, and Defourny]{9553905}
+Dalimier, J.; Claverie, M.; Goffart, B.; Jungers, Q.; Lamarche, C.; De~Maet,
+  T.; Defourny, P.
+\newblock Characterizing the Congo Basin Forests by a Detailed Forest Typology
+  Enriched with Forest Biophysical Variables.
+\newblock In Proceedings of the 2021 IEEE International Geoscience and Remote
+  Sensing Symposium IGARSS,  {Brussels, Belgium, 11--16 July 2021;}  pp. 673--676.
+\newblock {{https://doi.org/10.1109/IGARSS47720.2021.9553905}}.
+
+\bibitem[Zhang \em{et~al.}(2021)Zhang, Ling, Wang, Foody, Boyd, Li, Du, and
+  Atkinson]{ZHANG2021112470}
+Zhang, Y.; Ling, F.; Wang, X.; Foody, G.M.; Boyd, D.S.; Li, X.; Du, Y.;
+  Atkinson, P.M.
+\newblock Tracking small-scale tropical forest disturbances: Fusing the Landsat
+  and Sentinel-2 data record.
+\newblock {\em Remote Sens. Environ.} {\bf 2021}, {\em 261},~112470.
+\newblock {{https://doi.org/10.1016/j.rse.2021.112470}}.
+
+\bibitem[Chen \em{et~al.}(2021)Chen, Tsendbazar, Hamunyela, Verbesselt, and
+  Herold]{CHEN2021102386}
+Chen, N.; Tsendbazar, N.E.; Hamunyela, E.; Verbesselt, J.; Herold, M.
+\newblock Sub-annual tropical forest disturbance monitoring using harmonized
+  Landsat and Sentinel-2 data.
+\newblock {\em Int. J. Appl. Earth Obs. Geoinf.} {\bf 2021}, {\em 102},~102386.
+\newblock {{https://doi.org/10.1016/j.jag.2021.102386}}.
+
+\bibitem[Verhegghen \em{et~al.}(2015)Verhegghen, Hugh, and Achard]{7326202}
+Verhegghen, A.; Hugh, E.; Achard, F.
+\newblock Assessing forest degradation from selective logging using time series
+  of fine spatial resolution imagery in Republic of Congo.
+\newblock In Proceedings of the 2015 IEEE International Geoscience and Remote
+  Sensing Symposium (IGARSS), {Milan, Italy, 26--31 July 2015;}  pp. 2044--2047.
+\newblock {{https://doi.org/10.1109/IGARSS.2015.7326202}}.
+
+\bibitem[Haarpaintner \em{et~al.}(2012)Haarpaintner, Einzmann, Pedrazzani,
+  Mateos San~Juan, Gómez~Giménez, Heinzel, Enßle, and Mane]{6352722}
+Haarpaintner, J.; Einzmann, K.; Pedrazzani, D.; Mateos San~Juan, M.;
+  Gómez~Giménez, M.; Heinzel, J.; Enßle, F.; Mane, L.
+\newblock Tropical forest remote sensing services for the Democratic Republic
+  Of Congo case inside the EU FP7 ‘ReCover’ project (1st iteration).
+\newblock In Proceedings of the 2012 IEEE International Geoscience and Remote
+  Sensing Symposium, {Munich, Germany, 22--27 July  2012;}  pp.~6392--6395.
+\newblock {{https://doi.org/10.1109/IGARSS.2012.6352722}}.
+
+\bibitem[Sakurai-Amano \em{et~al.}(2002)Sakurai-Amano, Onuki, and
+  Takagi]{1027205}
+Sakurai-Amano, T.; Onuki, S.; Takagi, M.
+\newblock Automatic extraction of rivers in tropical rain forests from JERS-1
+  SAR images using spectral and spatial information.
+\newblock In Proceedings of the IEEE International Geoscience and Remote
+  Sensing Symposium, {Toronto, ON, Canada, 24--28 June 2002;}  Volume~6, pp. 3429--3431.
+\newblock {{https://doi.org/10.1109/IGARSS.2002.1027205}}.
+
+\bibitem[Floury \em{et~al.}(1995)Floury, {Le Toan}, Jeanjean, Beaudoin, and
+  Hamel]{520569}
+Floury, N.; {Le Toan}, T.; Jeanjean, H.; Beaudoin, A.; Hamel, O.
+\newblock {L and C-band multipolarized backscatter responses of eucalyptus
+  plantations in Congo}.
+\newblock In Proceedings of the 1995 International Geoscience and Remote
+  Sensing Symposium, IGARSS '95. Quantitative Remote Sensing for Science and
+  Applications, {Firenze, Italy, 10--14 July 1995;}  Volume~1, pp. 728--730.
+\newblock {{https://doi.org/10.1109/IGARSS.1995.520569}}.
+
+\bibitem[Zhang \em{et~al.}(2021)Zhang, Bauters, Boeckx, and
+  Van~Oost]{rs13183777}
+Zhang, H.; Bauters, M.; Boeckx, P.; Van~Oost, K.
+\newblock Mapping Canopy Heights in Dense Tropical Forests Using Low-Cost
+  UAV-Derived Photogrammetric Point Clouds and Machine Learning Approaches.
+\newblock {\em Remote Sens.} {\bf 2021}, {\em 13}, 3777.
+\newblock {{https://doi.org/10.3390/rs13183777}}.
+
+\bibitem[Jiménez \em{et~al.}(2020)Jiménez, Hernández, and
+  Rodríguez-Espinosa]{rs12172705}
+Jiménez, A.; Hernández, A.J.; Rodríguez-Espinosa, V.M.
+\newblock Integration of Geospatial Tools and Multi-source Geospatial Data to
+  Evaluate the Tropical Forest Cover Change in Central America and Its
+  Methodological Replicability in Brazil and the DRC.
+\newblock {\em Remote Sens.} {\bf 2020}, {\em 12}, 2705.
+\newblock {{https://doi.org/10.3390/rs12172705}}.
+
+\bibitem[Hansen \em{et~al.}(2016)Hansen, Potapov, Goetz, Turubanova, Tyukavina,
+  Krylov, Kommareddy, and Egorov]{HANSEN2016221}
+Hansen, M.C.; Potapov, P.V.; Goetz, S.J.; Turubanova, S.; Tyukavina, A.;
+  Krylov, A.; Kommareddy, A.; Egorov, A.
+\newblock Mapping tree height distributions in Sub-Saharan Africa using Landsat
+  7 and 8 data.
+\newblock {\em Remote Sens. Environ.} {\bf 2016}, {\em 185},~221--232. {{https://doi.org/10.1016/j.rse.2016.02.023}}.
+
+\bibitem[De~Grandi \em{et~al.}(2015)De~Grandi, Mitchard, Woodhouse, Verhegghen,
+  and Muirhead]{7326141}
+De~Grandi, E.C.; Mitchard, E.T.A.; Woodhouse, I.H.; Verhegghen, A.; Muirhead,
+  F.
+\newblock Statistics of TanDEM-X DSM, coherence and backscatter for the
+  characterization of tropical forest structural configuration.
+\newblock In Proceedings of the 2015 IEEE International Geoscience and Remote
+  Sensing Symposium (IGARSS),   {Milan, Italy, 26--31 July 2015;}  pp. 1805--1808.
+\newblock {{https://doi.org/10.1109/IGARSS.2015.7326141}}.
+
+\bibitem[Dalponte \em{et~al.}(2020)Dalponte, Marzini, Solano-Correa, Tonon,
+  Vescovo, and Gianelle]{DALPONTE2020102206}
+Dalponte, M.; Marzini, S.; Solano-Correa, Y.T.; Tonon, G.; Vescovo, L.;
+  Gianelle, D.
+\newblock Mapping forest windthrows using high spatial resolution multispectral
+  satellite images.
+\newblock {\em Int. J. Appl. Earth Obs. Geoinf.} {\bf 2020}, {\em 93},~102206.
+\newblock {{https://doi.org/10.1016/j.jag.2020.102206}}.
+
+\bibitem[Huang \em{et~al.}(2022)Huang, Min, Ding, Liu, Hu, Ni, and
+  Shen]{HUANG2022100006}
+Huang, W.; Min, W.; Ding, J.; Liu, Y.; Hu, Y.; Ni, W.; Shen, H.
+\newblock Forest height mapping using inventory and multi-source satellite data
+  over Hunan Province in southern China.
+\newblock {\em For. Ecosyst.} {\bf 2022}, {\em 9},~100006.
+\newblock {{https://doi.org/10.1016/j.fecs.2022.100006}}.
+
+\bibitem[Wang \em{et~al.}(2022)Wang, Qiu, Wan, Cao, and Zhang]{WANG2022113021}
+Wang, D.; Qiu, P.; Wan, B.; Cao, Z.; Zhang, Q.
+\newblock Mapping a- and b-diversity of mangrove forests with multispectral and
+  hyperspectral images.
+\newblock {\em Remote Sens. Environ.} {\bf 2022}, {\em 275},~113021.
+\newblock {{https://doi.org/10.1016/j.rse.2022.113021}}.
+
+\bibitem[Huete \em{et~al.}(2002)Huete, Didan, Miura, Rodriguez, Gao, and
+  Ferreira]{HUETE2002195}
+Huete, A.; Didan, K.; Miura, T.; Rodriguez, E.P.; Gao, X.; Ferreira, L.G.
+\newblock Overview of the radiometric and biophysical performance of the MODIS
+  vegetation indices.
+\newblock {\em Remote Sens. Environ.} {\bf 2002}, {\em 83},~195--213. 
+  {{https://doi.org/10.1016/S0034-4257(02)00096-2}}.
+
+\bibitem[Jiang \em{et~al.}(2008)Jiang, Huete, Didan, and Miura]{JIANG20083833}
+Jiang, Z.; Huete, A.R.; Didan, K.; Miura, T.
+\newblock Development of a two-band enhanced vegetation index without a blue
+  band.
+\newblock {\em Remote Sens. Environ.} {\bf 2008}, {\em
+  112},~3833--3845.
+\newblock {{https://doi.org/10.1016/j.rse.2008.06.006}}.
+
+\bibitem[Huete(1988)]{HUETE1988295}
+Huete, A.R.
+\newblock A soil-adjusted vegetation index (SAVI).
+\newblock {\em Remote Sens. Environ.} {\bf 1988}, {\em 25},~295--309.
+\newblock {{https://doi.org/10.1016/0034-4257(88)90106-X}}.
+
+\bibitem[Soudani \em{et~al.}(2012)Soudani, Hmimina, Delpierre, Pontailler,
+  Aubinet, Bonal, Caquet, {de Grandcourt}, Burban, Flechard, Guyon, Granier,
+  Gross, Heinesh, Longdoz, Loustau, Moureaux, Ourcival, Rambal, {Saint André},
+  and Dufrêne]{SOUDANI2012234}
+Soudani, K.; Hmimina, G.; Delpierre, N.; Pontailler, J.Y.; Aubinet, M.; Bonal,
+  D.; Caquet, B.; {de Grandcourt}, A.; Burban, B.; Flechard, C.;  et~al.
+\newblock Ground-based Network of NDVI measurements for tracking temporal
+  dynamics of canopy structure and vegetation phenology in different biomes.
+\newblock {\em Remote Sens. Environ.} {\bf 2012}, {\em 123},~234--245.
+\newblock {{https://doi.org/10.1016/j.rse.2012.03.012}}.
+
+\bibitem[Lemenkova(2020)]{Lemenkova202019}
+Lemenkova, P.
+\newblock {Hyperspectral Vegetation Indices Calculated by Qgis Using Landsat Tm
+  Image: A Case Study of Northern Iceland}.
+\newblock {\em Adv. Res. Life Sci.} {\bf 2020}, {\em 4},~70--78.
+\newblock {{https://doi.org/10.2478/arls-2020-0021}}.
+
+\bibitem[Seaquist \em{et~al.}(2002)Seaquist, Chappell, and Eklundh]{1026428}
+Seaquist, J.W.; Chappell, A.; Eklundh, L.
+\newblock Exploring and improving NOAA AVHRR NDVI image quality for African
+  drylands.
+\newblock In Proceedings of the IEEE International Geoscience and Remote
+  Sensing Symposium,  {Toronto, ON, Canada, 24--28 June 2002;}   Volume~4, pp. 2006--2008.
+\newblock {{https://doi.org/10.1109/IGARSS.2002.1026428}}.
+
+\bibitem[Hmimina \em{et~al.}(2013)Hmimina, Dufrêne, Pontailler, Delpierre,
+  Aubinet, Caquet, {de Grandcourt}, Burban, Flechard, Granier, Gross, Heinesch,
+  Longdoz, Moureaux, Ourcival, Rambal, {Saint André}, and
+  Soudani]{HMIMINA2013145}
+Hmimina, G.; Dufrêne, E.; Pontailler, J.Y.; Delpierre, N.; Aubinet, M.;
+  Caquet, B.; {de Grandcourt}, A.; Burban, B.; Flechard, C.; Granier, A.;
+  et~al.
+\newblock Evaluation of the potential of MODIS satellite data to predict
+  vegetation phenology in different biomes: An investigation using ground-based
+  NDVI measurements.
+\newblock {\em Remote Sens. Environ.} {\bf 2013}, {\em 132},~145--158.
+\newblock {{https://doi.org/10.1016/j.rse.2013.01.010}}.
+
+\bibitem[Tegegne \em{et~al.}(2016)Tegegne, Lindner, Fobissie, and
+  Kanninen]{TEGEGNE2016312}
+Tegegne, Y.T.; Lindner, M.; Fobissie, K.; Kanninen, M.
+\newblock {Evolution of drivers of deforestation and forest degradation in the
+  Congo Basin forests: Exploring possible policy options to address forest
+  loss}.
+\newblock {\em Land Use Policy} {\bf 2016}, {\em 51},~312--324.
+\newblock {{https://doi.org/10.1016/j.landusepol.2015.11.024}}.
+
+\bibitem[Kasekete \em{et~al.}(2022)Kasekete, Ligot, Mweru, Drouet, Rousseau,
+  Moango, and Bourland]{f13091508}
+Kasekete, D.K.; Ligot, G.; Mweru, J.P.M.; Drouet, T.; Rousseau, M.; Moango, A.;
+  Bourland, N.
+\newblock Growth, Productivity, Biomass and Carbon Stock in Eucalyptus saligna
+  and Grevillea robusta Plantations in North Kivu, Democratic Republic of the
+  Congo.
+\newblock {\em Forests} {\bf 2022}, {\em 13}, 1508.
+\newblock {{https://doi.org/10.3390/f13091508}}.
+
+\bibitem[Brandt \em{et~al.}(2016)Brandt, Nolte, and Agrawal]{BRANDT201615}
+Brandt, J.S.; Nolte, C.; Agrawal, A.
+\newblock Deforestation and timber production in Congo after implementation of
+  sustainable forest management policy.
+\newblock {\em Land Use Policy} {\bf 2016}, {\em 52},~15--22.
+\newblock {{https://doi.org/10.1016/j.landusepol.2015.11.028}}.
+
+\bibitem[Tritsch \em{et~al.}(2020)Tritsch, {Le Velly}, Mertens, Meyfroidt,
+  Sannier, Makak, and Houngbedji]{TRITSCH2020106660}
+Tritsch, I.; {Le Velly}, G.; Mertens, B.; Meyfroidt, P.; Sannier, C.; Makak,
+  J.S.; Houngbedji, K.
+\newblock Do forest-management plans and FSC certification help avoid
+  deforestation in the Congo Basin?
+\newblock {\em Ecol. Econ.} {\bf 2020}, {\em 175},~106660.
+\newblock {{https://doi.org/10.1016/j.ecolecon.2020.106660}}.
+
+\bibitem[Li \em{et~al.}(2015)Li, De~Pinto, Ulimwengu, You, and
+  Robertson]{Lietal2015}
+Li, M.; De~Pinto, A.; Ulimwengu, J.M.; You, L.; Robertson, R.D.
+\newblock {Impacts of Road Expansion on Deforestation and Biological Carbon
+  Loss in the Democratic Republic of Congo}.
+\newblock {\em Environ. Resour. Econ.} {\bf 2015}, {\em
+  60},~433--469.
+\newblock {{https://doi.org/10.1007/s10640-014-9775-y}}.
+
+\bibitem[Iloweka(2004)]{Iloweka}
+Iloweka, E.
+\newblock {The Deforestation of Rural Areas in the Lower Congo Province}.
+\newblock {\em Environ. Monit. Assess.} {\bf 2004}, {\em
+  99},~245--250.
+\newblock {{https://doi.org/10.1007/s10661-004-4028-0}}.
+
+\bibitem[Aquilas \em{et~al.}(2022)Aquilas, Mukong, Kimengsi, and
+  Ngangnchi]{AQUILAS2022100553}
+Aquilas, N.A.; Mukong, A.K.; Kimengsi, J.N.; Ngangnchi, F.H.
+\newblock Economic activities and deforestation in the Congo basin: An
+  environmental kuznets curve framework analysis.
+\newblock {\em Environ. Challenges} {\bf 2022}, {\em 8},~100553.
+\newblock {{https://doi.org/10.1016/j.envc.2022.100553}}.
+
+\bibitem[Hufkens \em{et~al.}(2020)Hufkens, de~Haulleville, Kearsley, Jacobsen,
+  Beeckman, Stoffelen, Vandelook, Meeus, Amara, Van~Hirtum, Van~den Bulcke,
+  Verbeeck, and Wingate]{rs12040638}
+Hufkens, K.; de~Haulleville, T.; Kearsley, E.; Jacobsen, K.; Beeckman, H.;
+  Stoffelen, P.; Vandelook, F.; Meeus, S.; Amara, M.; Van~Hirtum, L.;  et~al.
+\newblock {Historical Aerial Surveys Map Long-Term Changes of Forest Cover and
+  Structure in the Central Congo Basin}.
+\newblock {\em Remote Sens.} {\bf 2020}, {\em 12}, 638.
+\newblock {{https://doi.org/10.3390/rs12040638}}.
+
+\bibitem[Kabuanga \em{et~al.}(2021)Kabuanga, Kankonda, Saqalli, Maestripieri,
+  Bilintoh, Mweru, Liama, Nishuli, and Mané]{land10101042}
+Kabuanga, J.M.; Kankonda, O.M.; Saqalli, M.; Maestripieri, N.; Bilintoh, T.M.;
+  Mweru, J.P.M.; Liama, A.B.; Nishuli, R.; Mané, L.
+\newblock Historical Changes and Future Trajectories of Deforestation in the
+  Ituri-Epulu-Aru Landscape (Democratic Republic of the Congo).
+\newblock {\em Land} {\bf 2021}, {\em 10}, 1042.
+\newblock {{https://doi.org/10.3390/land10101042}}.
+
+\bibitem[Zhang \em{et~al.}(2005)Zhang, Devers, Desch, Justice, and
+  Townshend]{Zhangetal2005}
+Zhang, Q.; Devers, D.; Desch, A.; Justice, C.O.; Townshend, J.
+\newblock {Mapping tropical deforestation in Central Africa}.
+\newblock {\em Environ. Monit. Assess.} {\bf 2005}, {\em
+  101},~69--83.
+\newblock {{https://doi.org/10.1007/s10661-005-9132-2}}.
+
+\bibitem[Mukenza \em{et~al.}(2022)Mukenza, Muteya, Nghonda, Sambiéni,
+  Malaisse, Kaleba, Bogaert, and Sikuzani]{land11091541}
+Mukenza, M.M.; Muteya, H.K.; Nghonda, D.D.N.; Sambiéni, K.R.; Malaisse, F.;
+  Kaleba, S.C.; Bogaert, J.; Sikuzani, Y.U.
+\newblock Uncontrolled Exploitation of Pterocarpus tinctorius Welw. and
+  Associated Landscape Dynamics in the Kasenga Territory: Case of the Rural
+  Area of Kasomeno (DR Congo).
+\newblock {\em Land} {\bf 2022}, {\em 11}.
+\newblock {{https://doi.org/10.3390/land11091541}}.
+
+\bibitem[Shapiro \em{et~al.}(2021)Shapiro, Grantham, Aguilar-Amuchastegui,
+  Murray, Gond, Bonfils, and Rickenbach]{SHAPIRO2021107268}
+Shapiro, A.C.; Grantham, H.S.; Aguilar-Amuchastegui, N.; Murray, N.J.; Gond,
+  V.; Bonfils, D.; Rickenbach, O.
+\newblock Forest condition in the Congo Basin for the assessment of ecosystem
+  conservation status.
+\newblock {\em Ecol. Indic.} {\bf 2021}, {\em 122},~107268.
+\newblock {{https://doi.org/10.1016/j.ecolind.2020.107268}}.
+
+\bibitem[Chuma \em{et~al.}(2021)Chuma, Mondo, Ndeko, Mugumaarhahama, Bagula,
+  Blaise, Valérie, Jacques, Karume, and Mushagalusa]{CHUMA2021100083}
+Chuma, G.B.; Mondo, J.M.; Ndeko, A.B.; Mugumaarhahama, Y.; Bagula, E.M.;
+  Blaise, M.; Valérie, M.; Jacques, K.; Karume, K.; Mushagalusa, G.N.
+\newblock Forest cover affects gully expansion at the tropical watershed scale:
+  Case study of Luzinzi in Eastern DR Congo.
+\newblock {\em Trees, For. People} {\bf 2021}, {\em 4},~100083.
+\newblock {{https://doi.org/10.1016/j.tfp.2021.100083}}.
+
+\bibitem[Westman \em{et~al.}(1989)Westman, Strong, and Wilcox]{Westmanetal1989}
+Westman, W.E.; Strong, L.L.; Wilcox, B.A.
+\newblock {Tropical deforestation and species endangerment: The role of remote
+  sensing}.
+\newblock {\em Landsc. Ecol.} {\bf 1989}, {\em 3},~97--109.
+\newblock {{https://doi.org/10.1007/BF00131173}}.
+
+\bibitem[Ma \em{et~al.}(2012)Ma, Song, Wang, and Hua]{6350700}
+Ma, H.; Song, J.; Wang, J.; Hua, Y.
+\newblock Comparison of the inversion ability in extrapolating forest canopy
+  height by integration of LiDAR data and different optical remote sensing
+  products.
+\newblock In Proceedings of the 2012 IEEE International Geoscience and Remote
+  Sensing Symposium,   {Munich, Germany, 22--27 July  2012;} pp. 3363--3366.
+\newblock {{https://doi.org/10.1109/IGARSS.2012.6350700}}.
+
+\bibitem[Keil \em{et~al.}(1999)Keil, Akgoz, Carl, Forster, Hausler, Johlige,
+  Lautner, and Martin]{773475}
+Keil, M.; Akgoz, E.; Carl, S.; Forster, B.; Hausler, T.; Johlige, A.; Lautner,
+  M.; Martin, K.
+\newblock Use of SIR-C/X-SAR and Landsat TM data for vegetation mapping in the
+  Bavarian Forest national park and in the Ore Mountains.
+\newblock In Proceedings of the IEEE 1999 International Geoscience and Remote
+  Sensing Symposium, IGARSS'99 (Cat. No.99CH36293), {Hamburg, Germany, 28 June 1999--2 July 1999;}  Volume~1, pp.
+  293--295.
+\newblock {{https://doi.org/10.1109/IGARSS.1999.773475}}.
+
+\bibitem[Pu and Landry(2019)]{PU2019268}
+Pu, R.; Landry, S.
+\newblock Evaluating seasonal effect on forest leaf area index mapping using
+  multi-seasonal high resolution satellite pléiades imagery.
+\newblock {\em Int. J. Appl. Earth Obs. Geoinf.} {\bf 2019}, {\em 80},~268--279.
+\newblock {{https://doi.org/10.1016/j.jag.2019.04.020}}.
+
+\bibitem[Hoan \em{et~al.}(2011)Hoan, Tateishi, Bayan, Ngigi, and Lan]{6049235}
+Hoan, N.T.; Tateishi, R.; Bayan, A.; Ngigi, T.G.; Lan, M.
+\newblock Improving tropical forest mapping using combination of optical and
+  microwave data of ALOS.
+\newblock In Proceedings of the 2011 IEEE International Geoscience and Remote
+  Sensing Symposium, {Vancouver, BC, Canada,  24--29 July 2011;}  pp. 736--739.
+\newblock {{https://doi.org/10.1109/IGARSS.2011.6049235}}.
+
+\bibitem[Ohmann \em{et~al.}(2014)Ohmann, Gregory, and Roberts]{OHMANN20143}
+Ohmann, J.L.; Gregory, M.J.; Roberts, H.M.
+\newblock Scale considerations for integrating forest inventory plot data and
+  satellite image data for regional forest mapping.
+\newblock {\em Remote Sens. Environ.} {\bf 2014}, {\em 151},~3--15. {{https://doi.org/10.1016/j.rse.2013.08.048}}.
+
+\bibitem[Dupuis \em{et~al.}(2020)Dupuis, Lejeune, Michez, and
+  Fayolle]{rs12071087}
+Dupuis, C.; Lejeune, P.; Michez, A.; Fayolle, A.
+\newblock How Can Remote Sensing Help Monitor Tropical Moist Forest
+  Degradation?—A~Systematic Review.
+\newblock {\em Remote Sens.} {\bf 2020}, {\em 12}, 1087.
+\newblock {{https://doi.org/10.3390/rs12071087}}.
+
+\bibitem[Lambin \em{et~al.}(2003)Lambin, Geist, and Lepers]{lambin2003dynamics}
+Lambin, E.F.; Geist, H.J.; Lepers, E.
+\newblock Dynamics of land-use and land-cover change in tropical regions.
+\newblock {\em Annu. Rev. Environ. Resour.} {\bf 2003}, {\em
+  28},~205--241.\newpage
+
+\bibitem[De~Grandi \em{et~al.}(2001)De~Grandi, Mayaux, Massart, Baraldi, and
+  Sgrenzaroli]{976841}
+De~Grandi, G.F.; Mayaux, P.; Massart, M.; Baraldi, A.; Sgrenzaroli, M.
+\newblock A vegetation map of the Central Congo basin derived from microwave
+  and optical remote sensing data using a variable resolution classification
+  approach.
+\newblock In Proceedings of the Geoscience and Remote Sensing Symposium, 2001. IGARSS '01, \hl{Sydney, NSW, Australia, 9--13 July 2001;} %MDPI: We added the location and date of the conference. Please confirm.
+ Volume~3, pp. 1350--1352.
+\newblock {{https://doi.org/10.1109/IGARSS.2001.976841}}.
+
+\bibitem[Lamulamu \em{et~al.}(2022)Lamulamu, Ploton, Birigazzi, Xu, Saatchi,
+  and Kibambe~Lubamba]{rs14164126}
+Lamulamu, A.; Ploton, P.; Birigazzi, L.; Xu, L.; Saatchi, S.; Kibambe~Lubamba,
+  J.P.
+\newblock Assessing the Predictive Power of Democratic Republic of Congo's
+  National Spaceborne Biomass Map over Independent Test Samples.
+\newblock {\em Remote Sens.} {\bf 2022}, {\em 14}, 4126.
+\newblock {{https://doi.org/10.3390/rs14164126}}.
+
+\bibitem[Laporte and Lin(2003)]{1294510}
+Laporte, N.; Lin, T.S.
+\newblock Monitoring logging in the tropical forest of Republic of Congo with
+  Landsat imagery.
+\newblock In Proceedings of the {IGARSS 2003. 2003 IEEE International
+  Geoscience and Remote Sensing Symposium. Proceedings (IEEE Cat.
+  No.03CH37477)},  \hl{Toulouse, France, 21--25 July 2003;} %MDPI: We added the location and date of the conference. Please confirm.
+ Volume~4, pp. 2565--2567.
+\newblock {{https://doi.org/10.1109/IGARSS.2003.1294510}}.
+
+\bibitem[Zhang \em{et~al.}(2006)Zhang, Justice, Jiang, Brunner, and
+  Wilkie]{Zhangetal2006}
+Zhang, Q.; Justice, C.O.; Jiang, M.; Brunner, J.; Wilkie, D.S.
+\newblock {A GIS-based assessment on the vulnerability and future extent of the
+  tropical forests of the Congo basin}.
+\newblock {\em Environ. Monit. Assess.} {\bf 2006}, {\em
+  114},~107--121.
+\newblock {{https://doi.org/10.1007/s10661-006-2015-3}}.
+
+\bibitem[Kim \em{et~al.}(2014)Kim, Sexton, Noojipady, Huang, Anand, Channan,
+  Feng, and Townshend]{KIM2014178}
+Kim, D.H.; Sexton, J.O.; Noojipady, P.; Huang, C.; Anand, A.; Channan, S.;
+  Feng, M.; Townshend, J.R.
+\newblock Global, Landsat-based forest-cover change from 1990 to 2000.
+\newblock {\em Remote Sens. Environ.} {\bf 2014}, {\em 155},~178--193.
+\newblock {{https://doi.org/10.1016/j.rse.2014.08.017}}.
+
+\bibitem[Haarpaintner and Hindberg(2019)]{rs11242999}
+Haarpaintner, J.; Hindberg, H.
+\newblock Multi-Temporal and Multi-Frequency SAR Analysis for Forest Land Cover
+  Mapping of the Mai-Ndombe District (Democratic Republic of Congo).
+\newblock {\em Remote Sens.} {\bf 2019}, {\em 11}, 2999.
+\newblock {{https://doi.org/10.3390/rs11242999}}.
+
+\bibitem[Simard \em{et~al.}(2000)Simard, Saatchi, and DeGrandi]{858324}
+Simard, M.; Saatchi, S.; DeGrandi, G.
+\newblock Comparison of a decision tree and maximum likelihood classifiers:
+  application to SAR image of tropical forest.
+\newblock In Proceedings of the IGARSS 2000. IEEE 2000 International Geoscience
+  and Remote Sensing Symposium. Taking the Pulse of the Planet: The Role of
+  Remote Sensing in Managing the Environment. Proceedings (Cat. No.00CH37120), \hl{Honolulu, HI, USA, 24--28 July 2000;} %MDPI: We added the location and date of the conference. Please confirm.
+ Volume~5, pp. 2129--2130.
+\newblock {{https://doi.org/10.1109/IGARSS.2000.858324}}.
+
+\bibitem[Antropov \em{et~al.}(2015)Antropov, Rauste, Seifert, and
+  Häme]{7326669}
+Antropov, O.; Rauste, Y.; Seifert, F.M.; Häme, T.
+\newblock Selective logging of tropical forests observed using L- and C-band
+  SAR satellite data.
+\newblock In Proceedings of the 2015 IEEE International Geoscience and Remote
+  Sensing Symposium (IGARSS),  \hl{Milan, Italy, 26--31 July 2015;} %MDPI: We added the location and date of the conference. Please confirm.
+   pp. 3870--3873.
+\newblock {{https://doi.org/10.1109/IGARSS.2015.7326669}}.
+
+\bibitem[Einzmann \em{et~al.}(2012)Einzmann, Haarpaintner, and Larsen]{6352093}
+Einzmann, K.; Haarpaintner, J.; Larsen, Y.
+\newblock Forest monitoring in Congo Basin with combined use of SAR C- \&
+  L-band.
+\newblock In Proceedings of the 2012 IEEE International Geoscience and Remote
+  Sensing Symposium, \hl{Munich, Germany, 22--27 July  2012;} %MDPI: We added the location and date of the conference. Please confirm.
+ pp. 6573--6576.
+\newblock {{https://doi.org/10.1109/IGARSS.2012.6352093}}.
+
+\bibitem[Deutscher \em{et~al.}(2017)Deutscher, Gutjahr, Perko, Raggam,
+  Hirschmugl, and Schardt]{8035264}
+Deutscher, J.; Gutjahr, K.; Perko, R.; Raggam, H.; Hirschmugl, M.; Schardt, M.
+\newblock Humid tropical forest monitoring with multi-temporal L-, C- and
+  X-band SAR data.
+\newblock In Proceedings of the 2017 9th International Workshop on the Analysis
+  of Multitemporal Remote Sensing Images (MultiTemp), \hl{Brugge, Belgium, 27--29 June 2017;} %MDPI: We added the location and date of the conference. Please confirm.
+ pp. 1--4.
+\newblock {{https://doi.org/10.1109/Multi-Temp.2017.8035264}}.
+
+\bibitem[Hansen \em{et~al.}(2008)Hansen, Roy, Lindquist, Adusei, Justice, and
+  Altstatt]{HANSEN20082495}
+Hansen, M.C.; Roy, D.P.; Lindquist, E.; Adusei, B.; Justice, C.O.; Altstatt, A.
+\newblock A method for integrating MODIS and Landsat data for systematic
+  monitoring of forest cover and change in the Congo Basin.
+\newblock {\em Remote Sens. Environ.} {\bf 2008}, {\em
+  112},~2495--2513. {{https://doi.org/10.1016/j.rse.2007.11.012}}.
+
+\bibitem[Zhang \em{et~al.}(2019)Zhang, Ling, Foody, Ge, Boyd, Li, Du, and
+  Atkinson]{ZHANG201974}
+Zhang, Y.; Ling, F.; Foody, G.M.; Ge, Y.; Boyd, D.S.; Li, X.; Du, Y.; Atkinson,
+  P.M.
+\newblock Mapping annual forest cover by fusing PALSAR/PALSAR-2 and MODIS NDVI
+  during 2007–2016.
+\newblock {\em Remote Sens. Environ.} {\bf 2019}, {\em 224},~74--91.
+\newblock {{https://doi.org/10.1016/j.rse.2019.01.038}}.
+
+\bibitem[Trujillo-Jiménez \em{et~al.}(2022)Trujillo-Jiménez, Liberoff,
+  Pessacg, Pacheco, Díaz, and Flaherty]{TRUJILLOJIMENEZ2022100703}
+Trujillo-Jiménez, M.A.; Liberoff, A.L.; Pessacg, N.; Pacheco, C.; Díaz, L.;
+  Flaherty, S.
+\newblock SatRed: New classification land use/land cover model based on
+  multi-spectral satellite images and neural networks applied to a semiarid
+  valley of Patagonia.
+\newblock {\em Remote Sens. Appl. Soc. Environ.} {\bf
+  2022}, {\em 26},~100703.
+\newblock {{https://doi.org/10.1016/j.rsase.2022.100703}}.
+
+\bibitem[{van Strien} and Grêt-Regamey(2022)]{VANSTRIEN2022105462}
+{van Strien}, M.J.; Grêt-Regamey, A.
+\newblock Unsupervised deep learning of landscape typologies from remote
+  sensing images and other continuous spatial data.
+\newblock {\em Environ. Model. Softw.} {\bf 2022}, {\em
+  155},~105462.
+\newblock {{https://doi.org/10.1016/j.envsoft.2022.105462}}.
+
+\bibitem[Rodrigues \em{et~al.}(2022)Rodrigues, Malan, Ochoa, Vanneschi, and
+  Silva]{RODRIGUES2022711}
+Rodrigues, N.M.; Malan, K.M.; Ochoa, G.; Vanneschi, L.; Silva, S.
+\newblock Fitness landscape analysis of convolutional neural network
+  architectures for image classification.
+\newblock {\em Inf. Sci.} {\bf 2022}, {\em 609},~711--726.
+\newblock {{https://doi.org/10.1016/j.ins.2022.07.040}}.
+
+\bibitem[Zhang \em{et~al.}(2011)Zhang, Yang, Chen, Fan, and Wei]{5981114}
+Zhang, X.Q.; Yang, G.D.; Chen, S.B.; Fan, J.Z.; Wei, X.H.
+\newblock RS image batch processing in grid.
+\newblock \textls[-15]{In Proceedings of the 2011 19th International Conference on
+  Geoinformatics, \hl{Shanghai, China,  24--26 June 2011;} %MDPI: We added the location and date of the conference. Please confirm.
+ pp. 1--4.  {{https://doi.org/10.1109/GeoInformatics.2011.5981114}}.}
+
+\bibitem[Roberts \em{et~al.}(2022)Roberts, Mwangi, Mukabi, Njui, Nzioka,
+  Ndambiri, Bispo, Espirito-Santo, Gou, Johnson, Louis, Pacheco-Pascagaza,
+  Rodriguez-Veiga, Tansey, Upton, Robb, and Balzter]{ROBERTS2022105192}
+Roberts, J.; Mwangi, R.; Mukabi, F.; Njui, J.; Nzioka, K.; Ndambiri, J.; Bispo,
+  P.; Espirito-Santo, F.; Gou, Y.; Johnson, S.;  et~al.
+\newblock Pyeo: A Python package for near-real-time forest cover change
+  detection from Earth observation using machine learning.
+\newblock {\em Comput. Geosci.} {\bf 2022}, {\em 167},~105192.
+\newblock {{https://doi.org/10.1016/j.cageo.2022.105192}}.
+
+\bibitem[Liaqat \em{et~al.}(2021)Liaqat, Mohamed, Chowdhury, Elmahdy, Khan, and
+  Ansari]{LIAQAT2021100587}
+Liaqat, M.U.; Mohamed, M.M.; Chowdhury, R.; Elmahdy, S.I.; Khan, Q.; Ansari, R.
+\newblock Impact of land use/land cover changes on groundwater resources in Al
+  Ain region of the United Arab Emirates using remote sensing and GIS
+  techniques.
+\newblock {\em Groundw. Sustain. Dev.} {\bf 2021}, {\em
+  14},~100587.
+\newblock {{https://doi.org/10.1016/j.gsd.2021.100587}}.
+
+\bibitem[{Asuquo Enoh} \em{et~al.}(2022){Asuquo Enoh}, {Ebere Njoku}, and
+  {Chinenye Okeke}]{ASUQUOENOH2022}
+{Asuquo Enoh}, M.; {Ebere Njoku}, R.; {Chinenye Okeke}, U.
+\newblock Modeling and mapping the spatial–temporal changes in land use and
+  land cover in Lagos: A dynamics for building a sustainable urban city.
+\newblock {\em Adv. Space Res.} {2022}, \emph{in press}.
+\newblock {{https://doi.org/10.1016/j.asr.2022.07.042}}.
+
+\bibitem[Rawat and Kumar(2015)]{RAWAT201577}
+Rawat, J.; Kumar, M.
+\newblock Monitoring land use/cover change using remote sensing and GIS
+  techniques: A case study of Hawalbagh block, district Almora, Uttarakhand,
+  India.
+\newblock {\em  Egypt. J. Remote Sens. Space Sci.} {\bf
+  2015}, {\em 18},~77--84.
+\newblock {{https://doi.org/10.1016/j.ejrs.2015.02.002}}.
+
+\bibitem[Hussain \em{et~al.}(2022)Hussain, Mubeen, and
+  Karuppannan]{HUSSAIN2022103117}
+Hussain, S.; Mubeen, M.; Karuppannan, S.
+\newblock Land use and land cover (LULC) change analysis using TM, ETM+ and OLI
+  Landsat images in district of Okara, Punjab, Pakistan.
+\newblock {\em Phys. Chem. Earth Parts A B C} {\bf 2022},
+  {\em 126},~103117.
+\newblock {{https://doi.org/10.1016/j.pce.2022.103117}}.
+
+\bibitem[{Abd el-sadek} \em{et~al.}(2022){Abd el-sadek}, Elbeih, and
+  Negm]{ABDELSADEK2022815}
+{Abd el-sadek}, E.; Elbeih, S.; Negm, A.
+\newblock Coastal and landuse changes of Burullus Lake, Egypt: A comparison
+  using Landsat and Sentinel-2 satellite images.
+\newblock {\em  Egypt. J. Remote Sens. Space Sci.} {\bf
+  2022}, {\em 25},~815--829.
+\newblock {{https://doi.org/10.1016/j.ejrs.2022.07.006}}.
+
+\bibitem[Hedayati \em{et~al.}(2022)Hedayati, Vahidnia, and
+  Behzadi]{HEDAYATI202273}
+Hedayati, A.; Vahidnia, M.H.; Behzadi, S.
+\newblock Paddy lands detection using Landsat-8 satellite images and
+  object-based classification in Rasht city, Iran.
+\newblock {\em  Egypt. J. Remote Sens. Space Sci.} {\bf
+  2022}, {\em 25},~73--84.
+\newblock {{https://doi.org/10.1016/j.ejrs.2021.12.008}}.
+
+\bibitem[{R Core Team}(2022)]{RCoreTeam}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing};
+\newblock R Foundation for Statistical Computing: Vienna, Austria,  2022.
+
+\bibitem[de~Wasseige \em{et~al.}(2009)de~Wasseige, Devers, P., {Eba\'a Atyi},
+  Nasi, and Mayaux]{Wasseige}
+de~Wasseige, C.; Devers, D.; P., d.; {Eba\'a Atyi}, R.; Nasi, R.; Mayaux, P.
+\newblock {\em Les Forêts du Bassin du Congo---Etat des Forêts 2008}; Office
+  des Publications de L\'union Européenne:  \hl{Luxembourg,} %MDPI: We added the location of the publisher. Please confirm.
+ 2009.
+\newblock {{https://doi.org/10.2788/32456}}.
+
+\bibitem[Lescuyer \em{et~al.}(2010)Lescuyer, Cerutti, Essiane~Mendoula,
+  Eba'a~Atyi, and Nasi]{lescuyer2010chainsaw}
+Lescuyer, G.; Cerutti, P.O.; Essiane~Mendoula, E.; Eba'a~Atyi, R.; Nasi, R.,
+  {An appraisal of chainsaw milling in the Congo Basin}.
+\newblock In {\em {The forests of the Congo Basin: State of the forest 2010}};
+  Tropenbos International; Publications Office of the European Union:
+  Luxembourg,  2010; pp. 97--107.
+
+\bibitem[Jayathilake \em{et~al.}(2021)Jayathilake, Prescott, Carrasco, Rao, and
+  Symes]{Jayathilake}
+Jayathilake, H.M.; Prescott, G.W.; Carrasco, L.R.; Rao, M.; Symes, W.S.
+\newblock {Drivers of deforestation and degradation for 28 tropical
+  conservation landscapes}.
+\newblock {\em AMBIO} {\bf 2021}, {\em 50},~215--228.
+\newblock {{https://doi.org/10.1007/s13280-020-01325-9}}.
+
+\bibitem[Potapov \em{et~al.}(2012)Potapov, Turubanova, Hansen, Adusei, Broich,
+  Altstatt, Mane, and Justice]{POTAPOV2012106}
+Potapov, P.V.; Turubanova, S.A.; Hansen, M.C.; Adusei, B.; Broich, M.;
+  Altstatt, A.; Mane, L.; Justice, C.O.
+\newblock Quantifying forest cover loss in Democratic Republic of the Congo,
+  2000--2010, with Landsat ETM+ data.
+\newblock {\em Remote Sens. Environ.} {\bf 2012}, {\em 122},~106--116. {{https://doi.org/10.1016/j.rse.2011.08.027}}.
+
+\bibitem[Shapiro \em{et~al.}(2016)Shapiro, Aguilar-Amuchastegui, Hostert, and
+  Bastin]{Shapiro}
+Shapiro, A.C.; Aguilar-Amuchastegui, N.; Hostert, P.; Bastin, J.F.
+\newblock {Using fragmentation to assess degradation of forest edges in
+  Democratic Republic of Congo}.
+\newblock {\em Carbon Balance Manag.} {\bf 2016}, {\em 11}, 11.
+\newblock {{https://doi.org/10.1186/s13021-016-0054-9}}.
+
+\bibitem[Leutner \em{et~al.}(2022)Leutner, Horning, Schwalb-Willmann, and
+  Hijmans]{RStoolbox}
+Leutner, B.; Horning, N.; Schwalb-Willmann, J.; Hijmans, R.J.
+\newblock {\em Package ‘RStoolbox’};  \hl{2022.} %MDPI: Please add the name of the publisher and their location.
+
+
+\bibitem[{R. J. Hijmans and R. Bivand and K. Forner and J. Ooms and E. Pebesma
+  and M. D. Sumner}(2022)]{RTerra}
+{Hijmans, R.J.; Bivand, R.;  Forner, K.; Ooms, J.; Pebesma, E.; Sumner, M.D.}
+\newblock {\em Package ‘Terra’}.
+\newblock \hl{Maintainer: Vienna, Austria,} %MDPI: Please confirm if  publisher and their location is correct?
+  2022.
+
+\bibitem[Hijmans(2017)]{Hijmans}
+Hijmans, R.J.
+\newblock Raster: Geographic Data Analysis and Modeling. R Package Version
+  2.6-7.  2017.
+\newblock  Available online: \url{https://CRAN.R-project.org/package=raster}  \hl{(accessed on).} %MDPI: Please add the access date (format: Date Month Year), e.g., accessed on 1 January 2020.
+
+
+\bibitem[Neuwirth(2014)]{Neuwirth}
+Neuwirth, E.
+\newblock RColorBrewer: ColorBrewer Palettes. R Package Version 1.1-2.  2014. Available online: \url{https://CRAN.R-project.org/package=RColorBrewer}  \hl{(accessed on).} %MDPI: Please add the access date (format: Date Month Year), e.g., accessed on 1 January 2020.
+
+\bibitem[Garnier \em{et~al.}(2021)Garnier, Ross, Rudis, Sciaini, Camargo, and
+  Scherer]{viridis}
+Garnier, S.; Ross, N.; Rudis, R.; Sciaini, M.; Camargo, A.P.; Scherer, C.
+\newblock {\em {Viridis}---Colorblind-Friendly Color Maps for R};
+\newblock \hl{R Package Version 0.6.2.2021.} %MDPI: Please add the name of the publisher and their location.
+  {{https://doi.org/10.5281/zenodo.4679424}}.
+
+\bibitem[Mushi \em{et~al.}(2019)Mushi, Ndomba, Trigg, Tshimanga, and
+  Mtalo]{MUSHI201964}
+Mushi, C.A.; Ndomba, P.M.; Trigg, M.A.; Tshimanga, R.M.; Mtalo, F.
+\newblock Assessment of basin-scale soil erosion within the Congo River Basin:
+  A review.
+\newblock {\em CATENA} {\bf 2019}, {\em 178},~64--76.
+\newblock {{https://doi.org/10.1016/j.catena.2019.02.030}}.
+
+\bibitem[Betbeder \em{et~al.}(2014)Betbeder, Gond, Frappart, Baghdadi, Briant,
+  and Bartholomé]{6571272}
+Betbeder, J.; Gond, V.; Frappart, F.; Baghdadi, N.N.; Briant, G.; Bartholomé,
+  E.
+\newblock Mapping of Central Africa Forested Wetlands Using Remote Sensing.
+\newblock {\em IEEE J. Sel. Top. Appl. Earth Obs. Remote Sens.} {\bf 2014}, {\em 7},~531--542.
+\newblock {{https://doi.org/10.1109/JSTARS.2013.2269733}}.
+
+\bibitem[Washington \em{et~al.}(2013)Washington, James, Pearce, Pokam, and
+  Moufouma-Okia]{Washington}
+Washington, R.; James, R.; Pearce, H.; Pokam, W.M.; Moufouma-Okia, W.
+\newblock {Congo Basin rainfall climatology: Can we believe the climate
+  models?}
+\newblock {\em Philos Trans R Soc Lond B Biol Sci.} {\bf 2013}, {\em
+  368},~20120296. 
+  {{https://doi.org/10.1098/rstb.2012.0296}}.
+
+\bibitem[Sayer(1992)]{Sayer1992}
+Sayer, J., Za{\"i}re.
+\newblock In {\em The Conservation Atlas of Tropical Forests Africa}; Palgrave
+  Macmillan: London,   UK, 1992; pp. 270--282.
+\newblock {{https://doi.org/10.1007/978-1-349-12961-4\_32}}.
+
+\bibitem[Mendako \em{et~al.}(2022)Mendako, Tian, Ullah, Sagali, and
+  Kipute]{f13010130}
+Mendako, R.K.; Tian, G.; Ullah, S.; Sagali, H.L.; Kipute, D.D.
+\newblock Assessing the Economic Contribution of Forest Use to Rural
+  Livelihoods in the Rubi-Tele Hunting Domain, DR Congo.
+\newblock {\em Forests} {\bf 2022}, {\em 13}, 130.
+\newblock {{https://doi.org/10.3390/f13010130}}.
+
+\bibitem[Batra \em{et~al.}(2008)Batra, Yang, Choi, Kumar, Cai, and
+  De~Fraiture]{4780136}
+Batra, N.; Yang, Y.C.E.; Choi, H.I.; Kumar, P.; Cai, X.; De~Fraiture, C.
+\newblock Understanding Hydrological Cycle Dynamics Due to Changing Land Use
+  and Land Cover: Congo Basin Case Study.
+\newblock In Proceedings of the IGARSS 2008---2008 IEEE International
+  Geoscience and Remote Sensing Symposium, \hl{Boston, MA, USA,  7--11 July 2008;} %MDPI: We added the location and date of the conference. Please confirm.
+ Volume~5, pp. 491--494.
+\newblock {{https://doi.org/10.1109/IGARSS.2008.4780136}}.
+
+\bibitem[Wilkie(1994)]{Wilkie1994}
+Wilkie, D.S.
+\newblock {Remote sensing imagery for resource inventories in central Africa:
+  The importance of detailed field data}.
+\newblock {\em Hum. Ecol.} {\bf 1994}, {\em 22},~379--403.
+\newblock {{https://doi.org/10.1007/BF02168858}}.
+
+\bibitem[Somorin \em{et~al.}(2012)Somorin, Brown, Visseren-Hamakers, Sonwa,
+  Arts, and Nkem]{SOMORIN2012288}
+Somorin, O.A.; Brown, H.C.P.; Visseren-Hamakers, I.J.; Sonwa, D.J.; Arts, B.;
+  Nkem, J.
+\newblock The Congo Basin forests in a changing climate: Policy discourses on
+  adaptation and mitigation (REDD+).
+\newblock {\em Glob. Environ. Chang.} {\bf 2012}, {\em 22},~288--298.
+\newblock {{https://doi.org/10.1016/j.gloenvcha.2011.08.001}}.
+
+\bibitem[Bele \em{et~al.}(2015)Bele, Sonwa, and Tiani]{BELE20151}
+Bele, M.Y.; Sonwa, D.J.; Tiani, A.M.
+\newblock Adapting the Congo Basin forests management to climate change:
+  Linkages among biodiversity, forest loss, and human well-being.
+\newblock {\em For. Policy Econ.} {\bf 2015}, {\em 50},~1--10.
+\newblock {{https://doi.org/10.1016/j.forpol.2014.05.010}}.
+
+\bibitem[Morgan \em{et~al.}(2022)Morgan, Bush, Mandea, Kermarc, and
+  Mackey]{land11060918}
+Morgan, E.A.; Bush, G.; Mandea, J.Z.; Kermarc, M.; Mackey, B.
+\newblock Comparing Community Needs and REDD+ Activities for Capacity Building
+  and Forest Protection in the Équateur Province of the Democratic Republic of
+  Congo.
+\newblock {\em Land} {\bf 2022}, {\em 11}, 918.
+\newblock {{https://doi.org/10.3390/land11060918}}.
+
+\bibitem[Sufo~Kankeu \em{et~al.}(2020)Sufo~Kankeu, Tsayem~Demaze, Krott, Sonwa,
+  and Ongolo]{SUFOKANKEU2020102081}
+Sufo~Kankeu, R.; Tsayem~Demaze, M.; Krott, M.; Sonwa, D.J.; Ongolo, S.
+\newblock Governing knowledge transfer for deforestation monitoring: Insights
+  from REDD+ projects in the Congo Basin region.
+\newblock {\em For. Policy Econ.} {\bf 2020}, {\em 111},~102081.
+\newblock {{https://doi.org/10.1016/j.forpol.2019.102081}}.
+
+\bibitem[De~Grandi \em{et~al.}(2002)De~Grandi, Mayaux, Malingreau, Baraldi,
+  Simard, and Saatchi]{1025720}
+De~Grandi, G.; Mayaux, P.; Malingreau, J.; Baraldi, A.; Simard, M.; Saatchi, S.
+\newblock Cornerstones and epilogue of the GRFM Africa project: A gallery of
+  regional scale vegetation maps.
+\newblock In Proceedings of the IEEE International Geoscience and Remote
+  Sensing Symposium,  2002, Vol.~2, pp. 893--895.
+\newblock {{https://doi.org/10.1109/IGARSS.2002.1025720}}.
+
+\bibitem[Batsi \em{et~al.}(2021)Batsi, Sonwa, Mangaza, Ebuy, and
+  Kahindo]{Batsietal2021}
+Batsi, G.; Sonwa, D.J.; Mangaza, L.; Ebuy, J.; Kahindo, J.M.
+\newblock {Preliminary estimation of above-ground carbon storage in cocoa
+  agroforests of Bengamisa-Yangambi forest landscape (Democratic Republic of
+  Congo)}.
+\newblock {\em Agrofor. Syst.} {\bf 2021}, {\em 95},~1505--1517.
+\newblock {{https://doi.org/10.1007/s10457-021-00657-z}}.
+
+\bibitem[Washington \em{et~al.}(2006)Washington, Harrison, Conway, Black,
+  Challinor, Grimes, Jones, Morse, Kay, and Todd]{Washingtonetal2006}
+Washington, R.; Harrison, M.; Conway, D.; Black, E.; Challinor, A.; Grimes, D.;
+  Jones, R.; Morse, A.; Kay, G.; Todd, M.
+\newblock {African Climate Change: Taking the Shorter Route}.
+\newblock {\em Bull. Am. Meteorol. Soc.} {\bf 2006},
+  {\em 87},~1355--1366.
+\newblock {{https://doi.org/10.1175/BAMS-87-10-1355}}.
+
+\bibitem[Engebretson(2020)]{Engebretson}
+Engebretson, C.
+\newblock Landsat 8-9 Operational Land Imager (OLI)---Thermal Infrared Sensor
+  (TIRS) Collection 2 Level 1 (L1) Data Format Control Book (DFCB).
+\newblock Online,  2020.
+\newblock LSDS-1822 Version 6.0, USGS.  Available online: \url{https://earth.esa.int/eogateway/documents/20142/0/Landsat-8-9-OLI-TIRS-Collection-2-Level-1-Data-Format-Control-Book-DFCB.pdf}  \hl{(accessed on).} %MDPI: Newly added URL for this ref, please confirm. Please add the access date (format: Date Month Year), e.g., accessed on 1 January 2020.
+
+
+\bibitem[Lemenkova(2022{\natexlab{a}})]{Lemenkova202212}
+Lemenkova, P.
+\newblock {Handling Dataset with Geophysical and Geological Variables on the
+  Bolivian Andes by the GMT Scripts}.
+\newblock {\em Data} {\bf 2022}, {\em 7},~74.
+\newblock {{https://doi.org/10.3390/data7060074}}.
+
+\bibitem[Lemenkova(2022{\natexlab{b}})]{Lemenkova202217}
+Lemenkova, P.
+\newblock {Mapping Climate Parameters over the Territory of Botswana Using GMT
+  and Gridded Surface Data from TerraClimate}.
+\newblock {\em ISPRS Int. J. Geo-Inf.} {\bf 2022}, {\em
+  11},~473.
+\newblock {{https://doi.org/10.3390/ijgi11090473}}.
+
+\bibitem[Lemenkova(2022{\natexlab{c}})]{Lemenkova2022b}
+Lemenkova, P.
+\newblock {Console-Based Mapping of Mongolia Using GMT Cartographic Scripting
+  Toolset for Processing TerraClimate Data}.
+\newblock {\em Geosciences} {\bf 2022}, {\em 12},~140.
+\newblock {{https://doi.org/10.3390/geosciences12030140}}.
+
+\bibitem[Wilkie and Finn(1988)]{WILKIE1988307}
+Wilkie, D.S.; Finn, J.T.
+\newblock {A spatial model of land use and forest regeneration in the Ituri
+  forest of northeastern Zaire}.
+\newblock {\em Ecol. Model.} {\bf 1988}, {\em 41},~307--323.
+\newblock {{https://doi.org/10.1016/0304-3800(88)90034-8}}.
+
+\bibitem[Michel \em{et~al.}(2022)Michel, Yu, Fan, Lubalega, Chen, and
+  Sudi~Kaiko]{land11060787}
+Michel, O.O.; Yu, Y.; Fan, W.; Lubalega, T.; Chen, C.; Sudi~Kaiko, C.K.
+\newblock Impact of Land Use Change on Tree Diversity and Aboveground Carbon
+  Storage in the Mayombe Tropical Forest of the Democratic Republic of Congo.
+\newblock {\em Land} {\bf 2022}, {\em 11}, 787.
+\newblock {{https://doi.org/10.3390/land11060787}}.
+
+\bibitem[Bwangoy \em{et~al.}(2013)Bwangoy, Hansen, Potapov, Turubanova, and
+  Lumbuenamo]{Bwangoy}
+Bwangoy, J.R.B.; Hansen, M.C.; Potapov, P.; Turubanova, S.; Lumbuenamo, R.S.
+\newblock {Identifying nascent wetland forest conversion in the Democratic
+  Republic of the Congo}.
+\newblock {\em Wetl. Ecol. Manag.} {\bf 2013}, {\em 21},~29--43.
+\newblock \hl{https://doi.org/10.1007/s11273-012-9277-z.} %MDPI: only the editorial type papers can retain the "Short Biography of Author" in the manuscript, other types of papers are not allowed Keep it, so we remove this part, please confirm
+
+
+\end{thebibliography}
+
+
+
+%\nocite{*}
+
+%\section*{Short Biography of Authors}
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Photo_author_1.jpg}}}
+%{\textbf{Polina Lemenkova} is an Engineer and a PhD student of Prof. Dr. O. Debeir in the Image Analysis Research Unit (LISA-IA) in École polytechnique de Bruxelles, Université Libre de Bruxelles. Her research interests are focused on image processing, cartography, spatial data analysis, remote sensing and applied programming. She has a strong research experience in Earth and environmental sciences, mapping and data visualization, specifically in geological and geophysical domains. Her current topic is on seismic data processing using machine learning methods and scripting languages.}
+%%
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Photo_author_2.jpg}}}
+%{\textbf{Olivier Debeir} is a Head of the Image Analysis Research Unit (LISA-IA) in the École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles. His research interest is in addressing questions related to artificial intelligence and machine learning in general, and specifically on computer vision, graphics, image analysis, segmentation and classification, pattern recognition and deep learning. His research activity also concerns applied statistics and diverse algorithms of data analysis and modelling in natural sciences. He is an expert in programming languages.}
+
+\end{adjustwidth}
+\end{document}
