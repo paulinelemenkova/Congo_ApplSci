@@ -400,8 +400,6 @@ plot(landsatRGB, col=colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS 
 \end{lstlisting}
 
 
-
-
 \begin{lstlisting}[language=r, caption=R code used for the monochrome individual bands of the image Landsat OLI/TIRS, basicstyle=\scriptsize, label={lst:03}]
 library(raster)
 library(terra)
@@ -437,57 +435,55 @@ plot(b11, main = "TIRS 2 (B11)", col = colors, axes = FALSE, legend = TRUE)
 
 \vspace{6pt}
 
-The generated images reveal spatial details that can be better discerned in the intensity of pixels in false colour composites for water areas and more sharpened representations of urban areas in the natural colour composites showing spatial details in the three target areas: Bumba, Basoko and Kisangani (Figure~\ref{fig:05}). The colour products for all the three regions were prepared using the combination of bands 4-3-2 (natural) and 5-4-3 (false) with the spatial resolution of the visual bands selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture from the RGB bands was converted to the colours with the intensity channel corresponding to the resolution of the original bands (30~m). Hue, saturation and intensity transformations of each of the triplets were processed and resampled by R package 'terra' to form the output image, as seen in Figure~\ref{fig:05}.
-
-
+The generated images reveal spatial details that can be better discerned in the intensity of pixels in false colour composites for water areas and more sharpened representations of urban areas in the natural colour composites showing spatial details in the three target areas: Bumba, Basoko and Kisangani (Figure~\ref{fig:05}). The colour products for all the three regions were prepared using the combination of bands 4-3-2 (natural) and 5-4-3 (false) with spatial resolution selected as three triplets of the original multispectral bands of the Landsat-8 OLI/TIRS. The new mixture of the RGB bands was converted to the colours with the intensity channel corresponding to the resolution of the original bands (30~m). Hue, saturation and intensity transformations of each of the triplets were resampled by R package 'terra' to form the output image, Figure~\ref{fig:05}.
 
 \vspace{-6pt}
 \begin{figure}[H]
 \begin{adjustwidth}{-\extralength}{0cm}
 \centering %% If there is a figure in wide page, please release command \centering
-\makebox[0.90\linewidth][c]{%
+\makebox[0.85\linewidth][c]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.8\textwidth]{Fig_05a.jpg}
+			\includegraphics[width=0.75\textwidth]{Fig_05a.jpg}
 		\caption{\centering}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.8\textwidth]{Fig_05b.jpg}
-		\caption{\centering}
-	\end{subfigure}%
-}\\
-\vfill \vspace{1mm}
-\makebox[0.90\linewidth][c]{%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-			\includegraphics[width=0.8\textwidth]{Fig_05c.jpg}
-		\caption{\centering}
-	\end{subfigure}%
-	\begin{subfigure}[b]{.6\textwidth}
-		\centering
-		\includegraphics[width=0.8\textwidth]{Fig_05d.jpg}
+		\includegraphics[width=0.75\textwidth]{Fig_05b.jpg}
 		\caption{\centering}
 	\end{subfigure}%
 }\\
 \vfill \vspace{1mm}
-\makebox[0.90\linewidth][c]{%
+\makebox[0.85\linewidth][c]{%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-			\includegraphics[width=0.8\textwidth]{Fig_05e.jpg}
+			\includegraphics[width=0.75\textwidth]{Fig_05c.jpg}
 		\caption{\centering}
 	\end{subfigure}%
 	\begin{subfigure}[b]{.6\textwidth}
 		\centering
-		\includegraphics[width=0.8\textwidth]{Fig_05f.jpg}
+		\includegraphics[width=0.75\textwidth]{Fig_05d.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+}\\
+\vfill \vspace{1mm}
+\makebox[0.85\linewidth][c]{%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+			\includegraphics[width=0.75\textwidth]{Fig_05e.jpg}
+		\caption{\centering}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.6\textwidth}
+		\centering
+		\includegraphics[width=0.75\textwidth]{Fig_05f.jpg}
 		\caption{\centering}
 	\end{subfigure}%
 
 }
 \end{adjustwidth}
-\caption{Natural (bands 4-3-2) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS. \label{fig:05}}
-%image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio. (\textbf{a}) Bumba: natural colour composite, 2013. (\textbf{b}) Bumba: false colour composite: 2013. (\textbf{c}) Basoko: natural colour composite: 2013. (\textbf{d}) Basoko: false colour composite: 2013. (\textbf{e}) Kisangani: Natural colour composite: 2013. (\textbf{f}) Kisangani: False colour \hl{composite: 2013.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
-%%}
+\caption{Natural (bands 4-3-2) and false colour (bands 5-4-3) composites of the Landsat 8 OLI/TIRS image for the three target areas: Bumba, Basoko and Kisangani. Mapping: RStudio. (\textbf{a}) Bumba: natural colour composite, 2013. (\textbf{b}) Bumba: false colour composite: 2013. (\textbf{c}) Basoko: natural colour composite: 2013. (\textbf{d}) Basoko: false colour composite: 2013. (\textbf{e}) Kisangani: Natural colour composite: 2013. (\textbf{f}) Kisangani: False colour composite: 2013. \label{fig:05}}
+%MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+%%} <-- Authors' answer: yes, we confirm.
 \end{figure}
 
 \begin{figure*}
