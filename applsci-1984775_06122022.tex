@@ -102,8 +102,8 @@
 \newcommand{\orcidauthorB}{0000-0002-6461-1551} % Add \orcidB{} behind the author's name
 
 % Authors, for the paper (add full first names)
-\Author{\hl{Polina Lemenkova} %MDPI: Please carefully check the accuracy of names and affiliations.
- \hl{*} %MDPI: Newly added * for Correspondence author, please confirm
+\Author{Polina Lemenkova %MDPI: Please carefully check the accuracy of names and affiliations. <-- Authors' answer: yes, the names and affiliations are correct.
+ * %MDPI: Newly added * for Correspondence author, please confirm <-- Authors' answer: yes, we confirm.
 \orcidA{} and Olivier Debeir \orcidB{}}
 % \dagger,\ddagger
 %\longauthorlist{yes}
@@ -123,11 +123,11 @@
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address[1]{%
-Laboratory of Image Synthesis and Analysis, École Polytechnique de Bruxelles (EPB, Brussels Faculty of Engineering), Université Libre de \hl{Bruxelles,} %MDPI: The provided information should be arranged from subordinate to superior, we revised aff order, please confirm
+Laboratory of Image Synthesis and Analysis (LISA), École Polytechnique de Bruxelles (EPB, Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB), %MDPI: The provided information should be arranged from subordinate to superior, we revised aff order, please confirm <-- Authors' answer: yes, we confirm.
  Building L, Campus de Solbosch, ULB---LISA CP165/57, Avenue~Franklin D. Roosevelt 50, \mbox{B-1050 Brussels, Belgium}; {olivier.debeir@ulb.be}}
 
 % Contact information of the corresponding author
-\corres{\hangafter=1 \hangindent=1.05em \hspace{-0.82em}Correspondence: \hl{polina.lemenkova@ulb.be}; Tel.: +32-471-860-459}%MDPI: This is an important note to let you know that to protect the privacy of the author's contact information, we will only display the corresponding authors' contact information on the published paper. However, we hope the contact information of the other authors can also be confirmed or corrected during the proofreading stage, which will be recorded in our database to furnish the author's integrated publication history and also contribute to our future communications
+\corres{\hangafter=1 \hangindent=1.05em \hspace{-0.82em}Correspondence: polina.lemenkova@ulb.be; Tel.: +32-471-860-459}%MDPI: This is an important note to let you know that to protect the privacy of the author's contact information, we will only display the corresponding authors' contact information on the published paper. However, we hope the contact information of the other authors can also be confirmed or corrected during the proofreading stage, which will be recorded in our database to furnish the author's integrated publication history and also contribute to our future communications <-- Authors' answer: yes, we confirm.
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{In this paper, an image analysis framework is formulated for Landsat-8 OLI-TIRS scenes using the R programming language. The libraries of R are shown to be effective in remote sensing data processing tasks, such as classification using k-means clustering and computing the Normalized Difference Vegetation Index (NDVI). The data are processed using an integration of the RStoolbox, terra, raster, rgdal and auxiliary packages of R. The proposed approach to image processing using R is designed to exploit the parameters of image bands as cues to detect land cover types and vegetation parameters corresponding to the spectral reflectance of the objects represented on the Earth's surface. Our method is effective at processing the time series of the images taken at various periods to monitor the landscape dynamics in the middle part of the Congo River basin, D.R.C. Whereas previous approaches primarily used GIS software, we proposed to explicitly use the scripting methods for satellite image analysis by applying the extended functionality of R. The application of scripts for geospatial data is an effective and robust method compared with the traditional approaches due to its high automation and machine-based graphical processing. The algorithms of the R libraries are adjusted to spatial operations, such as projections and transformations, object topology, classification and map algebra. The data include Landsat-8 OLI-TIRS covering the three regions along the Congo river, Bumba, Basoko and Kisangani, for the years 2013, 2015 and 2022. We also validate the performance of graphical data handling for cartographic visualization using R libraries for visualising changes in land cover types by k-means clustering and calculation of the NDVI for vegetation analysis.
@@ -136,7 +136,7 @@ Laboratory of Image Synthesis and Analysis, École Polytechnique de Bruxelles (E
 \keyword{image processing; remote sensing; Landsat; R language; programming; cartography; mapping; data visualization; NDVI; Africa} 
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
-\PACS{\hl{91.10.Da;} %MDPI: For this journal, these ``PACS/MSC/JEL Classification'' parts are not necessary, please confirm if these parts should be retained.
+\PACS{91.10.Da; %MDPI: For this journal, these ``PACS/MSC/JEL Classification'' parts are not necessary, please confirm if these parts should be retained. <-- Authors' answer: yes, PACS/MSC/JEL Classification should be retained for indexation in the libraries and visibility in search. Please retain PACS/MSC/JEL Classification.
  91.10.Jf; 91.10.Sp; 91.10.Xa; 96.25.Vt; 91.10.Fc; 95.40.+s; 95.75.Qr; 95.75.Rs; 42.68.Wt}
 \MSC{86A30; 86-08; 86A99; 86A04}
 \JEL{Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
