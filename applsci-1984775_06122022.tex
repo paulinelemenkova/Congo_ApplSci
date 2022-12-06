@@ -526,7 +526,7 @@ unC
 # Creating the color palette table
 colors <- kovesi.diverging_rainbow_bgymr_45_85_c67(10)
 # Plotting a map
-plot(unC$map, main = "K-means Clustering for Landsat-\hl{8} OLI/TIRS C1 image of Basoko, Congo  \nL1TP_177059_20220208_20220212_02_T1 (2022)", font.main=2, cex.main = 0.95, col = colors, axes = FALSE, box = FALSE, legend = FALSE)
+plot(unC$map, main = "K-means Clustering for Landsat-8 OLI/TIRS C1 image of Basoko, Congo  \nL1TP_177059_20220208_20220212_02_T1 (2022)", font.main=2, cex.main = 0.95, col = colors, axes = FALSE, box = FALSE, legend = FALSE)
 # Adding legend
 legend("topleft", legend=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), fill = colors, title = "Classes", horiz = FALSE,  bty = "n", text.font=3, ncol=1)
 \end{lstlisting}
@@ -573,8 +573,8 @@ Thus, the automatic clustering analysis by R has been performed without prior kn
 	\end{subfigure}%
 
 }
-\caption{\hl{Bumba} %MDPI: We moved Figures 7--9 AFTER where it is first mentioned in the text.
- town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) Monochrome image for Bumba region: 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) Monochrome image for Bumba region: 2022. (\textbf{d}) Classified scene using k-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+\caption{Bumba %MDPI: We moved Figures 7--9 AFTER where it is first mentioned in the text. <-- Authors' answer: yes, correct, thank you.
+ town and surroundings of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) Monochrome image for Bumba region: 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) Monochrome image for Bumba region: 2022. (\textbf{d}) Classified scene using k-means clustering: 2022. %MDPI: We moved the subfigure explanations into the figure caption. Please confirm. <-- Authors' answer: yes, we confirm.
 }\label{fig:07}
 \end{figure}
 
@@ -608,7 +608,7 @@ Using this approach, we defined 10 classes in a process of the unsupervised clas
 		\caption{\centering}
 	\end{subfigure}%
 }
-\caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a})~{True-colour composite }image for Basoko: 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) {True-colour composite }image for Basoko: 2022. (\textbf{d}) Classified scene using k-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+\caption{Basoko town (Tshopo Province) and surroundings in the confluence of the Aruwimi River tributary into the main stream of the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a})~{True-colour composite }image for Basoko: 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) {True-colour composite }image for Basoko: 2022. (\textbf{d}) Classified scene using k-means clustering: 2022. %MDPI: We moved the subfigure explanations into the figure caption. Please confirm. <-- Authors' answer: yes, we confirm.
 }\label{fig:08}
 \end{figure}
 
@@ -637,7 +637,7 @@ Using this approach, we defined 10 classes in a process of the unsupervised clas
 		\caption{\centering}
 	\end{subfigure}%
 }
-\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013, 2015 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) {True-colour composite }image, Kisangani, 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) Classified scene using k-means clustering: 2015. (\textbf{d}) Classified scene using k-means \hl{clustering: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+\caption{Kisangani city (Tshopo Province) and region in the junction of the Tshopo and Lindi tributaries into the Congo River: raw Landsat-8 OLI/TIRS scene for years 2013, 2015 and 2022 and the classified outputs by k-means clustering. Mapping: RStudio. Source: authors. (\textbf{a}) {True-colour composite }image, Kisangani, 2013. (\textbf{b}) Classified scene using k-means clustering: 2013. (\textbf{c}) Classified scene using k-means clustering: 2015. (\textbf{d}) Classified scene using k-means clustering: 2022. %MDPI: We moved the subfigure explanations into the figure caption. Please confirm. <-- Authors' answer: yes, we confirm.
 }\label{fig:09}
 \end{figure}
 
@@ -717,8 +717,8 @@ Apparently, the combination of a higher reflectance in the NIR and a lower refle
 	\end{subfigure}%
 
 }
-\caption{\hl{NDVI} %MDPI: We moved this figure AFTER where it is first mentioned in the text.
- computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for years 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangani. Mapping: RStudio. Source: authors. (\textbf{a}) Bumba region: 2013. (\textbf{b}) Bumba region: 2022. (\textbf{c}) Basoko region: 2013. (\textbf{d}) Basoko region: 2022. (\textbf{e}) Kisangani region: 2013. (\textbf{f}) Kisangani \hl{region: 2022.} %MDPI: We moved the subfigure explanations into the figure caption. Please confirm.
+\caption{NDVI %MDPI: We moved this figure AFTER where it is first mentioned in the text. <-- Authors' answer: yes, correct, thank you.
+ computed from 5 and 4 bands of the Landsat-8 OLI/TIRS scenes for years 2013 and 2022 for the three key areas: Bumba, Basoko, Kisangani. Mapping: RStudio. Source: authors. (\textbf{a}) Bumba region: 2013. (\textbf{b}) Bumba region: 2022. (\textbf{c}) Basoko region: 2013. (\textbf{d}) Basoko region: 2022. (\textbf{e}) Kisangani region: 2013. (\textbf{f}) Kisangani region: 2022. %MDPI: We moved the subfigure explanations into the figure caption. Please confirm. <-- Authors' answer: yes, we confirm.
 }\label{fig:10}
 \end{figure}
 
